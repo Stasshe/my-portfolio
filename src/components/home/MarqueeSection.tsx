@@ -6,13 +6,18 @@ type MarqueeSectionProps = {
 };
 
 export function MarqueeSection({ marqueeRef, items }: MarqueeSectionProps) {
+  const repeatCount = 4;
+  const repeatedItems = Array.from({ length: repeatCount }).flatMap((_, rep) =>
+    items.map((item, idx) => ({ key: `${item}-${idx}-${rep}`, value: item })),
+  );
+
   return (
     <div ref={marqueeRef} className="marquee-section">
       <div className="marquee-track">
-        {[...items, ...items, ...items, ...items].map((item, i) => (
-          <div key={`${item}-${i}`} className="marquee-item">
+        {repeatedItems.map(({ key, value }) => (
+          <div key={key} className="marquee-item">
             <span className="dot" />
-            {item}
+            {value}
           </div>
         ))}
       </div>
