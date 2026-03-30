@@ -285,7 +285,7 @@ export default function Home() {
             ease: "power3.out",
             stagger: 0.1,
           },
-          "-=0.4"
+          "-=0.4",
         )
         .from(
           ".hero-tagline",
@@ -295,7 +295,7 @@ export default function Home() {
             duration: 0.8,
             ease: "power3.out",
           },
-          "-=0.4"
+          "-=0.4",
         )
         .from(
           ".hero-scroll-indicator",
@@ -303,7 +303,7 @@ export default function Home() {
             opacity: 0,
             duration: 0.6,
           },
-          "-=0.2"
+          "-=0.2",
         )
         .from(
           ".hero-deco",
@@ -314,7 +314,7 @@ export default function Home() {
             ease: "power2.out",
             stagger: 0.2,
           },
-          "-=1"
+          "-=1",
         );
 
       if (marqueeRef.current) {
@@ -377,10 +377,7 @@ export default function Home() {
       <div ref={cursorRef} className="custom-cursor" />
 
       <div className="page-loader">
-        <span
-          className="page-loader-text"
-          style={{ opacity: 0, transform: "translateY(20px)" }}
-        >
+        <span className="page-loader-text" style={{ opacity: 0, transform: "translateY(20px)" }}>
           Stasshe
         </span>
       </div>

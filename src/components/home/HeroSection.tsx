@@ -30,8 +30,8 @@ export function HeroSection({ heroRef }: HeroSectionProps) {
         </div>
 
         <p className="body-text hero-tagline">
-          Building thoughtful digital experiences with care for detail, warmth,
-          and a touch of playfulness.
+          Building thoughtful digital experiences with care for detail, warmth, and a touch of
+          playfulness.
         </p>
       </div>
 

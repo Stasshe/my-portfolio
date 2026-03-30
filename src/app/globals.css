@@ -3,17 +3,17 @@
    ============================================ */
 
 /* Google Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
 
 /* ============================================
    CSS Custom Properties
    ============================================ */
 :root {
   /* Color Palette */
-  --color-light: #F0ECEE;
-  --color-light-accent: #8099B2;
-  --color-brand: #14A8C7;
-  --color-dark-accent: #AC5D7B;
+  --color-light: #f0ecee;
+  --color-light-accent: #8099b2;
+  --color-brand: #14a8c7;
+  --color-dark-accent: #ac5d7b;
   --color-dark: #273582;
 
   /* Derived colors */
@@ -24,9 +24,9 @@
   --color-light-accent-rgb: 128, 153, 178;
 
   /* Typography */
-  --font-serif: 'Cormorant Garamond', 'Georgia', serif;
-  --font-mono: 'Space Mono', 'Courier New', monospace;
-  --font-sans: 'DM Sans', 'Helvetica Neue', sans-serif;
+  --font-serif: "Cormorant Garamond", "Georgia", serif;
+  --font-mono: "Space Mono", "Courier New", monospace;
+  --font-sans: "DM Sans", "Helvetica Neue", sans-serif;
 
   /* Spacing */
   --space-xs: 0.5rem;
@@ -91,7 +91,8 @@ button {
   color: inherit;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -249,7 +250,7 @@ ul, ol {
 }
 
 .nav-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
@@ -390,8 +391,15 @@ ul, ol {
 }
 
 @keyframes scrollPulse {
-  0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
-  50% { opacity: 1; transform: scaleY(1); }
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scaleY(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
 }
 
 /* Decorative elements */
@@ -550,7 +558,7 @@ ul, ol {
 
 .work-card-visual {
   width: 100%;
-  aspect-ratio: 16/10;
+  aspect-ratio: 16 / 10;
   position: relative;
   overflow: hidden;
 }
@@ -638,7 +646,7 @@ ul, ol {
 }
 
 .about-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -775,7 +783,7 @@ ul, ol {
 }
 
 .skew-section::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -50px;
   left: 0;
@@ -786,7 +794,7 @@ ul, ol {
 }
 
 .skew-section::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -50px;
   left: 0;
@@ -1068,7 +1076,7 @@ ul, ol {
 }
 
 .cta-button::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
   background-color: var(--color-brand);

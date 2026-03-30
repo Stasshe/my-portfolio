@@ -25,10 +25,8 @@ export function HorizontalSection({
             </span>
             <h2 className="heading-lg" style={{ maxWidth: "600px" }}>
               I design &{" "}
-              <span style={{ color: "var(--color-brand)", fontStyle: "italic" }}>
-                build
-              </span>{" "}
-              things for the web.
+              <span style={{ color: "var(--color-brand)", fontStyle: "italic" }}>build</span> things
+              for the web.
             </h2>
             <p
               className="body-text"
@@ -38,8 +36,8 @@ export function HorizontalSection({
                 color: "var(--color-light-accent)",
               }}
             >
-              From concept to code, I craft interfaces that feel intuitive,
-              expressive, and memorable.
+              From concept to code, I craft interfaces that feel intuitive, expressive, and
+              memorable.
             </p>
           </div>
         </div>
@@ -72,8 +70,7 @@ export function HorizontalSection({
                 color: "rgba(240,236,238,0.6)",
               }}
             >
-              I believe in design that breathes. Space is not emptiness &mdash; it
-              is an invitation.
+              I believe in design that breathes. Space is not emptiness &mdash; it is an invitation.
             </p>
           </div>
         </div>
@@ -84,8 +81,7 @@ export function HorizontalSection({
             style={{ textAlign: "center", maxWidth: "700px", margin: "0 auto" }}
           >
             <h2 className="heading-lg">
-              Let&apos;s create something{" "}
-              <span style={{ fontStyle: "italic" }}>beautiful.</span>
+              Let&apos;s create something <span style={{ fontStyle: "italic" }}>beautiful.</span>
             </h2>
             <div style={{ marginTop: "3rem" }}>
               <button
