@@ -81,7 +81,7 @@ export default function Home() {
   const loaderRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -232,7 +232,6 @@ export default function Home() {
               opacity: 0,
               scrollTrigger: {
                 trigger: panel,
-                containerAnimation: gsap.getById("horizontalScroll") as gsap.core.Animation | undefined,
                 start: "left center",
                 end: "center center",
                 scrub: true,
