@@ -3,70 +3,18 @@
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { AboutSection } from "../components/home/AboutSection";
+import { HeroSection } from "../components/home/HeroSection";
+import { HomeFooter } from "../components/home/HomeFooter";
+import { HomeNavigation } from "../components/home/HomeNavigation";
+import { HorizontalSection } from "../components/home/HorizontalSection";
+import { MarqueeSection } from "../components/home/MarqueeSection";
+import { SkewSection } from "../components/home/SkewSection";
+import { WorksSection } from "../components/home/WorksSection";
+import { MARQUEE_ITEMS, PRODUCTS, SKILLS } from "../components/home/data";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-
-/* ───── Data ───── */
-const PRODUCTS = [
-  {
-    id: 1,
-    title: "Project Alpha",
-    category: "Web Design",
-    description: "A bold reimagining of digital storytelling through interactive design.",
-    tags: ["Design", "Frontend"],
-    gradient: "linear-gradient(135deg, #14A8C7 0%, #273582 100%)",
-  },
-  {
-    id: 2,
-    title: "Project Beta",
-    category: "Branding",
-    description: "Visual identity system that bridges tradition and modernity.",
-    tags: ["Branding", "Identity"],
-    gradient: "linear-gradient(135deg, #AC5D7B 0%, #273582 100%)",
-  },
-  {
-    id: 3,
-    title: "Project Gamma",
-    category: "Development",
-    description: "Full-stack application built for scale and elegance.",
-    tags: ["React", "Node.js"],
-    gradient: "linear-gradient(135deg, #8099B2 0%, #14A8C7 100%)",
-  },
-  {
-    id: 4,
-    title: "Project Delta",
-    category: "UI/UX",
-    description: "Experience design focused on delight, usability, and craft.",
-    tags: ["UX", "Prototype"],
-    gradient: "linear-gradient(135deg, #273582 0%, #AC5D7B 100%)",
-  },
-];
-
-const MARQUEE_ITEMS = [
-  "Design",
-  "Development",
-  "Branding",
-  "Strategy",
-  "Creative",
-  "Digital",
-  "Craft",
-  "Experience",
-];
-
-const SKILLS = [
-  "React",
-  "Next.js",
-  "TypeScript",
-  "Node.js",
-  "Figma",
-  "UI Design",
-  "GSAP",
-  "CSS",
-  "Three.js",
-  "Tailwind",
-];
 
 export default function Home() {
   const mainRef = useRef<HTMLDivElement>(null);
@@ -79,7 +27,6 @@ export default function Home() {
   const skewRef = useRef<HTMLElement>(null);
   const footerRef = useRef<HTMLElement>(null);
   const navRef = useRef<HTMLElement>(null);
-  const loaderRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [, setIsLoaded] = useState(false);
@@ -131,7 +78,7 @@ export default function Home() {
             },
           });
 
-          panels.forEach((panel, _i) => {
+          panels.forEach((panel) => {
             const content = panel.querySelector(".panel-content");
             if (content) {
               gsap.from(content, {
@@ -281,7 +228,6 @@ export default function Home() {
         });
       };
 
-      /* ──────────── Page Loader ──────────── */
       const loaderTl = gsap.timeline({
         onComplete: () => {
           setIsLoaded(true);
@@ -319,9 +265,8 @@ export default function Home() {
         })
         .set(".page-loader", { display: "none" });
 
-      /* ──────────── Hero animations ──────────── */
       const heroTl = gsap.timeline({
-        delay: 1.8, // after loader
+        delay: 1.8,
       });
 
       heroTl
@@ -372,7 +317,6 @@ export default function Home() {
           "-=1"
         );
 
-      /* ──────────── Marquee ──────────── */
       if (marqueeRef.current) {
         const track = marqueeRef.current.querySelector(".marquee-track");
         if (track) {
@@ -385,8 +329,6 @@ export default function Home() {
         }
       }
 
-
-      /* ──────────── Custom cursor ──────────── */
       const moveCursor = (e: MouseEvent) => {
         if (cursorRef.current) {
           gsap.to(cursorRef.current, {
@@ -399,7 +341,6 @@ export default function Home() {
       };
       window.addEventListener("mousemove", moveCursor);
 
-      // Hover effects on interactive elements
       const interactives = document.querySelectorAll("a, button, .work-card, .nav-link");
       interactives.forEach((el) => {
         el.addEventListener("mouseenter", () => {
@@ -433,11 +374,9 @@ export default function Home() {
 
   return (
     <div ref={mainRef}>
-      {/* ──── Custom Cursor ──── */}
       <div ref={cursorRef} className="custom-cursor" />
 
-      {/* ──── Page Loader ──── */}
-      <div ref={loaderRef} className="page-loader">
+      <div className="page-loader">
         <span
           className="page-loader-text"
           style={{ opacity: 0, transform: "translateY(20px)" }}
@@ -446,487 +385,24 @@ export default function Home() {
         </span>
       </div>
 
-      {/* ──── Navigation ──── */}
-      <nav ref={navRef} className="nav">
-        <div className="nav-inner">
-          <div
-            className="nav-logo"
-            onClick={() => scrollToSection("hero")}
-            onKeyDown={() => {}}
-            role="button"
-            tabIndex={0}
-          >
-            Stasshe
-          </div>
+      <HomeNavigation
+        navRef={navRef}
+        menuOpen={menuOpen}
+        setMenuOpen={setMenuOpen}
+        scrollToSection={scrollToSection}
+      />
 
-          <div className="nav-links">
-            <span
-              className="nav-link"
-              onClick={() => scrollToSection("works")}
-              onKeyDown={() => {}}
-              role="button"
-              tabIndex={0}
-            >
-              Works
-            </span>
-            <span
-              className="nav-link"
-              onClick={() => scrollToSection("about")}
-              onKeyDown={() => {}}
-              role="button"
-              tabIndex={0}
-            >
-              About
-            </span>
-            <Link href="/products" className="nav-link">
-              Products
-            </Link>
-          </div>
-
-          <button
-            className="nav-menu-btn"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-            type="button"
-          >
-            <span
-              style={{
-                transform: menuOpen ? "rotate(45deg) translate(4px, 4px)" : "none",
-              }}
-            />
-            <span style={{ opacity: menuOpen ? 0 : 1 }} />
-            <span
-              style={{
-                transform: menuOpen ? "rotate(-45deg) translate(4px, -4px)" : "none",
-              }}
-            />
-          </button>
-        </div>
-      </nav>
-
-      {/* ──── Mobile Menu ──── */}
-      <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
-        <span
-          className="nav-link"
-          onClick={() => scrollToSection("hero")}
-          onKeyDown={() => {}}
-          role="button"
-          tabIndex={0}
-        >
-          Home
-        </span>
-        <span
-          className="nav-link"
-          onClick={() => scrollToSection("works")}
-          onKeyDown={() => {}}
-          role="button"
-          tabIndex={0}
-        >
-          Works
-        </span>
-        <span
-          className="nav-link"
-          onClick={() => scrollToSection("about")}
-          onKeyDown={() => {}}
-          role="button"
-          tabIndex={0}
-        >
-          About
-        </span>
-        <Link href="/products" className="nav-link" onClick={() => setMenuOpen(false)}>
-          Products
-        </Link>
-      </div>
-
-      {/* ────────────────────────────────────── */}
-      {/* HERO SECTION */}
-      {/* ────────────────────────────────────── */}
-      <section ref={heroRef} className="hero" id="hero">
-        <div className="hero-deco hero-deco-1" />
-        <div className="hero-deco hero-deco-2" />
-        <div className="hero-deco hero-deco-3" />
-
-        <div className="container hero-content">
-          <span className="label hero-greeting">Portfolio of</span>
-
-          <div className="hero-title-line">
-            <span className="heading-xl hero-name">Sta</span>
-            <span className="heading-xl hero-name-accent">ss</span>
-            <span className="heading-xl hero-name">he</span>
-          </div>
-
-          <div className="hero-title-line" style={{ marginTop: "0.5rem" }}>
-            <span
-              className="heading-md"
-              style={{ color: "var(--color-light-accent)", fontWeight: 300 }}
-            >
-              — design, craft & curiosity
-            </span>
-          </div>
-
-          <p className="body-text hero-tagline">
-            Building thoughtful digital experiences with care for detail, warmth,
-            and a touch of playfulness.
-          </p>
-        </div>
-
-        <div className="hero-scroll-indicator">
-          <span className="label" style={{ fontSize: "0.6rem" }}>
-            Scroll
-          </span>
-          <div className="hero-scroll-line" />
-        </div>
-      </section>
-
-      {/* ────────────────────────────────────── */}
-      {/* MARQUEE */}
-      {/* ────────────────────────────────────── */}
-      <div ref={marqueeRef} className="marquee-section">
-        <div className="marquee-track">
-          {[...MARQUEE_ITEMS, ...MARQUEE_ITEMS, ...MARQUEE_ITEMS, ...MARQUEE_ITEMS].map(
-            (item, i) => (
-              <div key={`${item}-${i}`} className="marquee-item">
-                <span className="dot" />
-                {item}
-              </div>
-            )
-          )}
-        </div>
-      </div>
-
-      {/* ────────────────────────────────────── */}
-      {/* HORIZONTAL SCROLL SECTION */}
-      {/* ────────────────────────────────────── */}
-      <section ref={horizontalRef} className="horizontal-section">
-        <div ref={horizontalWrapRef} className="horizontal-wrapper">
-          {/* Panel 1: Intro */}
-          <div className="horizontal-panel">
-            <div className="panel-content container">
-              <span
-                className="label"
-                style={{ color: "var(--color-brand)", marginBottom: "1.5rem", display: "block" }}
-              >
-                What I do
-              </span>
-              <h2 className="heading-lg" style={{ maxWidth: "600px" }}>
-                I design &{" "}
-                <span style={{ color: "var(--color-brand)", fontStyle: "italic" }}>
-                  build
-                </span>{" "}
-                things for the web.
-              </h2>
-              <p
-                className="body-text"
-                style={{
-                  maxWidth: "450px",
-                  marginTop: "2rem",
-                  color: "var(--color-light-accent)",
-                }}
-              >
-                From concept to code, I craft interfaces that feel intuitive,
-                expressive, and memorable.
-              </p>
-            </div>
-          </div>
-
-          {/* Panel 2: Philosophy */}
-          <div className="horizontal-panel">
-            <div className="panel-content container">
-              <span
-                className="label"
-                style={{
-                  color: "var(--color-brand)",
-                  marginBottom: "1.5rem",
-                  display: "block",
-                }}
-              >
-                My philosophy
-              </span>
-              <h2 className="heading-lg" style={{ maxWidth: "650px" }}>
-                Less noise,
-                <br />
-                more{" "}
-                <span style={{ color: "var(--color-dark-accent)", fontStyle: "italic" }}>
-                  resonance.
-                </span>
-              </h2>
-              <p
-                className="body-text"
-                style={{
-                  maxWidth: "400px",
-                  marginTop: "2rem",
-                  color: "rgba(240,236,238,0.6)",
-                }}
-              >
-                I believe in design that breathes. Space is not emptiness — it
-                is an invitation.
-              </p>
-            </div>
-          </div>
-
-          {/* Panel 3: CTA */}
-          <div className="horizontal-panel">
-            <div
-              className="panel-content container"
-              style={{ textAlign: "center", maxWidth: "700px", margin: "0 auto" }}
-            >
-              <h2 className="heading-lg">
-                Let&apos;s create something{" "}
-                <span style={{ fontStyle: "italic" }}>beautiful.</span>
-              </h2>
-              <div style={{ marginTop: "3rem" }}>
-                <button
-                  className="cta-button cta-button--light"
-                  onClick={() => scrollToSection("works")}
-                  type="button"
-                >
-                  <span>View my work</span>
-                  <span className="arrow">→</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ────────────────────────────────────── */}
-      {/* SKEW / DIAGONAL TEXT */}
-      {/* ────────────────────────────────────── */}
-      <section ref={skewRef} className="skew-section">
-        <div className="skew-content">
-          <div className="skew-text-row">
-            <div className="skew-text">
-              <span className="filled">Creative</span>
-              &nbsp;&nbsp;&nbsp;
-              <span className="stroke">Direction</span>
-              &nbsp;&nbsp;&nbsp;
-              <span className="italic">& Vision</span>
-            </div>
-          </div>
-          <div className="skew-text-row">
-            <div className="skew-text">
-              <span className="stroke">Interface</span>
-              &nbsp;&nbsp;&nbsp;
-              <span className="filled">Design</span>
-              &nbsp;&nbsp;&nbsp;
-              <span className="italic">Systems</span>
-            </div>
-          </div>
-          <div className="skew-text-row">
-            <div className="skew-text">
-              <span className="italic">Full-Stack</span>
-              &nbsp;&nbsp;&nbsp;
-              <span className="filled">Development</span>
-              &nbsp;&nbsp;&nbsp;
-              <span className="stroke">& Craft</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ────────────────────────────────────── */}
-      {/* WORKS / PRODUCTS CARDS */}
-      {/* ────────────────────────────────────── */}
-      <section ref={worksRef} className="section works-section" id="works">
-        <div className="container">
-          <div className="works-header">
-            <div>
-              <span
-                className="label"
-                style={{ color: "var(--color-brand)", marginBottom: "1rem", display: "block" }}
-              >
-                Selected Works
-              </span>
-              <h2 className="heading-lg">
-                Things I&apos;ve{" "}
-                <span style={{ color: "var(--color-dark-accent)", fontStyle: "italic" }}>
-                  made.
-                </span>
-              </h2>
-            </div>
-            <span className="label works-count">
-              {String(PRODUCTS.length).padStart(2, "0")} Projects
-            </span>
-          </div>
-
-          <div className="works-grid">
-            {PRODUCTS.map((product) => (
-              <Link
-                href="/products"
-                key={product.id}
-                className="work-card"
-              >
-                <div className="work-card-visual">
-                  <div
-                    className="work-card-gradient"
-                    style={{ background: product.gradient }}
-                  />
-                </div>
-                <div className="work-card-body">
-                  <span className="label work-card-category">
-                    {product.category}
-                  </span>
-                  <h3 className="heading-sm work-card-title">{product.title}</h3>
-                  <p className="body-text-sm work-card-description">
-                    {product.description}
-                  </p>
-                </div>
-                <div className="work-card-footer">
-                  <div className="work-card-tags">
-                    {product.tags.map((tag) => (
-                      <span key={tag} className="work-card-tag">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="work-card-arrow">↗</div>
-                </div>
-              </Link>
-            ))}
-          </div>
-
-          <div style={{ textAlign: "center", marginTop: "var(--space-xl)" }}>
-            <Link href="/products" className="cta-button">
-              <span>All products</span>
-              <span className="arrow">→</span>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ────────────────────────────────────── */}
-      {/* ABOUT SECTION */}
-      {/* ────────────────────────────────────── */}
-      <section ref={aboutRef} className="section about-section" id="about">
-        <div className="about-deco about-deco-1" />
-        <div className="about-deco about-deco-2" />
-
-        <div className="container">
-          <div className="about-grid">
-            <div>
-              <span className="label about-label">About Me</span>
-              <h2 className="heading-lg about-title">
-                Designer,
-                <br />
-                developer,
-                <br />
-                <span className="accent">& dreamer.</span>
-              </h2>
-
-              <div className="about-stats">
-                <div className="about-stat">
-                  <div className="about-stat-number">5+</div>
-                  <div className="about-stat-label">Years of experience</div>
-                </div>
-                <div className="about-stat">
-                  <div className="about-stat-number">30+</div>
-                  <div className="about-stat-label">Projects completed</div>
-                </div>
-                <div className="about-stat">
-                  <div className="about-stat-number">∞</div>
-                  <div className="about-stat-label">Cups of coffee</div>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <p className="body-text about-text">
-                {/* User will fill this in later */}
-              </p>
-              <p className="body-text about-text">
-                {/* User will fill this in later */}
-              </p>
-
-              <div className="about-skills">
-                {SKILLS.map((skill) => (
-                  <span key={skill} className="about-skill">
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ────────────────────────────────────── */}
-      {/* FOOTER */}
-      {/* ────────────────────────────────────── */}
-      <footer ref={footerRef} className="footer" id="contact">
-        <div className="container">
-          <div className="footer-top">
-            <div className="footer-cta">
-              <h2 className="heading-lg footer-cta-title">
-                Let&apos;s work{" "}
-                <span className="accent">together.</span>
-              </h2>
-              <div style={{ marginTop: "var(--space-md)" }}>
-                <a href="mailto:hello@stasshe.com" className="cta-button cta-button--light">
-                  <span>Get in touch</span>
-                  <span className="arrow">→</span>
-                </a>
-              </div>
-            </div>
-
-            <div className="footer-links">
-              <div className="footer-link-group">
-                <h4>Navigate</h4>
-                <span
-                  style={{ cursor: "pointer", display: "block", padding: "0.3rem 0", fontFamily: "var(--font-sans)", fontSize: "0.9rem", color: "rgba(240,236,238,0.6)", transition: "color 0.4s" }}
-                  onClick={() => scrollToSection("hero")}
-                  onKeyDown={() => {}}
-                  role="button"
-                  tabIndex={0}
-                >
-                  Home
-                </span>
-                <span
-                  style={{ cursor: "pointer", display: "block", padding: "0.3rem 0", fontFamily: "var(--font-sans)", fontSize: "0.9rem", color: "rgba(240,236,238,0.6)", transition: "color 0.4s" }}
-                  onClick={() => scrollToSection("works")}
-                  onKeyDown={() => {}}
-                  role="button"
-                  tabIndex={0}
-                >
-                  Works
-                </span>
-                <span
-                  style={{ cursor: "pointer", display: "block", padding: "0.3rem 0", fontFamily: "var(--font-sans)", fontSize: "0.9rem", color: "rgba(240,236,238,0.6)", transition: "color 0.4s" }}
-                  onClick={() => scrollToSection("about")}
-                  onKeyDown={() => {}}
-                  role="button"
-                  tabIndex={0}
-                >
-                  About
-                </span>
-                <Link href="/products" style={{ display: "block", padding: "0.3rem 0", fontFamily: "var(--font-sans)", fontSize: "0.9rem", color: "rgba(240,236,238,0.6)", transition: "color 0.4s" }}>
-                  Products
-                </Link>
-              </div>
-              <div className="footer-link-group">
-                <h4>Social</h4>
-                <a href="#" target="_blank" rel="noopener noreferrer">
-                  Twitter
-                </a>
-                <a href="#" target="_blank" rel="noopener noreferrer">
-                  GitHub
-                </a>
-                <a href="#" target="_blank" rel="noopener noreferrer">
-                  LinkedIn
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div className="footer-bottom">
-            <span className="footer-copyright">
-              © 2025 Stasshe. All rights reserved.
-            </span>
-            <span className="label" style={{ color: "rgba(240,236,238,0.3)" }}>
-              Built with care
-            </span>
-          </div>
-        </div>
-      </footer>
+      <HeroSection heroRef={heroRef} />
+      <MarqueeSection marqueeRef={marqueeRef} items={MARQUEE_ITEMS} />
+      <HorizontalSection
+        horizontalRef={horizontalRef}
+        horizontalWrapRef={horizontalWrapRef}
+        scrollToSection={scrollToSection}
+      />
+      <SkewSection skewRef={skewRef} />
+      <WorksSection worksRef={worksRef} products={PRODUCTS} />
+      <AboutSection aboutRef={aboutRef} skills={SKILLS} />
+      <HomeFooter footerRef={footerRef} scrollToSection={scrollToSection} />
     </div>
   );
 }
