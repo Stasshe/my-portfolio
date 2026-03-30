@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { type RefObject } from "react";
+import type { RefObject } from "react";
 
 type HomeFooterProps = {
   footerRef: RefObject<HTMLElement | null>;

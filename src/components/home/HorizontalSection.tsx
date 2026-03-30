@@ -1,5 +1,5 @@
 import { ArrowRight } from "lucide-react";
-import { type RefObject } from "react";
+import type { RefObject } from "react";
 
 type HorizontalSectionProps = {
   horizontalRef: RefObject<HTMLElement | null>;
