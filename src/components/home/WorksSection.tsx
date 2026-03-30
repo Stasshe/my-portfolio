@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { type RefObject } from "react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { type Product } from "./data";
 
 type WorksSectionProps = {
@@ -42,7 +43,7 @@ export function WorksSection({ worksRef, products }: WorksSectionProps) {
                 <h3 className="heading-sm work-card-title">{product.title}</h3>
                 <p className="body-text-sm work-card-description">{product.description}</p>
               </div>
-              <div className="work-card-footer">
+                <div className="work-card-footer">
                 <div className="work-card-tags">
                   {product.tags.map((tag) => (
                     <span key={tag} className="work-card-tag">
@@ -50,7 +51,7 @@ export function WorksSection({ worksRef, products }: WorksSectionProps) {
                     </span>
                   ))}
                 </div>
-                <div className="work-card-arrow">&#8599;</div>
+                <div className="work-card-arrow"><ArrowUpRight /></div>
               </div>
             </Link>
           ))}
@@ -59,7 +60,7 @@ export function WorksSection({ worksRef, products }: WorksSectionProps) {
         <div style={{ textAlign: "center", marginTop: "var(--space-xl)" }}>
           <Link href="/products" className="cta-button">
             <span>All products</span>
-            <span className="arrow">&rarr;</span>
+            <ArrowRight className="arrow" />
           </Link>
         </div>
       </div>

@@ -270,19 +270,18 @@ ul, ol {
 /* Mobile menu button */
 .nav-menu-btn {
   display: none;
-  flex-direction: column;
-  gap: 5px;
+  align-items: center;
+  justify-content: center;
   padding: 4px;
   cursor: pointer;
   z-index: 1001;
 }
 
-.nav-menu-btn span {
-  display: block;
+.nav-menu-btn .menu-icon {
   width: 24px;
-  height: 1.5px;
-  background-color: var(--color-dark);
-  transition: all 0.3s ease;
+  height: 24px;
+  color: var(--color-dark);
+  transition: transform 0.3s ease;
 }
 
 /* Mobile overlay */

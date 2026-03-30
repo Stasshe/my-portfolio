@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { type RefObject } from "react";
+import { Menu, X } from "lucide-react";
 
 type HomeNavigationProps = {
   navRef: RefObject<HTMLElement | null>;
@@ -55,20 +56,10 @@ export function HomeNavigation({
           <button
             className="nav-menu-btn"
             onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
             type="button"
           >
-            <span
-              style={{
-                transform: menuOpen ? "rotate(45deg) translate(4px, 4px)" : "none",
-              }}
-            />
-            <span style={{ opacity: menuOpen ? 0 : 1 }} />
-            <span
-              style={{
-                transform: menuOpen ? "rotate(-45deg) translate(4px, -4px)" : "none",
-              }}
-            />
+            {menuOpen ? <X className="menu-icon" /> : <Menu className="menu-icon" />}
           </button>
         </div>
       </nav>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { type RefObject } from "react";
+import { ArrowRight } from "lucide-react";
 
 type HomeFooterProps = {
   footerRef: RefObject<HTMLElement | null>;
@@ -28,7 +29,7 @@ export function HomeFooter({ footerRef, scrollToSection }: HomeFooterProps) {
             <div style={{ marginTop: "var(--space-md)" }}>
               <a href="mailto:hello@stasshe.com" className="cta-button cta-button--light">
                 <span>Get in touch</span>
-                <span className="arrow">&rarr;</span>
+                <ArrowRight className="arrow" />
               </a>
             </div>
           </div>

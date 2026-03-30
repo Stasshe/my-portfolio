@@ -1,4 +1,5 @@
 import { type RefObject } from "react";
+import { ArrowRight } from "lucide-react";
 
 type HorizontalSectionProps = {
   horizontalRef: RefObject<HTMLElement | null>;
@@ -93,7 +94,7 @@ export function HorizontalSection({
                 type="button"
               >
                 <span>View my work</span>
-                <span className="arrow">&rarr;</span>
+                <ArrowRight className="arrow" />
               </button>
             </div>
           </div>
