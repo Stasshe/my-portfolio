@@ -158,16 +158,20 @@ export default function Home() {
           ease: "power3.out",
         });
 
-        gsap.from(".work-card", {
-          scrollTrigger: {
-            trigger: ".works-grid",
-            start: "top 85%",
+        gsap.set(".work-card", { autoAlpha: 0, y: 80 });
+        ScrollTrigger.batch(".work-card", {
+          start: "top 88%",
+          once: true,
+          onEnter: (batch) => {
+            gsap.to(batch, {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.8,
+              ease: "power3.out",
+              stagger: 0.15,
+              overwrite: "auto",
+            });
           },
-          y: 80,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          stagger: 0.15,
         });
 
         gsap.from(".about-label", {
@@ -289,6 +293,10 @@ export default function Home() {
         },
       });
 
+      const refreshAfterLoad = () => ScrollTrigger.refresh();
+      window.addEventListener("load", refreshAfterLoad);
+      document.fonts?.ready.then(() => ScrollTrigger.refresh());
+
       loaderTl
         .to(".page-loader-text", {
           opacity: 1,
@@ -402,6 +410,7 @@ export default function Home() {
       });
 
       return () => {
+        window.removeEventListener("load", refreshAfterLoad);
         window.removeEventListener("mousemove", moveCursor);
       };
     }, mainRef);
