@@ -85,9 +85,208 @@ export default function Home() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      const setupScrollAnimations = () => {
+        ScrollTrigger.create({
+          start: 100,
+          onUpdate: (self) => {
+            if (navRef.current) {
+              if (self.direction === 1 && self.scroll() > 100) {
+                navRef.current.classList.add("scrolled");
+              } else if (self.scroll() < 100) {
+                navRef.current.classList.remove("scrolled");
+              }
+            }
+          },
+        });
+
+        if (heroRef.current) {
+          gsap.to(".hero-content", {
+            yPercent: -30,
+            opacity: 0.3,
+            scrollTrigger: {
+              trigger: heroRef.current,
+              start: "top top",
+              end: "bottom top",
+              scrub: 1,
+            },
+          });
+        }
+
+        if (horizontalRef.current && horizontalWrapRef.current) {
+          const panels = horizontalWrapRef.current.querySelectorAll(".horizontal-panel");
+          const getTotalWidth = () => (panels.length - 1) * window.innerWidth;
+
+          gsap.to(horizontalWrapRef.current, {
+            x: () => -getTotalWidth(),
+            ease: "none",
+            scrollTrigger: {
+              trigger: horizontalRef.current,
+              start: "top top",
+              end: () => `+=${getTotalWidth()}`,
+              scrub: 1,
+              pin: true,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          panels.forEach((panel, _i) => {
+            const content = panel.querySelector(".panel-content");
+            if (content) {
+              gsap.from(content, {
+                x: 100,
+                opacity: 0,
+                scrollTrigger: {
+                  trigger: panel,
+                  start: "left center",
+                  end: "center center",
+                  scrub: true,
+                },
+              });
+            }
+          });
+        }
+
+        gsap.from(".works-header", {
+          scrollTrigger: {
+            trigger: ".works-section",
+            start: "top 80%",
+          },
+          y: 60,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+        });
+
+        gsap.from(".work-card", {
+          scrollTrigger: {
+            trigger: ".works-grid",
+            start: "top 85%",
+          },
+          y: 80,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.15,
+        });
+
+        gsap.from(".about-label", {
+          scrollTrigger: {
+            trigger: ".about-section",
+            start: "top 75%",
+          },
+          x: -40,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power3.out",
+        });
+
+        gsap.from(".about-title", {
+          scrollTrigger: {
+            trigger: ".about-section",
+            start: "top 70%",
+          },
+          y: 60,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+        });
+
+        gsap.from(".about-text", {
+          scrollTrigger: {
+            trigger: ".about-section",
+            start: "top 60%",
+          },
+          y: 40,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          stagger: 0.1,
+        });
+
+        gsap.from(".about-stat", {
+          scrollTrigger: {
+            trigger: ".about-stats",
+            start: "top 85%",
+          },
+          y: 40,
+          opacity: 0,
+          duration: 0.6,
+          ease: "power3.out",
+          stagger: 0.1,
+        });
+
+        gsap.from(".about-skill", {
+          scrollTrigger: {
+            trigger: ".about-skills",
+            start: "top 90%",
+          },
+          scale: 0.8,
+          opacity: 0,
+          duration: 0.4,
+          ease: "back.out(1.7)",
+          stagger: 0.05,
+        });
+
+        gsap.to(".about-deco-1", {
+          y: -80,
+          scrollTrigger: {
+            trigger: ".about-section",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+
+        gsap.to(".about-deco-2", {
+          y: 60,
+          scrollTrigger: {
+            trigger: ".about-section",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        });
+
+        if (skewRef.current) {
+          const rows = skewRef.current.querySelectorAll(".skew-text");
+          rows.forEach((row, i) => {
+            gsap.from(row, {
+              x: i % 2 === 0 ? -200 : 200,
+              opacity: 0,
+              scrollTrigger: {
+                trigger: row,
+                start: "top 90%",
+                end: "top 40%",
+                scrub: 1,
+              },
+            });
+          });
+        }
+
+        gsap.from(".footer-cta-title", {
+          scrollTrigger: {
+            trigger: ".footer",
+            start: "top 80%",
+          },
+          y: 60,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out",
+        });
+      };
+
       /* ──────────── Page Loader ──────────── */
       const loaderTl = gsap.timeline({
-        onComplete: () => setIsLoaded(true),
+        onComplete: () => {
+          setIsLoaded(true);
+          setupScrollAnimations();
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              ScrollTrigger.refresh();
+            });
+          });
+        },
       });
 
       loaderTl
@@ -110,20 +309,6 @@ export default function Home() {
           ease: "power4.inOut",
         })
         .set(".page-loader", { display: "none" });
-
-      /* ──────────── Nav scroll effect ──────────── */
-      ScrollTrigger.create({
-        start: 100,
-        onUpdate: (self) => {
-          if (navRef.current) {
-            if (self.direction === 1 && self.scroll() > 100) {
-              navRef.current.classList.add("scrolled");
-            } else if (self.scroll() < 100) {
-              navRef.current.classList.remove("scrolled");
-            }
-          }
-        },
-      });
 
       /* ──────────── Hero animations ──────────── */
       const heroTl = gsap.timeline({
@@ -178,20 +363,6 @@ export default function Home() {
           "-=1"
         );
 
-      // Hero parallax on scroll
-      if (heroRef.current) {
-        gsap.to(".hero-content", {
-          yPercent: -30,
-          opacity: 0.3,
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: 1,
-          },
-        });
-      }
-
       /* ──────────── Marquee ──────────── */
       if (marqueeRef.current) {
         const track = marqueeRef.current.querySelector(".marquee-track");
@@ -205,174 +376,6 @@ export default function Home() {
         }
       }
 
-      /* ──────────── Horizontal Scroll ──────────── */
-      if (horizontalRef.current && horizontalWrapRef.current) {
-        const panels = horizontalWrapRef.current.querySelectorAll(".horizontal-panel");
-        const totalWidth = (panels.length - 1) * window.innerWidth;
-
-        gsap.to(horizontalWrapRef.current, {
-          x: -totalWidth,
-          ease: "none",
-          scrollTrigger: {
-            trigger: horizontalRef.current,
-            start: "top top",
-            end: () => `+=${totalWidth}`,
-            scrub: 1,
-            pin: true,
-            anticipatePin: 1,
-          },
-        });
-
-        // Animate panel contents
-        panels.forEach((panel, _i) => {
-          const content = panel.querySelector(".panel-content");
-          if (content) {
-            gsap.from(content, {
-              x: 100,
-              opacity: 0,
-              scrollTrigger: {
-                trigger: panel,
-                start: "left center",
-                end: "center center",
-                scrub: true,
-              },
-            });
-          }
-        });
-      }
-
-      /* ──────────── Works / Products section ──────────── */
-      gsap.from(".works-header", {
-        scrollTrigger: {
-          trigger: ".works-section",
-          start: "top 80%",
-        },
-        y: 60,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-      });
-
-      gsap.from(".work-card", {
-        scrollTrigger: {
-          trigger: ".works-grid",
-          start: "top 85%",
-        },
-        y: 80,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        stagger: 0.15,
-      });
-
-      /* ──────────── About Section ──────────── */
-      gsap.from(".about-label", {
-        scrollTrigger: {
-          trigger: ".about-section",
-          start: "top 75%",
-        },
-        x: -40,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-      });
-
-      gsap.from(".about-title", {
-        scrollTrigger: {
-          trigger: ".about-section",
-          start: "top 70%",
-        },
-        y: 60,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-      });
-
-      gsap.from(".about-text", {
-        scrollTrigger: {
-          trigger: ".about-section",
-          start: "top 60%",
-        },
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        stagger: 0.1,
-      });
-
-      gsap.from(".about-stat", {
-        scrollTrigger: {
-          trigger: ".about-stats",
-          start: "top 85%",
-        },
-        y: 40,
-        opacity: 0,
-        duration: 0.6,
-        ease: "power3.out",
-        stagger: 0.1,
-      });
-
-      gsap.from(".about-skill", {
-        scrollTrigger: {
-          trigger: ".about-skills",
-          start: "top 90%",
-        },
-        scale: 0.8,
-        opacity: 0,
-        duration: 0.4,
-        ease: "back.out(1.7)",
-        stagger: 0.05,
-      });
-
-      // About decorative circles parallax
-      gsap.to(".about-deco-1", {
-        y: -80,
-        scrollTrigger: {
-          trigger: ".about-section",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1,
-        },
-      });
-
-      gsap.to(".about-deco-2", {
-        y: 60,
-        scrollTrigger: {
-          trigger: ".about-section",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1,
-        },
-      });
-
-      /* ──────────── Skew / Diagonal Text ──────────── */
-      if (skewRef.current) {
-        const rows = skewRef.current.querySelectorAll(".skew-text");
-        rows.forEach((row, i) => {
-          gsap.from(row, {
-            x: i % 2 === 0 ? -200 : 200,
-            opacity: 0,
-            scrollTrigger: {
-              trigger: row,
-              start: "top 90%",
-              end: "top 40%",
-              scrub: 1,
-            },
-          });
-        });
-      }
-
-      /* ──────────── Footer ──────────── */
-      gsap.from(".footer-cta-title", {
-        scrollTrigger: {
-          trigger: ".footer",
-          start: "top 80%",
-        },
-        y: 60,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-      });
 
       /* ──────────── Custom cursor ──────────── */
       const moveCursor = (e: MouseEvent) => {
