@@ -1,11 +1,12 @@
 "use client";
 
 import gsap from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 /* ───── Data ───── */
 const PRODUCTS = [
