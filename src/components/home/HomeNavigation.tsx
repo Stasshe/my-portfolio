@@ -19,35 +19,17 @@ export function HomeNavigation({
     <>
       <nav ref={navRef} className="nav">
         <div className="nav-inner">
-          <div
-            className="nav-logo"
-            onClick={() => scrollToSection("hero")}
-            onKeyDown={() => {}}
-            role="button"
-            tabIndex={0}
-          >
+          <button type="button" className="nav-logo" onClick={() => scrollToSection("hero")}>
             Stasshe
-          </div>
+          </button>
 
           <div className="nav-links">
-            <span
-              className="nav-link"
-              onClick={() => scrollToSection("works")}
-              onKeyDown={() => {}}
-              role="button"
-              tabIndex={0}
-            >
+            <button type="button" className="nav-link" onClick={() => scrollToSection("works")}>
               Works
-            </span>
-            <span
-              className="nav-link"
-              onClick={() => scrollToSection("about")}
-              onKeyDown={() => {}}
-              role="button"
-              tabIndex={0}
-            >
+            </button>
+            <button type="button" className="nav-link" onClick={() => scrollToSection("about")}>
               About
-            </span>
+            </button>
             <Link href="/products" className="nav-link">
               Products
             </Link>
@@ -65,33 +47,15 @@ export function HomeNavigation({
       </nav>
 
       <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
-        <span
-          className="nav-link"
-          onClick={() => scrollToSection("hero")}
-          onKeyDown={() => {}}
-          role="button"
-          tabIndex={0}
-        >
+        <button type="button" className="nav-link" onClick={() => scrollToSection("hero")}>
           Home
-        </span>
-        <span
-          className="nav-link"
-          onClick={() => scrollToSection("works")}
-          onKeyDown={() => {}}
-          role="button"
-          tabIndex={0}
-        >
+        </button>
+        <button type="button" className="nav-link" onClick={() => scrollToSection("works")}>
           Works
-        </span>
-        <span
-          className="nav-link"
-          onClick={() => scrollToSection("about")}
-          onKeyDown={() => {}}
-          role="button"
-          tabIndex={0}
-        >
+        </button>
+        <button type="button" className="nav-link" onClick={() => scrollToSection("about")}>
           About
-        </span>
+        </button>
         <Link href="/products" className="nav-link" onClick={() => setMenuOpen(false)}>
           Products
         </Link>

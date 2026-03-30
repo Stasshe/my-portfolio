@@ -37,46 +37,28 @@ export function HomeFooter({ footerRef, scrollToSection }: HomeFooterProps) {
           <div className="footer-links">
             <div className="footer-link-group">
               <h4>Navigate</h4>
-              <span
-                style={navLinkStyle}
-                onClick={() => scrollToSection("hero")}
-                onKeyDown={() => {}}
-                role="button"
-                tabIndex={0}
-              >
+              <button type="button" style={navLinkStyle} onClick={() => scrollToSection("hero")}>
                 Home
-              </span>
-              <span
-                style={navLinkStyle}
-                onClick={() => scrollToSection("works")}
-                onKeyDown={() => {}}
-                role="button"
-                tabIndex={0}
-              >
+              </button>
+              <button type="button" style={navLinkStyle} onClick={() => scrollToSection("works")}>
                 Works
-              </span>
-              <span
-                style={navLinkStyle}
-                onClick={() => scrollToSection("about")}
-                onKeyDown={() => {}}
-                role="button"
-                tabIndex={0}
-              >
+              </button>
+              <button type="button" style={navLinkStyle} onClick={() => scrollToSection("about")}>
                 About
-              </span>
+              </button>
               <Link href="/products" style={navLinkStyle}>
                 Products
               </Link>
             </div>
             <div className="footer-link-group">
               <h4>Social</h4>
-              <a href="#" target="_blank" rel="noopener noreferrer">
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
                 Twitter
               </a>
-              <a href="#" target="_blank" rel="noopener noreferrer">
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer">
                 GitHub
               </a>
-              <a href="#" target="_blank" rel="noopener noreferrer">
+              <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
                 LinkedIn
               </a>
             </div>
