@@ -1,6 +1,6 @@
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { type RefObject } from "react";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { type Product } from "./data";
 
 type WorksSectionProps = {
