@@ -51,16 +51,19 @@ export default function Home() {
         });
 
         if (heroRef.current) {
-          gsap.to(".hero-content", {
-            yPercent: -30,
-            opacity: 0.3,
-            scrollTrigger: {
-              trigger: heroRef.current,
-              start: "top top",
-              end: "bottom top",
-              scrub: 1,
-            },
-          });
+          const heroContent = heroRef.current.querySelectorAll<HTMLElement>('.hero-content');
+          if (heroContent && heroContent.length) {
+            gsap.to(heroContent, {
+              yPercent: -30,
+              opacity: 0.3,
+              scrollTrigger: {
+                trigger: heroRef.current,
+                start: 'top top',
+                end: 'bottom top',
+                scrub: 1,
+              },
+            });
+          }
         }
 
         if (horizontalRef.current && horizontalWrapRef.current) {
@@ -296,53 +299,81 @@ export default function Home() {
         delay: 1.8,
       });
 
-      heroTl
-        .from(".hero-greeting", {
-          y: 30,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power3.out",
-        })
-        .from(
-          ".hero-title-line span",
-          {
-            y: 120,
-            opacity: 0,
-            duration: 1,
-            ease: "power3.out",
-            stagger: 0.1,
-          },
-          "-=0.4",
-        )
-        .from(
-          ".hero-tagline",
-          {
+      if (heroRef.current) {
+        const greetingEls = heroRef.current.querySelectorAll<HTMLElement>('.hero-greeting');
+        const titleSpans = heroRef.current.querySelectorAll<HTMLElement>('.hero-title-line span');
+        const taglineEls = heroRef.current.querySelectorAll<HTMLElement>('.hero-tagline');
+        const scrollIndicators = heroRef.current.querySelectorAll<HTMLElement>('.hero-scroll-indicator');
+        const decoEls = heroRef.current.querySelectorAll<HTMLElement>('.hero-deco');
+
+        heroTl
+          .from(greetingEls, {
             y: 30,
             opacity: 0,
             duration: 0.8,
-            ease: "power3.out",
-          },
-          "-=0.4",
-        )
-        .from(
-          ".hero-scroll-indicator",
-          {
-            opacity: 0,
-            duration: 0.6,
-          },
-          "-=0.2",
-        )
-        .from(
-          ".hero-deco",
-          {
-            scale: 0,
-            opacity: 0,
-            duration: 1.2,
-            ease: "power2.out",
-            stagger: 0.2,
-          },
-          "-=1",
-        );
+            ease: 'power3.out',
+          })
+          .from(
+            titleSpans,
+            {
+              y: 120,
+              opacity: 0,
+              duration: 1,
+              ease: 'power3.out',
+              stagger: 0.1,
+            },
+            '-=0.4',
+          )
+          .from(
+            taglineEls,
+            {
+              y: 30,
+              opacity: 0,
+              duration: 0.8,
+              ease: 'power3.out',
+            },
+            '-=0.4',
+          )
+          .from(
+            scrollIndicators,
+            {
+              opacity: 0,
+              duration: 0.6,
+            },
+            '-=0.2',
+          )
+          .from(
+            decoEls,
+            {
+              scale: 0,
+              opacity: 0,
+              duration: 1.2,
+              ease: 'power2.out',
+              stagger: 0.2,
+            },
+            '-=1',
+          );
+      } else {
+        // Fallback to selector strings if ref is unavailable
+        heroTl
+          .from('.hero-greeting', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out' })
+          .from(
+            '.hero-title-line span',
+            { y: 120, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.1 },
+            '-=0.4',
+          )
+          .from(
+            '.hero-tagline',
+            { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out' },
+            '-=0.4',
+          )
+          .from('.hero-scroll-indicator', { opacity: 0, duration: 0.6 }, '-=0.2')
+          .from(
+            '.hero-deco',
+            { scale: 0, opacity: 0, duration: 1.2, ease: 'power2.out', stagger: 0.2 },
+            '-=1',
+          );
+      }
 
       if (marqueeRef.current) {
         const track = marqueeRef.current.querySelector(".marquee-track");

@@ -8,6 +8,13 @@ const config: Config = {
   ],
   darkMode: 'class',
   theme: {
+    container: {
+      center: true,
+      padding: 'clamp(1.5rem, 4vw, 4rem)',
+      screens: {
+        '2xl': '1400px',
+      },
+    },
     extend: {
       colors: {
         border: 'hsl(var(--border))',
@@ -48,6 +55,23 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
         mono: ['var(--font-geist-mono)', 'Consolas', 'monospace'],
+      },
+      // Keep clamp-based scales available as Tailwind font sizes
+      fontSize: {
+        'heading-xl': ['clamp(3.5rem, 10vw, 9rem)', { lineHeight: '0.95', fontWeight: '300' }],
+        'heading-lg': ['clamp(2.5rem, 6vw, 5.5rem)', { lineHeight: '1.05', fontWeight: '300' }],
+        'heading-md': ['clamp(1.8rem, 4vw, 3.5rem)', { lineHeight: '1.15', fontWeight: '400' }],
+        'heading-sm': ['clamp(1.2rem, 2.5vw, 2rem)', { lineHeight: '1.3', fontWeight: '400' }],
+        label: ['clamp(0.65rem, 1vw, 0.8rem)', { lineHeight: '1.4' }],
+        'label-lg': ['clamp(0.8rem, 1.2vw, 1rem)', { lineHeight: '1.4' }],
+        'body-text': ['clamp(0.95rem, 1.2vw, 1.1rem)', { lineHeight: '1.7' }],
+        'body-text-sm': ['clamp(0.8rem, 1vw, 0.95rem)', { lineHeight: '1.6' }],
+      },
+      spacing: {
+        'section-padding': 'clamp(4rem, 10vw, 10rem)',
+      },
+      maxWidth: {
+        'container-max': '1400px',
       },
       animation: {
         'pulse-slow': 'pulse 2s ease-in-out infinite',

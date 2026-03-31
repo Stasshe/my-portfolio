@@ -1,4 +1,3 @@
-import "@/components/home/hero/HeroSection.css";
 import "@/components/home/marquee/MarqueeSection.css";
 import "@/components/home/skew/SkewSection.css";
 import "@/components/home/works/WorksSection.css";
