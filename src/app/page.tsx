@@ -1,5 +1,6 @@
 "use client";
 
+import { useCustomCursor } from "@/lib/useCustomCursor";
 import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -30,6 +31,8 @@ export default function Home() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [, setIsLoaded] = useState(false);
+
+  useCustomCursor(cursorRef, { extraSelectors: ".work-card" });
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -327,31 +330,7 @@ export default function Home() {
         }
       }
 
-      const moveCursor = (e: MouseEvent) => {
-        if (cursorRef.current) {
-          gsap.to(cursorRef.current, {
-            x: e.clientX,
-            y: e.clientY,
-            duration: 0.5,
-            ease: "power2.out",
-          });
-        }
-      };
-      window.addEventListener("mousemove", moveCursor);
-
-      const interactives = document.querySelectorAll("a, button, .work-card, .nav-link");
-      interactives.forEach((el) => {
-        el.addEventListener("mouseenter", () => {
-          cursorRef.current?.classList.add("hovering");
-        });
-        el.addEventListener("mouseleave", () => {
-          cursorRef.current?.classList.remove("hovering");
-        });
-      });
-
-      return () => {
-        window.removeEventListener("mousemove", moveCursor);
-      };
+      
     }, mainRef);
 
     return () => ctx.revert();

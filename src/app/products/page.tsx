@@ -1,12 +1,13 @@
 "use client";
 
+import { useCustomCursor } from "@/lib/useCustomCursor";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowLeft, Search, X } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { CATEGORIES, PRODUCT_ITEMS } from "../../components/products/data";
 import type { ProductItem } from "../../components/products/data";
+import { CATEGORIES, PRODUCT_ITEMS } from "../../components/products/data";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,6 +21,8 @@ export default function ProductsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  useCustomCursor(cursorRef, { extraSelectors: ".products-grid-item" });
 
   const filteredProducts = useMemo(() => {
     return PRODUCT_ITEMS.filter((item) => {
@@ -70,34 +73,7 @@ export default function ProductsPage() {
         delay: 0.4,
       });
 
-      // Custom cursor
-      const moveCursor = (e: MouseEvent) => {
-        if (cursorRef.current) {
-          gsap.to(cursorRef.current, {
-            x: e.clientX,
-            y: e.clientY,
-            duration: 0.5,
-            ease: "power2.out",
-          });
-        }
-      };
-      window.addEventListener("mousemove", moveCursor);
-
-      const interactives = document.querySelectorAll(
-        "a, button, .products-grid-item, .nav-link",
-      );
-      interactives.forEach((el) => {
-        el.addEventListener("mouseenter", () => {
-          cursorRef.current?.classList.add("hovering");
-        });
-        el.addEventListener("mouseleave", () => {
-          cursorRef.current?.classList.remove("hovering");
-        });
-      });
-
-      return () => {
-        window.removeEventListener("mousemove", moveCursor);
-      };
+      
     }, pageRef);
 
     return () => ctx.revert();
