@@ -324,6 +324,7 @@ export default function Home() {
         document.getElementById('hero-title-span-1'),
         document.getElementById('hero-title-span-2'),
       ].filter(Boolean) as HTMLElement[];
+      const subtagEls = [document.getElementById('hero-subtag')].filter(Boolean) as HTMLElement[];
       const taglineEls = [document.getElementById('hero-tagline')].filter(Boolean) as HTMLElement[];
       const scrollIndicators = [document.getElementById('hero-scroll-indicator')].filter(Boolean) as HTMLElement[];
       const decoEls = [
@@ -349,6 +350,16 @@ export default function Home() {
             stagger: 0.1,
           },
           '-=0.4',
+        )
+        .from(
+          subtagEls,
+          {
+            y: 20,
+            opacity: 0,
+            duration: 0.7,
+            ease: 'power3.out',
+          },
+          '-=0.3',
         )
         .from(
           taglineEls,
