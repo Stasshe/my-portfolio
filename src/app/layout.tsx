@@ -1,4 +1,7 @@
-import "@/components/home/about/about.css";
+import "@/components/home/hero/HeroSection.css";
+import "@/components/home/marquee/MarqueeSection.css";
+import "@/components/home/skew/SkewSection.css";
+import "@/components/home/works/WorksSection.css";
 import type { Metadata } from "next";
 import "./globals.css";
 import "./products/products.css";

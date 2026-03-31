@@ -1,7 +1,7 @@
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import type { RefObject } from "react";
-import type { Product } from "./data";
+import type { Product } from "../data";
 
 type WorksSectionProps = {
   worksRef: RefObject<HTMLElement | null>;

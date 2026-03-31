@@ -1,0 +1,74 @@
+
+/* ============================================
+   Marquee / Ticker
+   ============================================ */
+.marquee-section {
+  padding: var(--space-lg) 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(var(--color-dark-rgb), 0.08);
+  border-bottom: 1px solid rgba(var(--color-dark-rgb), 0.08);
+}
+
+.marquee-track {
+  display: flex;
+  gap: var(--space-lg);
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.marquee-item {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  font-weight: 300;
+  color: var(--color-dark);
+  opacity: 0.15;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.marquee-item .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-brand);
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   Horizontal Scroll Section
+   ============================================ */
+.horizontal-section {
+  overflow: hidden;
+}
+
+.horizontal-wrapper {
+  display: flex;
+  width: fit-content;
+  will-change: transform;
+}
+
+.horizontal-panel {
+  width: 100vw;
+  min-height: 100vh;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 clamp(2rem, 6vw, 6rem);
+}
+
+.horizontal-panel:nth-child(1) {
+  background-color: var(--color-light);
+}
+
+.horizontal-panel:nth-child(2) {
+  background-color: var(--color-dark);
+  color: var(--color-light);
+}
+
+.horizontal-panel:nth-child(3) {
+  background: linear-gradient(135deg, var(--color-brand), var(--color-dark));
+  color: var(--color-light);
+}

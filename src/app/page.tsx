@@ -7,13 +7,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
 import { AboutSection } from "../components/home/about/AboutSection";
 import { MARQUEE_ITEMS, PRODUCTS, SKILLS } from "../components/home/data";
-import { HeroSection } from "../components/home/HeroSection";
+import { HeroSection } from "../components/home/hero/HeroSection";
 import { HomeFooter } from "../components/home/HomeFooter";
 import { HomeNavigation } from "../components/home/HomeNavigation";
 import { HorizontalSection } from "../components/home/HorizontalSection";
-import { MarqueeSection } from "../components/home/MarqueeSection";
-import { SkewSection } from "../components/home/SkewSection";
-import { WorksSection } from "../components/home/WorksSection";
+import { MarqueeSection } from "../components/home/marquee/MarqueeSection";
+import { SkewSection } from "../components/home/skew/SkewSection";
+import { WorksSection } from "../components/home/works/WorksSection";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -125,84 +125,109 @@ export default function Home() {
           },
         });
 
-        gsap.from(".about-label", {
-          scrollTrigger: {
-            trigger: ".about-section",
-            start: "top 75%",
-          },
-          x: -40,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power3.out",
-        });
+        if (aboutRef.current) {
+          const label = aboutRef.current.querySelector('[data-about="label"]');
+          if (label) {
+            gsap.from(label, {
+              scrollTrigger: {
+                trigger: aboutRef.current,
+                start: "top 75%",
+              },
+              x: -40,
+              opacity: 0,
+              duration: 0.8,
+              ease: "power3.out",
+            });
+          }
 
-        gsap.from(".about-title", {
-          scrollTrigger: {
-            trigger: ".about-section",
-            start: "top 70%",
-          },
-          y: 60,
-          opacity: 0,
-          duration: 1,
-          ease: "power3.out",
-        });
+          const title = aboutRef.current.querySelector('[data-about="title"]');
+          if (title) {
+            gsap.from(title, {
+              scrollTrigger: {
+                trigger: aboutRef.current,
+                start: "top 70%",
+              },
+              y: 60,
+              opacity: 0,
+              duration: 1,
+              ease: "power3.out",
+            });
+          }
 
-        gsap.from(".about-text", {
-          scrollTrigger: {
-            trigger: ".about-section",
-            start: "top 60%",
-          },
-          y: 40,
-          opacity: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          stagger: 0.1,
-        });
+          const texts = aboutRef.current.querySelectorAll('[data-about="text"]');
+          if (texts.length) {
+            gsap.from(texts, {
+              scrollTrigger: {
+                trigger: aboutRef.current,
+                start: "top 60%",
+              },
+              y: 40,
+              opacity: 0,
+              duration: 0.8,
+              ease: "power3.out",
+              stagger: 0.1,
+            });
+          }
 
-        gsap.from(".about-stat", {
-          scrollTrigger: {
-            trigger: ".about-stats",
-            start: "top 85%",
-          },
-          y: 40,
-          opacity: 0,
-          duration: 0.6,
-          ease: "power3.out",
-          stagger: 0.1,
-        });
+          const stats = aboutRef.current.querySelectorAll('[data-about="stat"]');
+          const statsTrigger = aboutRef.current.querySelector('[data-about="stats"]') ?? aboutRef.current;
+          if (stats.length) {
+            gsap.from(stats, {
+              scrollTrigger: {
+                trigger: statsTrigger,
+                start: "top 85%",
+              },
+              y: 40,
+              opacity: 0,
+              duration: 0.6,
+              ease: "power3.out",
+              stagger: 0.1,
+            });
+          }
 
-        gsap.from(".about-skill", {
-          scrollTrigger: {
-            trigger: ".about-skills",
-            start: "top 90%",
-          },
-          scale: 0.8,
-          opacity: 0,
-          duration: 0.4,
-          immediateRender: false,
-          ease: "back.out(1.7)",
-          stagger: 0.05,
-        });
+          const skills = aboutRef.current.querySelectorAll('[data-about="skill"]');
+          const skillsTrigger = aboutRef.current.querySelector('[data-about="skills"]') ?? aboutRef.current;
+          if (skills.length) {
+            gsap.from(skills, {
+              scrollTrigger: {
+                trigger: skillsTrigger,
+                start: "top 90%",
+              },
+              scale: 0.8,
+              opacity: 0,
+              duration: 0.4,
+              immediateRender: false,
+              ease: "back.out(1.7)",
+              stagger: 0.05,
+            });
+          }
 
-        gsap.to(".about-deco-1", {
-          y: -80,
-          scrollTrigger: {
-            trigger: ".about-section",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1,
-          },
-        });
+          const deco1 = aboutRef.current.querySelector('[data-about="deco-1"]');
+          if (deco1) {
+            gsap.to(deco1, {
+              y: -80,
+              scrollTrigger: {
+                trigger: aboutRef.current,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1,
+              },
+            });
+          }
 
-        gsap.to(".about-deco-2", {
-          y: 60,
-          scrollTrigger: {
-            trigger: ".about-section",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1,
-          },
-        });
+          const deco2 = aboutRef.current.querySelector('[data-about="deco-2"]');
+          if (deco2) {
+            gsap.to(deco2, {
+              y: 60,
+              scrollTrigger: {
+                trigger: aboutRef.current,
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1,
+              },
+            });
+          }
+        }
 
         if (skewRef.current) {
           const rows = skewRef.current.querySelectorAll(".skew-text");
