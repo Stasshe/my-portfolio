@@ -51,15 +51,15 @@ export default function Home() {
         });
 
         if (heroRef.current) {
-          const heroContentEl = document.getElementById('hero-content');
+          const heroContentEl = document.getElementById("hero-content");
           if (heroContentEl) {
             gsap.to(heroContentEl, {
               yPercent: -30,
               opacity: 0.3,
               scrollTrigger: {
                 trigger: heroRef.current,
-                start: 'top top',
-                end: 'bottom top',
+                start: "top top",
+                end: "bottom top",
                 scrub: 1,
               },
             });
@@ -72,10 +72,10 @@ export default function Home() {
 
           gsap.to(horizontalWrapRef.current, {
             x: () => -getTotalWidth(),
-            ease: 'none',
+            ease: "none",
             scrollTrigger: {
               trigger: horizontalRef.current,
-              start: 'top top',
+              start: "top top",
               end: () => `+=${getTotalWidth()}`,
               scrub: 1,
               pin: true,
@@ -92,8 +92,8 @@ export default function Home() {
                 opacity: 0,
                 scrollTrigger: {
                   trigger: panel,
-                  start: 'left center',
-                  end: 'center center',
+                  start: "left center",
+                  end: "center center",
                   scrub: true,
                 },
               });
@@ -101,35 +101,35 @@ export default function Home() {
           });
         }
 
-        const worksHeaderEl = document.getElementById('works-header');
-        const worksSectionEl = document.getElementById('works');
+        const worksHeaderEl = document.getElementById("works-header");
+        const worksSectionEl = document.getElementById("works");
         if (worksHeaderEl && worksSectionEl) {
           gsap.from(worksHeaderEl, {
             scrollTrigger: {
               trigger: worksSectionEl,
-              start: 'top 80%',
+              start: "top 80%",
             },
             y: 60,
             opacity: 0,
             duration: 1,
-            ease: 'power3.out',
+            ease: "power3.out",
           });
         }
 
-        const workCards = worksRef.current?.getElementsByClassName('work-card') ?? [];
+        const workCards = worksRef.current?.getElementsByClassName("work-card") ?? [];
         if ((workCards as HTMLCollection).length) {
           gsap.set(workCards as any, { autoAlpha: 0, y: 80 });
           ScrollTrigger.batch(workCards as any, {
-            start: 'top 88%',
+            start: "top 88%",
             once: true,
             onEnter: (batch: any) => {
               gsap.to(batch, {
                 autoAlpha: 1,
                 y: 0,
                 duration: 0.8,
-                ease: 'power3.out',
+                ease: "power3.out",
                 stagger: 0.15,
-                overwrite: 'auto',
+                overwrite: "auto",
               });
             },
           });
@@ -137,106 +137,111 @@ export default function Home() {
 
         if (aboutRef.current) {
           const aboutEl = aboutRef.current;
-          const label = document.getElementById('about-label');
+          const label = document.getElementById("about-label");
           if (label) {
             gsap.from(label, {
               scrollTrigger: {
                 trigger: aboutEl,
-                start: 'top 75%',
+                start: "top 75%",
               },
               x: -40,
               opacity: 0,
               duration: 0.8,
-              ease: 'power3.out',
+              ease: "power3.out",
             });
           }
 
-          const title = document.getElementById('about-title');
+          const title = document.getElementById("about-title");
           if (title) {
             gsap.from(title, {
               scrollTrigger: {
                 trigger: aboutEl,
-                start: 'top 70%',
+                start: "top 70%",
               },
               y: 60,
               opacity: 0,
               duration: 1,
-              ease: 'power3.out',
+              ease: "power3.out",
             });
           }
 
-          const texts = [document.getElementById('about-text-0'), document.getElementById('about-text-1')].filter(Boolean) as HTMLElement[];
+          const texts = [
+            document.getElementById("about-text-0"),
+            document.getElementById("about-text-1"),
+          ].filter(Boolean) as HTMLElement[];
           if (texts.length) {
             gsap.from(texts, {
               scrollTrigger: {
                 trigger: aboutEl,
-                start: 'top 60%',
+                start: "top 60%",
               },
               y: 40,
               opacity: 0,
               duration: 0.8,
-              ease: 'power3.out',
+              ease: "power3.out",
               stagger: 0.1,
             });
           }
 
-          const stats = ['about-stat-0', 'about-stat-1', 'about-stat-2']
+          const stats = ["about-stat-0", "about-stat-1", "about-stat-2"]
             .map((id) => document.getElementById(id))
             .filter(Boolean) as HTMLElement[];
-          const statsTrigger = document.getElementById('about-stats') ?? aboutEl;
+          const statsTrigger = document.getElementById("about-stats") ?? aboutEl;
           if (stats.length) {
             gsap.from(stats, {
               scrollTrigger: {
                 trigger: statsTrigger,
-                start: 'top 85%',
+                start: "top 85%",
               },
               y: 40,
               opacity: 0,
               duration: 0.6,
-              ease: 'power3.out',
+              ease: "power3.out",
               stagger: 0.1,
             });
           }
 
-          const skillsContainer = document.getElementById('about-skills');
-          const skills = skillsContainer ? Array.from(skillsContainer.children) as HTMLElement[] : [];
+          const skillsContainer = document.getElementById("about-skills");
+          const skills = skillsContainer
+            ? (Array.from(skillsContainer.children) as HTMLElement[])
+            : [];
           const skillsTrigger = skillsContainer ?? aboutEl;
           if (skills.length) {
             gsap.from(skills, {
               scrollTrigger: {
                 trigger: skillsTrigger,
-                start: 'top 90%',
+                start: "top 90%",
               },
               scale: 0.8,
               opacity: 0,
               duration: 0.4,
               immediateRender: false,
-              ease: 'back.out(1.7)',
+              ease: "back.out(1.7)",
               stagger: 0.05,
             });
           }
 
-          const deco1 = document.getElementById('about-deco-1');
+          const deco1 = document.getElementById("about-deco-1");
           if (deco1) {
             gsap.to(deco1, {
               y: -80,
               scrollTrigger: {
                 trigger: aboutEl,
-                start: 'top bottom',
-                end: 'bottom top',
+                start: "top bottom",
+                end: "bottom top",
                 scrub: 1,
               },
             });
           }
 
-          const deco2 = document.getElementById('about-deco-2');
+          const deco2 = document.getElementById("about-deco-2");
           if (deco2) {
             gsap.to(deco2, {
               y: 60,
               scrollTrigger: {
                 trigger: aboutEl,
-                start: 'top bottom',
-                end: 'bottom top',
+                start: "top bottom",
+                end: "bottom top",
                 scrub: 1,
               },
             });
@@ -245,9 +250,9 @@ export default function Home() {
 
         if (skewRef.current) {
           const rows = [
-            document.getElementById('skew-text-0'),
-            document.getElementById('skew-text-1'),
-            document.getElementById('skew-text-2'),
+            document.getElementById("skew-text-0"),
+            document.getElementById("skew-text-1"),
+            document.getElementById("skew-text-2"),
           ].filter(Boolean) as HTMLElement[];
           rows.forEach((row, i) => {
             gsap.from(row, {
@@ -255,26 +260,26 @@ export default function Home() {
               opacity: 0,
               scrollTrigger: {
                 trigger: row,
-                start: 'top 90%',
-                end: 'top 40%',
+                start: "top 90%",
+                end: "top 40%",
                 scrub: 1,
               },
             });
           });
         }
 
-        const footerCta = document.getElementById('footer-cta-title');
-        const footerEl = document.getElementById('contact');
+        const footerCta = document.getElementById("footer-cta-title");
+        const footerEl = document.getElementById("contact");
         if (footerCta && footerEl) {
           gsap.from(footerCta, {
             scrollTrigger: {
               trigger: footerEl,
-              start: 'top 80%',
+              start: "top 80%",
             },
             y: 60,
             opacity: 0,
             duration: 1,
-            ease: 'power3.out',
+            ease: "power3.out",
           });
         }
       };
@@ -318,19 +323,23 @@ export default function Home() {
         delay: 1.8,
       });
 
-      const greetingEls = [document.getElementById('hero-greeting')].filter(Boolean) as HTMLElement[];
+      const greetingEls = [document.getElementById("hero-greeting")].filter(
+        Boolean,
+      ) as HTMLElement[];
       const titleSpans = [
-        document.getElementById('hero-title-span-0'),
-        document.getElementById('hero-title-span-1'),
-        document.getElementById('hero-title-span-2'),
+        document.getElementById("hero-title-span-0"),
+        document.getElementById("hero-title-span-1"),
+        document.getElementById("hero-title-span-2"),
       ].filter(Boolean) as HTMLElement[];
-      const subtagEls = [document.getElementById('hero-subtag')].filter(Boolean) as HTMLElement[];
-      const taglineEls = [document.getElementById('hero-tagline')].filter(Boolean) as HTMLElement[];
-      const scrollIndicators = [document.getElementById('hero-scroll-indicator')].filter(Boolean) as HTMLElement[];
+      const subtagEls = [document.getElementById("hero-subtag")].filter(Boolean) as HTMLElement[];
+      const taglineEls = [document.getElementById("hero-tagline")].filter(Boolean) as HTMLElement[];
+      const scrollIndicators = [document.getElementById("hero-scroll-indicator")].filter(
+        Boolean,
+      ) as HTMLElement[];
       const decoEls = [
-        document.getElementById('hero-deco-1'),
-        document.getElementById('hero-deco-2'),
-        document.getElementById('hero-deco-3'),
+        document.getElementById("hero-deco-1"),
+        document.getElementById("hero-deco-2"),
+        document.getElementById("hero-deco-3"),
       ].filter(Boolean) as HTMLElement[];
 
       heroTl
@@ -338,7 +347,7 @@ export default function Home() {
           y: 30,
           opacity: 0,
           duration: 0.8,
-          ease: 'power3.out',
+          ease: "power3.out",
         })
         .from(
           titleSpans,
@@ -346,10 +355,10 @@ export default function Home() {
             y: 120,
             opacity: 0,
             duration: 1,
-            ease: 'power3.out',
+            ease: "power3.out",
             stagger: 0.1,
           },
-          '-=0.4',
+          "-=0.4",
         )
         .from(
           subtagEls,
@@ -357,9 +366,9 @@ export default function Home() {
             y: 20,
             opacity: 0,
             duration: 0.7,
-            ease: 'power3.out',
+            ease: "power3.out",
           },
-          '-=0.3',
+          "-=0.3",
         )
         .from(
           taglineEls,
@@ -367,9 +376,9 @@ export default function Home() {
             y: 30,
             opacity: 0,
             duration: 0.8,
-            ease: 'power3.out',
+            ease: "power3.out",
           },
-          '-=0.4',
+          "-=0.4",
         )
         .from(
           scrollIndicators,
@@ -377,7 +386,7 @@ export default function Home() {
             opacity: 0,
             duration: 0.6,
           },
-          '-=0.2',
+          "-=0.2",
         )
         .from(
           decoEls,
@@ -385,23 +394,21 @@ export default function Home() {
             scale: 0,
             opacity: 0,
             duration: 1.2,
-            ease: 'power2.out',
+            ease: "power2.out",
             stagger: 0.2,
           },
-          '-=1',
+          "-=1",
         );
 
-      const marqueeTrack = document.getElementById('marquee-track');
+      const marqueeTrack = document.getElementById("marquee-track");
       if (marqueeTrack) {
         gsap.to(marqueeTrack, {
           xPercent: -50,
           repeat: -1,
           duration: 25,
-          ease: 'none',
+          ease: "none",
         });
       }
-
-      
     }, mainRef);
 
     return () => ctx.revert();

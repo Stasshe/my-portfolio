@@ -72,8 +72,6 @@ export default function ProductsPage() {
         ease: "power3.out",
         delay: 0.4,
       });
-
-      
     }, pageRef);
 
     return () => ctx.revert();
@@ -131,11 +129,15 @@ export default function ProductsPage() {
       {/* Header */}
       <div ref={headerRef} className="products-page-header">
         <div className="container">
-          <span className="label" style={{ color: "var(--color-brand)", marginBottom: "1rem", display: "block" }}>
+          <span
+            className="label"
+            style={{ color: "var(--color-brand)", marginBottom: "1rem", display: "block" }}
+          >
             Products & Works
           </span>
           <h1 className="heading-xl products-page-title">
-            Every<br />
+            Every
+            <br />
             <span className="products-title-accent">thing</span>{" "}
             <span className="products-title-italic">I craft.</span>
           </h1>
@@ -187,7 +189,8 @@ export default function ProductsPage() {
 
             <div className="products-count">
               <span className="label">
-                {String(filteredProducts.length).padStart(2, "0")} item{filteredProducts.length !== 1 ? "s" : ""}
+                {String(filteredProducts.length).padStart(2, "0")} item
+                {filteredProducts.length !== 1 ? "s" : ""}
               </span>
             </div>
           </div>
@@ -199,15 +202,16 @@ export default function ProductsPage() {
         <div className="container">
           <div ref={gridRef} className="products-grid">
             {filteredProducts.length > 0 ? (
-              filteredProducts.map((item) => (
-                <ProductCard key={item.id} item={item} />
-              ))
+              filteredProducts.map((item) => <ProductCard key={item.id} item={item} />)
             ) : (
               <div className="products-empty">
                 <span className="heading-md" style={{ color: "var(--color-light-accent)" }}>
                   No projects found.
                 </span>
-                <p className="body-text" style={{ color: "var(--color-light-accent)", marginTop: "1rem" }}>
+                <p
+                  className="body-text"
+                  style={{ color: "var(--color-light-accent)", marginTop: "1rem" }}
+                >
                   Try adjusting your search or filters.
                 </p>
               </div>
@@ -224,9 +228,7 @@ export default function ProductsPage() {
               <span>Back to Home</span>
               <ArrowLeft className="arrow" size={16} />
             </Link>
-            <span className="footer-copyright">
-              © 2025 Stasshe. All rights reserved.
-            </span>
+            <span className="footer-copyright">© 2025 Stasshe. All rights reserved.</span>
           </div>
         </div>
       </footer>
@@ -238,21 +240,18 @@ function ProductCard({ item }: { item: ProductItem }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
-  const handleMouseMove = useCallback(
-    (e: React.MouseEvent<HTMLDivElement>) => {
-      if (!cardRef.current) return;
-      const rect = cardRef.current.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
-      const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-      gsap.to(cardRef.current, {
-        rotateY: x * 4,
-        rotateX: -y * 4,
-        duration: 0.4,
-        ease: "power2.out",
-      });
-    },
-    [],
-  );
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+    gsap.to(cardRef.current, {
+      rotateY: x * 4,
+      rotateX: -y * 4,
+      duration: 0.4,
+      ease: "power2.out",
+    });
+  }, []);
 
   const handleMouseLeave = useCallback(() => {
     setIsHovered(false);

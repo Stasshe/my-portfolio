@@ -156,9 +156,8 @@
   max-width: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-width 0.5s var(--ease-out-expo),
-    opacity 0.3s ease,
-    padding 0.5s var(--ease-out-expo);
+  transition: max-width 0.5s var(--ease-out-expo), opacity 0.3s ease, padding 0.5s
+    var(--ease-out-expo);
   padding: 0;
   border: 1px solid transparent;
   border-radius: 100px;

@@ -37,7 +37,10 @@ export function useCustomCursor<T extends HTMLElement = HTMLElement>(
 
     const baseSelectors = ["a", "button", ".nav-link"];
     const extra = extraSelectors
-      ? extraSelectors.split(",").map((s) => s.trim()).filter(Boolean)
+      ? extraSelectors
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean)
       : [];
     const selector = [...baseSelectors, ...extra].join(", ");
 
@@ -64,5 +67,11 @@ export function useCustomCursor<T extends HTMLElement = HTMLElement>(
         el.removeEventListener("mouseleave", leave);
       });
     };
-  }, [cursorRef, options?.extraSelectors, options?.hoverClass, options?.moveDuration, options?.easing]);
+  }, [
+    cursorRef,
+    options?.extraSelectors,
+    options?.hoverClass,
+    options?.moveDuration,
+    options?.easing,
+  ]);
 }
