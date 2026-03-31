@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "BUILD_MODE=production next build",
+    "preview:static": "npx serve out -l 3000",
     "start": "next start",
     "lint": "biome check src/",
     "lint:fix": "biome check --write src/",
@@ -15,7 +17,9 @@
     "lucide-react": "^1.7.0",
     "next": "^16.2.1",
     "react": "19.1.1",
-    "react-dom": "19.1.1"
+    "react-dom": "19.1.1",
+    "gray-matter": "^4.0.3",
+    "marked": "^5.1.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.0",
