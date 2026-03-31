@@ -5,7 +5,8 @@ import gsap from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
-import { AboutSection } from "../components/home/AboutSection";
+import { AboutSection } from "../components/home/about/AboutSection";
+import { MARQUEE_ITEMS, PRODUCTS, SKILLS } from "../components/home/data";
 import { HeroSection } from "../components/home/HeroSection";
 import { HomeFooter } from "../components/home/HomeFooter";
 import { HomeNavigation } from "../components/home/HomeNavigation";
@@ -13,7 +14,6 @@ import { HorizontalSection } from "../components/home/HorizontalSection";
 import { MarqueeSection } from "../components/home/MarqueeSection";
 import { SkewSection } from "../components/home/SkewSection";
 import { WorksSection } from "../components/home/WorksSection";
-import { MARQUEE_ITEMS, PRODUCTS, SKILLS } from "../components/home/data";
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 

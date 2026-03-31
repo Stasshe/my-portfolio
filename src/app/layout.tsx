@@ -1,3 +1,4 @@
+import "@/components/home/about/about.css";
 import type { Metadata } from "next";
 import "./globals.css";
 import "./products/products.css";
