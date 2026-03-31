@@ -78,10 +78,10 @@ export function AboutSection({ aboutRef, skills }: AboutSectionProps) {
 
           <div>
             <p id="about-text-0" className="body-text text-[rgba(var(--color-light-rgb),0.6)] mb-4">
-              {/* User will fill this in later */}
+              I'm a passionate designer and developer with a love for creating meaningful digital experiences.
             </p>
             <p id="about-text-1" className="body-text text-[rgba(var(--color-light-rgb),0.6)] mb-4">
-              {/* User will fill this in later */}
+              When I'm not coding or designing, you can find me exploring new technologies or enjoying a good cup of coffee.
             </p>
 
             <div id="about-skills" data-about="skills" className="flex flex-wrap gap-2 mt-4">
