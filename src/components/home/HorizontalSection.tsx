@@ -14,9 +14,9 @@ export function HorizontalSection({
 }: HorizontalSectionProps) {
   return (
     <section ref={horizontalRef} className="horizontal-section">
-      <div ref={horizontalWrapRef} className="horizontal-wrapper">
-        <div className="horizontal-panel">
-          <div className="panel-content container">
+      <div id="horizontal-wrap" ref={horizontalWrapRef} className="horizontal-wrapper">
+        <div id="horizontal-panel-0" className="horizontal-panel">
+          <div id="panel-content-0" className="panel-content container">
             <span
               className="label"
               style={{ color: "var(--color-brand)", marginBottom: "1.5rem", display: "block" }}
@@ -42,8 +42,8 @@ export function HorizontalSection({
           </div>
         </div>
 
-        <div className="horizontal-panel">
-          <div className="panel-content container">
+        <div id="horizontal-panel-1" className="horizontal-panel">
+          <div id="panel-content-1" className="panel-content container">
             <span
               className="label"
               style={{
@@ -75,8 +75,9 @@ export function HorizontalSection({
           </div>
         </div>
 
-        <div className="horizontal-panel">
+        <div id="horizontal-panel-2" className="horizontal-panel">
           <div
+            id="panel-content-2"
             className="panel-content container"
             style={{ textAlign: "center", maxWidth: "700px", margin: "0 auto" }}
           >

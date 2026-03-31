@@ -23,7 +23,7 @@ export function HomeFooter({ footerRef, scrollToSection }: HomeFooterProps) {
       <div className="container">
         <div className="footer-top">
           <div className="footer-cta">
-            <h2 className="heading-lg footer-cta-title">
+            <h2 id="footer-cta-title" className="heading-lg footer-cta-title">
               Let&apos;s work <span className="accent">together.</span>
             </h2>
             <div style={{ marginTop: "var(--space-md)" }}>

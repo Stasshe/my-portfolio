@@ -7,9 +7,9 @@ type SkewSectionProps = {
 export function SkewSection({ skewRef }: SkewSectionProps) {
   return (
     <section ref={skewRef} className="skew-section">
-      <div className="skew-content">
+      <div id="skew-content" className="skew-content">
         <div className="skew-text-row">
-          <div className="skew-text">
+          <div id="skew-text-0" className="skew-text">
             <span className="filled">Creative</span>
             &nbsp;&nbsp;&nbsp;
             <span className="stroke">Direction</span>
@@ -18,7 +18,7 @@ export function SkewSection({ skewRef }: SkewSectionProps) {
           </div>
         </div>
         <div className="skew-text-row">
-          <div className="skew-text">
+          <div id="skew-text-1" className="skew-text">
             <span className="stroke">Interface</span>
             &nbsp;&nbsp;&nbsp;
             <span className="filled">Design</span>
@@ -27,7 +27,7 @@ export function SkewSection({ skewRef }: SkewSectionProps) {
           </div>
         </div>
         <div className="skew-text-row">
-          <div className="skew-text">
+          <div id="skew-text-2" className="skew-text">
             <span className="italic">Full-Stack</span>
             &nbsp;&nbsp;&nbsp;
             <span className="filled">Development</span>

@@ -12,7 +12,7 @@ export function WorksSection({ worksRef, products }: WorksSectionProps) {
   return (
     <section ref={worksRef} className="section works-section" id="works">
       <div className="container">
-        <div className="works-header">
+        <div id="works-header" className="works-header">
           <div>
             <span
               className="label"

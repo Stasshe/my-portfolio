@@ -51,9 +51,9 @@ export default function Home() {
         });
 
         if (heroRef.current) {
-          const heroContent = heroRef.current.querySelectorAll<HTMLElement>('.hero-content');
-          if (heroContent && heroContent.length) {
-            gsap.to(heroContent, {
+          const heroContentEl = document.getElementById('hero-content');
+          if (heroContentEl) {
+            gsap.to(heroContentEl, {
               yPercent: -30,
               opacity: 0.3,
               scrollTrigger: {
@@ -67,15 +67,15 @@ export default function Home() {
         }
 
         if (horizontalRef.current && horizontalWrapRef.current) {
-          const panels = horizontalWrapRef.current.querySelectorAll(".horizontal-panel");
+          const panels = Array.from(horizontalWrapRef.current.children) as HTMLElement[];
           const getTotalWidth = () => (panels.length - 1) * window.innerWidth;
 
           gsap.to(horizontalWrapRef.current, {
             x: () => -getTotalWidth(),
-            ease: "none",
+            ease: 'none',
             scrollTrigger: {
               trigger: horizontalRef.current,
-              start: "top top",
+              start: 'top top',
               end: () => `+=${getTotalWidth()}`,
               scrub: 1,
               pin: true,
@@ -85,15 +85,15 @@ export default function Home() {
           });
 
           panels.forEach((panel) => {
-            const content = panel.querySelector(".panel-content");
+            const content = panel.firstElementChild as HTMLElement | null;
             if (content) {
               gsap.from(content, {
                 x: 100,
                 opacity: 0,
                 scrollTrigger: {
                   trigger: panel,
-                  start: "left center",
-                  end: "center center",
+                  start: 'left center',
+                  end: 'center center',
                   scrub: true,
                 },
               });
@@ -101,131 +101,142 @@ export default function Home() {
           });
         }
 
-        gsap.from(".works-header", {
-          scrollTrigger: {
-            trigger: ".works-section",
-            start: "top 80%",
-          },
-          y: 60,
-          opacity: 0,
-          duration: 1,
-          ease: "power3.out",
-        });
+        const worksHeaderEl = document.getElementById('works-header');
+        const worksSectionEl = document.getElementById('works');
+        if (worksHeaderEl && worksSectionEl) {
+          gsap.from(worksHeaderEl, {
+            scrollTrigger: {
+              trigger: worksSectionEl,
+              start: 'top 80%',
+            },
+            y: 60,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out',
+          });
+        }
 
-        gsap.set(".work-card", { autoAlpha: 0, y: 80 });
-        ScrollTrigger.batch(".work-card", {
-          start: "top 88%",
-          once: true,
-          onEnter: (batch) => {
-            gsap.to(batch, {
-              autoAlpha: 1,
-              y: 0,
-              duration: 0.8,
-              ease: "power3.out",
-              stagger: 0.15,
-              overwrite: "auto",
-            });
-          },
-        });
+        const workCards = worksRef.current?.getElementsByClassName('work-card') ?? [];
+        if ((workCards as HTMLCollection).length) {
+          gsap.set(workCards as any, { autoAlpha: 0, y: 80 });
+          ScrollTrigger.batch(workCards as any, {
+            start: 'top 88%',
+            once: true,
+            onEnter: (batch: any) => {
+              gsap.to(batch, {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.8,
+                ease: 'power3.out',
+                stagger: 0.15,
+                overwrite: 'auto',
+              });
+            },
+          });
+        }
 
         if (aboutRef.current) {
-          const label = aboutRef.current.querySelector('[data-about="label"]');
+          const aboutEl = aboutRef.current;
+          const label = document.getElementById('about-label');
           if (label) {
             gsap.from(label, {
               scrollTrigger: {
-                trigger: aboutRef.current,
-                start: "top 75%",
+                trigger: aboutEl,
+                start: 'top 75%',
               },
               x: -40,
               opacity: 0,
               duration: 0.8,
-              ease: "power3.out",
+              ease: 'power3.out',
             });
           }
 
-          const title = aboutRef.current.querySelector('[data-about="title"]');
+          const title = document.getElementById('about-title');
           if (title) {
             gsap.from(title, {
               scrollTrigger: {
-                trigger: aboutRef.current,
-                start: "top 70%",
+                trigger: aboutEl,
+                start: 'top 70%',
               },
               y: 60,
               opacity: 0,
               duration: 1,
-              ease: "power3.out",
+              ease: 'power3.out',
             });
           }
 
-          const texts = aboutRef.current.querySelectorAll('[data-about="text"]');
+          const texts = [document.getElementById('about-text-0'), document.getElementById('about-text-1')].filter(Boolean) as HTMLElement[];
           if (texts.length) {
             gsap.from(texts, {
               scrollTrigger: {
-                trigger: aboutRef.current,
-                start: "top 60%",
+                trigger: aboutEl,
+                start: 'top 60%',
               },
               y: 40,
               opacity: 0,
               duration: 0.8,
-              ease: "power3.out",
+              ease: 'power3.out',
               stagger: 0.1,
             });
           }
 
-          const stats = aboutRef.current.querySelectorAll('[data-about="stat"]');
-          const statsTrigger = aboutRef.current.querySelector('[data-about="stats"]') ?? aboutRef.current;
+          const stats = ['about-stat-0', 'about-stat-1', 'about-stat-2']
+            .map((id) => document.getElementById(id))
+            .filter(Boolean) as HTMLElement[];
+          const statsTrigger = document.getElementById('about-stats') ?? aboutEl;
           if (stats.length) {
             gsap.from(stats, {
               scrollTrigger: {
                 trigger: statsTrigger,
-                start: "top 85%",
+                start: 'top 85%',
               },
               y: 40,
               opacity: 0,
               duration: 0.6,
-              ease: "power3.out",
+              ease: 'power3.out',
               stagger: 0.1,
             });
           }
 
-          const skills = aboutRef.current.querySelectorAll('[data-about="skill"]');
-          const skillsTrigger = aboutRef.current.querySelector('[data-about="skills"]') ?? aboutRef.current;
+          const skillsContainer = document.getElementById('about-skills');
+          const skills = skillsContainer ? Array.from(skillsContainer.children) as HTMLElement[] : [];
+          const skillsTrigger = skillsContainer ?? aboutEl;
           if (skills.length) {
             gsap.from(skills, {
               scrollTrigger: {
                 trigger: skillsTrigger,
-                start: "top 90%",
+                start: 'top 90%',
               },
               scale: 0.8,
               opacity: 0,
               duration: 0.4,
               immediateRender: false,
-              ease: "back.out(1.7)",
+              ease: 'back.out(1.7)',
               stagger: 0.05,
             });
           }
 
-          const deco1 = aboutRef.current.querySelector('[data-about="deco-1"]');
+          const deco1 = document.getElementById('about-deco-1');
           if (deco1) {
             gsap.to(deco1, {
               y: -80,
               scrollTrigger: {
-                trigger: aboutRef.current,
-                start: "top bottom",
-                end: "bottom top",
+                trigger: aboutEl,
+                start: 'top bottom',
+                end: 'bottom top',
                 scrub: 1,
               },
             });
           }
 
-          const deco2 = aboutRef.current.querySelector('[data-about="deco-2"]');
+          const deco2 = document.getElementById('about-deco-2');
           if (deco2) {
             gsap.to(deco2, {
               y: 60,
               scrollTrigger: {
-                trigger: aboutRef.current,
-                start: "top bottom",
-                end: "bottom top",
+                trigger: aboutEl,
+                start: 'top bottom',
+                end: 'bottom top',
                 scrub: 1,
               },
             });
@@ -233,31 +244,39 @@ export default function Home() {
         }
 
         if (skewRef.current) {
-          const rows = skewRef.current.querySelectorAll(".skew-text");
+          const rows = [
+            document.getElementById('skew-text-0'),
+            document.getElementById('skew-text-1'),
+            document.getElementById('skew-text-2'),
+          ].filter(Boolean) as HTMLElement[];
           rows.forEach((row, i) => {
             gsap.from(row, {
               x: i % 2 === 0 ? -200 : 200,
               opacity: 0,
               scrollTrigger: {
                 trigger: row,
-                start: "top 90%",
-                end: "top 40%",
+                start: 'top 90%',
+                end: 'top 40%',
                 scrub: 1,
               },
             });
           });
         }
 
-        gsap.from(".footer-cta-title", {
-          scrollTrigger: {
-            trigger: ".footer",
-            start: "top 80%",
-          },
-          y: 60,
-          opacity: 0,
-          duration: 1,
-          ease: "power3.out",
-        });
+        const footerCta = document.getElementById('footer-cta-title');
+        const footerEl = document.getElementById('contact');
+        if (footerCta && footerEl) {
+          gsap.from(footerCta, {
+            scrollTrigger: {
+              trigger: footerEl,
+              start: 'top 80%',
+            },
+            y: 60,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out',
+          });
+        }
       };
 
       // ScrollTrigger のセットアップは即時に行う（loader に依存させない）
@@ -299,92 +318,76 @@ export default function Home() {
         delay: 1.8,
       });
 
-      if (heroRef.current) {
-        const greetingEls = heroRef.current.querySelectorAll<HTMLElement>('.hero-greeting');
-        const titleSpans = heroRef.current.querySelectorAll<HTMLElement>('.hero-title-line span');
-        const taglineEls = heroRef.current.querySelectorAll<HTMLElement>('.hero-tagline');
-        const scrollIndicators = heroRef.current.querySelectorAll<HTMLElement>('.hero-scroll-indicator');
-        const decoEls = heroRef.current.querySelectorAll<HTMLElement>('.hero-deco');
+      const greetingEls = [document.getElementById('hero-greeting')].filter(Boolean) as HTMLElement[];
+      const titleSpans = [
+        document.getElementById('hero-title-span-0'),
+        document.getElementById('hero-title-span-1'),
+        document.getElementById('hero-title-span-2'),
+      ].filter(Boolean) as HTMLElement[];
+      const taglineEls = [document.getElementById('hero-tagline')].filter(Boolean) as HTMLElement[];
+      const scrollIndicators = [document.getElementById('hero-scroll-indicator')].filter(Boolean) as HTMLElement[];
+      const decoEls = [
+        document.getElementById('hero-deco-1'),
+        document.getElementById('hero-deco-2'),
+        document.getElementById('hero-deco-3'),
+      ].filter(Boolean) as HTMLElement[];
 
-        heroTl
-          .from(greetingEls, {
+      heroTl
+        .from(greetingEls, {
+          y: 30,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power3.out',
+        })
+        .from(
+          titleSpans,
+          {
+            y: 120,
+            opacity: 0,
+            duration: 1,
+            ease: 'power3.out',
+            stagger: 0.1,
+          },
+          '-=0.4',
+        )
+        .from(
+          taglineEls,
+          {
             y: 30,
             opacity: 0,
             duration: 0.8,
             ease: 'power3.out',
-          })
-          .from(
-            titleSpans,
-            {
-              y: 120,
-              opacity: 0,
-              duration: 1,
-              ease: 'power3.out',
-              stagger: 0.1,
-            },
-            '-=0.4',
-          )
-          .from(
-            taglineEls,
-            {
-              y: 30,
-              opacity: 0,
-              duration: 0.8,
-              ease: 'power3.out',
-            },
-            '-=0.4',
-          )
-          .from(
-            scrollIndicators,
-            {
-              opacity: 0,
-              duration: 0.6,
-            },
-            '-=0.2',
-          )
-          .from(
-            decoEls,
-            {
-              scale: 0,
-              opacity: 0,
-              duration: 1.2,
-              ease: 'power2.out',
-              stagger: 0.2,
-            },
-            '-=1',
-          );
-      } else {
-        // Fallback to selector strings if ref is unavailable
-        heroTl
-          .from('.hero-greeting', { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out' })
-          .from(
-            '.hero-title-line span',
-            { y: 120, opacity: 0, duration: 1, ease: 'power3.out', stagger: 0.1 },
-            '-=0.4',
-          )
-          .from(
-            '.hero-tagline',
-            { y: 30, opacity: 0, duration: 0.8, ease: 'power3.out' },
-            '-=0.4',
-          )
-          .from('.hero-scroll-indicator', { opacity: 0, duration: 0.6 }, '-=0.2')
-          .from(
-            '.hero-deco',
-            { scale: 0, opacity: 0, duration: 1.2, ease: 'power2.out', stagger: 0.2 },
-            '-=1',
-          );
-      }
+          },
+          '-=0.4',
+        )
+        .from(
+          scrollIndicators,
+          {
+            opacity: 0,
+            duration: 0.6,
+          },
+          '-=0.2',
+        )
+        .from(
+          decoEls,
+          {
+            scale: 0,
+            opacity: 0,
+            duration: 1.2,
+            ease: 'power2.out',
+            stagger: 0.2,
+          },
+          '-=1',
+        );
 
-      if (marqueeRef.current) {
-        const track = marqueeRef.current.querySelector(".marquee-track");
-        if (track) {
-          gsap.to(track, {
-            xPercent: -50,
-            repeat: -1,
-            duration: 25,
-            ease: "none",
-          });
-        }
+      const marqueeTrack = document.getElementById('marquee-track');
+      if (marqueeTrack) {
+        gsap.to(marqueeTrack, {
+          xPercent: -50,
+          repeat: -1,
+          duration: 25,
+          ease: 'none',
+        });
       }
 
       

@@ -13,7 +13,7 @@ export function MarqueeSection({ marqueeRef, items }: MarqueeSectionProps) {
 
   return (
     <div ref={marqueeRef} className="marquee-section">
-      <div className="marquee-track">
+      <div id="marquee-track" className="marquee-track">
         {repeatedItems.map(({ key, value }) => (
           <div key={key} className="marquee-item">
             <span className="dot" />
