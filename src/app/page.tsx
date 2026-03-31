@@ -228,20 +228,18 @@ export default function Home() {
         });
       };
 
+      // ScrollTrigger のセットアップは即時に行う（loader に依存させない）
+      setupScrollAnimations();
+
       const loaderTl = gsap.timeline({
         onComplete: () => {
           setIsLoaded(true);
-          setupScrollAnimations();
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              ScrollTrigger.refresh();
-            });
-          });
+          // loader 完了後は単一の refresh で十分
+          ScrollTrigger.refresh();
         },
       });
 
-      const refreshAfterLoad = () => ScrollTrigger.refresh();
-      window.addEventListener("load", refreshAfterLoad);
+      // フォント読み込み完了時にも refresh
       document.fonts?.ready.then(() => ScrollTrigger.refresh());
 
       loaderTl
@@ -352,7 +350,6 @@ export default function Home() {
       });
 
       return () => {
-        window.removeEventListener("load", refreshAfterLoad);
         window.removeEventListener("mousemove", moveCursor);
       };
     }, mainRef);
