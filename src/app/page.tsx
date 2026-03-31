@@ -179,6 +179,7 @@ export default function Home() {
           scale: 0.8,
           opacity: 0,
           duration: 0.4,
+          immediateRender: false,
           ease: "back.out(1.7)",
           stagger: 0.05,
         });
