@@ -34,7 +34,7 @@ export function HeroSection({ heroRef }: HeroSectionProps) {
         </div>
 
         <div id="hero-title-line-sub" className="hero-title-line mt-2">
-          <span id="hero-subtag" className="heading-md text-[var(--color-light-accent)] font-[300]">
+          <span id="hero-subtag" className="inline-block heading-md text-[var(--color-light-accent)] font-[300]">
             &mdash; design, craft & curiosity
           </span>
         </div>
