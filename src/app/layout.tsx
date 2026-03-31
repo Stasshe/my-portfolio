@@ -4,6 +4,7 @@ import "@/components/home/works/WorksSection.css";
 import type { Metadata } from "next";
 import "./globals.css";
 import "./products/products.css";
+import "./products/[id]/product-detail.css";
 
 export const metadata: Metadata = {
   title: "Stasshe — Portfolio",
