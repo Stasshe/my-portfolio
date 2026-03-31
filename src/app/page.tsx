@@ -116,13 +116,14 @@ export default function Home() {
           });
         }
 
-        const workCards = worksRef.current?.getElementsByClassName("work-card") ?? [];
-        if ((workCards as HTMLCollection).length) {
-          gsap.set(workCards as any, { autoAlpha: 0, y: 80 });
-          ScrollTrigger.batch(workCards as any, {
+        const workCardsCollection = worksRef.current?.getElementsByClassName("work-card");
+        if (workCardsCollection?.length) {
+          const workCards = Array.from(workCardsCollection) as Element[];
+          gsap.set(workCards, { autoAlpha: 0, y: 80 });
+          ScrollTrigger.batch(workCards, {
             start: "top 88%",
             once: true,
-            onEnter: (batch: any) => {
+            onEnter: (batch: Element[]) => {
               gsap.to(batch, {
                 autoAlpha: 1,
                 y: 0,

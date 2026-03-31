@@ -29,7 +29,7 @@ export function useCustomCursor<T extends HTMLElement = HTMLElement>(
           x: e.clientX,
           y: e.clientY,
           duration: moveDuration,
-          ease: easing as any,
+          ease: easing,
         });
       }
     };
