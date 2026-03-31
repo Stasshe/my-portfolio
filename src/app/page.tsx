@@ -369,7 +369,7 @@ export default function Home() {
             duration: 0.7,
             ease: "power3.out",
           },
-          "-=0.3",
+          "-=0.7",
         )
         .from(
           taglineEls,
