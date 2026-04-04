@@ -19,9 +19,22 @@ export type MdxProduct = {
 
 const PRODUCTS_DIR = path.join(process.cwd(), "data", "products");
 
+function resolveImagePath(imagePath: string): string {
+  if (!imagePath || imagePath.startsWith("http") || imagePath.startsWith("/")) {
+    return imagePath;
+  }
+  return `/data/products/${imagePath}`;
+}
+
 function getMdxFiles(): string[] {
   if (!fs.existsSync(PRODUCTS_DIR)) return [];
   return fs.readdirSync(PRODUCTS_DIR).filter((f) => f.endsWith(".mdx") || f.endsWith(".md"));
+}
+
+function resolveImagePathsInHtml(html: string): string {
+  return html.replace(/src="(?!(?:https?:\/\/|\/|data:))([^"]+)"/g, (_match, imagePath) => {
+    return `src="${resolveImagePath(imagePath)}"`;
+  });
 }
 
 export function getAllProductsFromMdx(): MdxProduct[] {
@@ -33,6 +46,7 @@ export function getAllProductsFromMdx(): MdxProduct[] {
     const rawContent = String(content ?? "");
     const withoutScripts = rawContent.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, "");
     const contentHtml = marked(withoutScripts, { mangle: false, headerIds: false });
+    const resolvedHtml = resolveImagePathsInHtml(String(contentHtml));
 
     return {
       id: String(data.id ?? ""),
@@ -40,11 +54,11 @@ export function getAllProductsFromMdx(): MdxProduct[] {
       summary: String(data.summary ?? ""),
       category: String(data.category ?? ""),
       tags: Array.isArray(data.tags) ? data.tags.map(String) : [],
-      thumbnail: String(data.thumbnail ?? ""),
+      thumbnail: resolveImagePath(String(data.thumbnail ?? "")),
       colSpan: Number(data.colSpan ?? 1),
       rowSpan: Number(data.rowSpan ?? 1),
       year: String(data.year ?? ""),
-      contentHtml,
+      contentHtml: resolvedHtml,
       raw,
     } as MdxProduct;
   });
