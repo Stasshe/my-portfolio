@@ -160,11 +160,15 @@ function ProductCard({ item }: { item: MdxProduct }) {
     ? { backgroundImage: `url(${item.thumbnail})`, backgroundSize: "cover", backgroundPosition: "center" }
     : { background: "linear-gradient(135deg,#f3f4f6,#e5e7eb)" };
 
+  const col = item.colSpan ?? 1;
+  const row = item.rowSpan ?? 1;
+  const sizeClass = col <= 2 ? "span-sm" : col <= 3 ? "span-md" : "span-lg";
+
   return (
     <div
       ref={cardRef}
-      className={`products-grid-item ${isHovered ? "hovered" : ""}`}
-      style={{ gridColumn: `span ${item.colSpan ?? 1}`, gridRow: `span ${item.rowSpan ?? 1}` }}
+      className={`products-grid-item ${sizeClass} ${isHovered ? "hovered" : ""}`}
+      style={{ gridColumn: `span ${col}`, gridRow: `span ${row}` }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
