@@ -18,44 +18,50 @@ year: "2024"
 
 ## Overview
 
-クラシックな漢字ゲーム体験を、演出と継続プレイ性の観点から再設計したリメイク作品です。
+クラシックな「漢字でGO!」のリメイク版で、強化されたビジュアルと改良された難易度レベルの漢字チャレンジを提供します。
 
-学習ゲームとしての手触りを残しつつ、見た目・難易度・ランキング導線を強化しました。
+実装の背景、主要機能、運用上の注意点をREADMEの読み味で整理しています。
 
-## Concept
+## Background
 
-- 和風ビジュアルで没入感を高める
-- 段階的な難易度で学習の継続を支える
-- やり込み向けにUnlimitedモードを用意
+- プロジェクト: 漢字の旅 - リメイク版
+- 目的: 短文サマリーではなく、再利用しやすい実装ドキュメントとして残す
+- 方針: デモ向け説明よりも、実装意図と運用条件を優先
 
-## Gameplay
+## Key Features
 
-- 漢字問題を解いて階層を進める
-- モードごとにテンポと難度を調整
-- Unlimitedモードの到達階層をオンライン反映
+### ゲームモード
+
+- 漢字でGO!のリメイク版
+- 演出を和風にし、よりかっこいいグラフィックを。
+- 漢字でGO!にはなかった、アンリミテッドモード
+- 無制限モードでは、到達階層をオンラインランキングに反映できる
+- 収録漢字はほとんどが全てChatGPTなので、真偽には注意。
 
 ## Tech Stack
 
 - Swift
 - SpriteKit
 - UIKit
+- Game
+- iOS
+- App
 - Firebase Realtime Database
-- iOS Playgrounds
+- Online
+- Ranking
+- Playgrounds
 
-## Notes
+## Implementation Notes
 
-- 収録データには生成由来コンテンツを含むため、厳密用途では検証が必要
-- 難易度バランスは継続的に調整
-
-## Result
-
-単発で終わらない学習体験を作れた点が成果です。演出刷新とランキング導線の追加が継続率向上に寄与しました。
+- 実装は速度優先で小さく回し、必要に応じて段階的に機能追加
+- ユーザー体験を壊しやすい箇所（同期、権限、外部API制約）を先に固定
+- 学習用途と実運用用途の境界を明示し、用途に応じて使い分ける設計
 
 ## Links
 
-- [GITHUB](https://github.com/Stasshe/Kanji-de-Go-remake)
+- [GitHub](https://github.com/Stasshe/Kanji-de-Go-remake)
 
-## Gallery
+## Screenshots
 
 ![Kanji Journey - Reimagined](assets/kanji-de-go/IMG_0347.png)
 ![Kanji Journey - Reimagined](assets/kanji-de-go/IMG_0350.png)

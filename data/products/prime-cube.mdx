@@ -18,23 +18,28 @@ year: "2024"
 
 ## Overview
 
-合成数キューブをタップ・スライスして素因数に分解する、操作感重視の数学ゲームです。
+合成数のキューブをタップまたはスライスして素因数に分解する爽快な数学ゲームで、複数の難易度レベルとコンボ・ヒントシステムを備えています。爽快さ全振りのスペシャルモードも！？
 
-「問題を解く」だけでなく、「反応して分解する」体験へ置き換えることで、学習と爽快感の両立を狙いました。
+実装の背景、主要機能、運用上の注意点をREADMEの読み味で整理しています。
 
-## Design Intent
+## Background
 
-- 素因数分解をゲーム操作に翻訳
-- 難易度の段階化で継続プレイを促進
-- コンボと倍率で上達実感を可視化
+- プロジェクト: Split into the Prime!
+- 目的: 短文サマリーではなく、再利用しやすい実装ドキュメントとして残す
+- 方針: デモ向け説明よりも、実装意図と運用条件を優先
 
-## Core Systems
+## Key Features
 
-- タップベースの分解アクション
-- コンボ倍率スコアリング
-- ライフ制とペナルティ
-- 大きい数向けヒント機能
-- Easy〜Specialまでの複数モード
+### ゲームプレイメカニクス
+
+- 生ぬるくない、数学付きのためのゲーム
+- タップベースのキューブ分割メカニクスと、物理エンジン
+- 複数の難易度モード（イージー、ノーマル、ハード、スーパーハード、スペシャル）
+- スコア倍率付きコンボシステム
+- ペナルティメカニクス付きライフシステム
+- リアルタイムの素因数分解ゲームプレイ
+- 大きな数字（80以上）のヒントシステム
+- 素早い反応へのスコア倍率
 
 ## Tech Stack
 
@@ -43,21 +48,26 @@ year: "2024"
 - UIKit
 - GameplayKit
 - CoreAnimation
+- Playgrounds
+- Firebase Realtime Database
+- Online
+- Ranking
+- App
+- iOS
+- Game
 
-## Balancing Notes
+## Implementation Notes
 
-- 学習性を保ちつつ爽快感を落とさない調整が重要
-- 高難易度では読みやすさと速度のバランスを継続調整
-
-## Result
-
-数学ゲームとしての堅さを保ちつつ、繰り返し遊びたくなるリズムを作れました。
+- 実装は速度優先で小さく回し、必要に応じて段階的に機能追加
+- ユーザー体験を壊しやすい箇所（同期、権限、外部API制約）を先に固定
+- 学習用途と実運用用途の境界を明示し、用途に応じて使い分ける設計
 
 ## Links
 
-- [GITHUB](https://github.com/Stasshe/Split-into-the-Prime)
+- [GitHub](https://github.com/Stasshe/Split-into-the-Prime)
 
-## Gallery
+## Screenshots
+
 
 ![Split into the Prime!](assets/prime-cube/IMG_0354.png)
 ![Split into the Prime!](assets/prime-cube/IMG_0356.png)

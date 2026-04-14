@@ -17,40 +17,63 @@ year: "2024"
 
 ## Overview
 
-`no-cookie.youtube.com` が利用可能な環境で、教材動画へ素早くアクセスするための補助ツールです。
+no-cookie環境用のYoutube視聴ツール。コメントなども閲覧可能
 
-視聴導線の簡略化に加えて、コメント確認や検索周辺の運用も意識して設計しました。
+実装の背景、主要機能、運用上の注意点をREADMEの読み味で整理しています。
 
 ## Background
 
-- 通常のYouTube導線が使えないケースがある
-- 毎回URLを手作業で変換するのは非効率
-- 授業中や短時間での参照をスムーズにしたい
+- プロジェクト: YouTube教育アクセス
+- 目的: 短文サマリーではなく、再利用しやすい実装ドキュメントとして残す
+- 方針: デモ向け説明よりも、実装意図と運用条件を優先
 
-## Core Features
+## Key Features
 
-- ワンクリックで閲覧導線を起動
-- `no-cookie.youtube.com` 前提のアクセス補助
-- コメント閲覧の支援
-- API利用時のクォータを考慮した運用
+### 機能
+
+- ワンクリック起動
+- no-cookie.youtube.comが許可されている(ISGCフィルターはおそらくデフォルトで許可されている)時のみ有効
+- 尚、コメント閲覧はno-cookieが許可されていなくても可能
+- youtube-api-v3のクォーター消費に注意。検索系は1日100回まで
+- たくさんapiキーを作ることで対応(迷惑)
 
 ## Tech Stack
 
 - JavaScript
 - Bookmarklet
-- YouTube Data API
+- YouTube API
 - DOM Manipulation
+- no-cookie
+- js
+- ブックマークレット
 
-## Operational Notes
+## Implementation Notes
 
-- 検索系処理はAPIクォータの制約を受ける
-- キー管理のコストが発生する
-- 環境設定により機能差が出るため、用途限定での利用が現実的
+- 実装は速度優先で小さく回し、必要に応じて段階的に機能追加
+- ユーザー体験を壊しやすい箇所（同期、権限、外部API制約）を先に固定
+- 学習用途と実運用用途の境界を明示し、用途に応じて使い分ける設計
 
-## Result
+## README Notes
 
-制限下でも「教材へ辿り着くまでの手順」を短縮できました。日常の参照体験を実運用レベルで改善できたプロジェクトです。
+実運用では、視聴そのものよりも「URL変換と導線短縮」が価値の中心です。
+
+1. 対象のYouTube URLを開く
+2. ブックマークレットを起動して no-cookie 側へ切り替える
+3. 必要に応じてコメントや関連情報を確認する
+4. 検索を使う場合はAPIクォータ残量を確認する
+
+## Operational Constraints
+
+- no-cookie ドメインの許可状態で利用可能範囲が変わる
+- APIキーの使い回しはクォータ枯渇を招きやすい
+- 授業内の短時間利用を前提に、重い機能は切り分けて使うのが安全
+
+## Future Improvements
+
+- APIキー管理の分離とローテーション方針の明文化
+- コメント取得と検索導線のUI整理
+- 利用環境ごとの成功パターンをREADMEに追記
 
 ## Links
 
-- [GITHUB](https://github.com/Stasshe/-school-filtering-ignore/tree/52e67c116feebfe8e95e8fb1a5edc54070274789/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88/Youtube)
+- [GitHub](https://github.com/Stasshe/-school-filtering-ignore/tree/52e67c116feebfe8e95e8fb1a5edc54070274789/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88/Youtube)

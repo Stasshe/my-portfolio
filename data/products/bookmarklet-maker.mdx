@@ -16,22 +16,28 @@ year: "2024"
 
 ## Overview
 
-ブックマークレット制作でつまずきやすい「整形」「管理」「再編集」を一つのフローにまとめたWebアプリです。
+直感的なWeb UIでブックマークレットを作成・編集・管理するツール。生成したコードは最適化・縮小され、すぐにブックマークへ保存できます。
 
-コードを書ける人向けだけではなく、UI中心で扱いたいユーザーにも使いやすい体験を目指しました。
+実装の背景、主要機能、運用上の注意点をREADMEの読み味で整理しています。
 
-## Problem
+## Background
 
-- コードを1行化する段階で失敗しやすい
-- 端末をまたぐとスニペット管理が煩雑になる
-- 実行前に簡単に確認できる場が欲しい
+- プロジェクト: ブックマークレットメーカー
+- 目的: 短文サマリーではなく、再利用しやすい実装ドキュメントとして残す
+- 方針: デモ向け説明よりも、実装意図と運用条件を優先
 
-## What It Solves
+## Key Features
 
-- スニペットの作成から保存までを一画面で完結
-- ターゲットページを意識したライブプレビュー
-- 最適化済みブックマークレットのエクスポート
-- タグ・カテゴリによる整理
+### ビジュアルエディタ
+
+- コードスニペットのドラッグ＆ドロップ
+- ターゲットページでのライブプレビュー
+- 最適化されたブックマークレットコードをエクスポート
+
+### 管理機能
+
+- 作成したブックマークレットの保存・編集
+- タグやカテゴリによる整理
 
 ## Tech Stack
 
@@ -42,20 +48,25 @@ year: "2024"
 
 ## Implementation Notes
 
-- 反復編集しやすいデータ管理を重視
-- 操作回数を減らすために導線を短く設計
-- 視覚的な編集とコードベース編集の両方に配慮
+- 実装は速度優先で小さく回し、必要に応じて段階的に機能追加
+- ユーザー体験を壊しやすい箇所（同期、権限、外部API制約）を先に固定
+- 学習用途と実運用用途の境界を明示し、用途に応じて使い分ける設計
 
-## Result
+## README Notes
 
-「作る→試す→直す→保存する」を短サイクルで回せるツールとして機能しました。小規模ユーティリティの量産に向いています。
+READMEに合わせた基本フローは次のとおりです。
+
+1. エディタでJavaScriptコードを編集
+2. 右側プレビューで挙動を即時確認
+3. Create Bookmarkletでminify済みコードを生成
+4. Copy to Clipboardでブラウザへ登録
 
 ## Links
 
-- [GITHUB](https://github.com/Stasshe/BookMarkLetMaker)
-- [LIVE](https://bookmarklet-maker.vercel.app/)
+- [GitHub](https://github.com/Stasshe/BookMarkLetMaker)
+- [Vercel](https://bookmarklet-maker.vercel.app/)
 
-## Gallery
+## Screenshots
 
 ![BookMarkLet Maker](assets/bookmarklet-maker/IMG_0148.png)
 ![BookMarkLet Maker](assets/bookmarklet-maker/IMG_0149.png)

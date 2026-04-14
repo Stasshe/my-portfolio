@@ -18,50 +18,60 @@ year: "2024"
 
 ## Overview
 
-体感速度を最優先に設計したリアルタイムチャットアプリです。
+高性能なリアルタイムチャットアプリケーションで、高度な機能と最適化されたユーザー体験を提供します。
 
-メッセージ同期だけでなく、通話、通知、ファイル共有まで含めて、日常利用できる会話基盤を目指しました。
+実装の背景、主要機能、運用上の注意点をREADMEの読み味で整理しています。
 
-## Objective
+## Background
 
-- 遅延の少ないチャット体験を実現
-- モバイルでも通知導線を維持
-- 連絡から共有までをアプリ内で完結
+- プロジェクト: Ventus-Talk
+- 目的: 短文サマリーではなく、再利用しやすい実装ドキュメントとして残す
+- 方針: デモ向け説明よりも、実装意図と運用条件を優先
 
-## Architecture Highlights
+## Key Features
 
-- Firestore中心のリアルタイム同期
-- 複数サーバー構成で負荷分散
-- PWA + Service Workerによる通知
-- SkyWay(WebRTC)によるビデオ通話
-- Google Drive APIによるファイル共有
+### 主要機能
+
+- 0.05-0.15秒の更新速度でのリアルタイムメッセージング
+- 4つのFirestoreサーバーによるマルチサーバーアーキテクチャ
+- YouTubeリンクのno-cookie自動変換と埋め込み
+- Sky-wayを使用したビデオ通話
+- QRコードによる友達追加システム
+- Google-Driveファイル共有サポート
+- PWA/Service Workerによるプッシュ通知
+- 開発スピードと、ユーザビリティを重視したから、無料サーバーに負荷をかけるようなセキュリティは搭載できなかった。ま、そんな大事すぎるもんは送らんだろうし、このwebアプリが攻撃される可能性も低いし大丈夫や。
 
 ## Tech Stack
 
 - Firestore
 - JavaScript
-- PWA / Service Worker
-- Firebase Cloud Messaging
+- PWA
+- FCM (Firebase Cloud Messaging)
 - Google Drive API
 - WebRTC
+- Service Workers
+- js
 
-## Trade-offs
+## Implementation Notes
 
-- 無料基盤の制約によりセキュリティ強化は段階的
-- 開発速度とUXを優先した設計判断を含む
-- 高機密データの送受信は想定外
+- 実装は速度優先で小さく回し、必要に応じて段階的に機能追加
+- ユーザー体験を壊しやすい箇所（同期、権限、外部API制約）を先に固定
+- 学習用途と実運用用途の境界を明示し、用途に応じて使い分ける設計
 
-## Result
+## README Notes
 
-同期速度と機能幅のバランスを取り、実利用できるチャット体験を構築できました。通知導線と通話連携が特に有効でした。
+README上では、更新速度(約0.05〜0.15秒)と、日次メッセージ処理量(約10,000件/日)を目安として提示しています。
+
+また、Firestoreを役割分割したマルチサーバー構成と、通知連携(FCM + Service Worker)が中核です。
+速度と実装密度を優先したぶん、セキュリティは段階的強化前提という整理になっています。
 
 ## Links
 
-- [GITHUB](https://github.com/stasshe/ventus-talk)
-- [GLITCH](https://ventus-talk.glitch.me)
-- [RENDER](https://ventus-talk.onrender.com)
+- [GitHub](https://github.com/stasshe/ventus-talk)
+- [Glitch](https://ventus-talk.glitch.me)
+- [Render](https://ventus-talk.onrender.com)
 
-## Gallery
+## Screenshots
 
 ![Ventus-Talk](assets/ventus-talk/IMG_0226.png)
 ![Ventus-Talk](assets/ventus-talk/IMG_0153.png)

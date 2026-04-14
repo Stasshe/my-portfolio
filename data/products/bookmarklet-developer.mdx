@@ -18,46 +18,71 @@ year: "2024"
 
 ## Overview
 
-モバイルブラウザでも、ページ構造の確認や簡単なコード検証を行えるようにした開発用ブックマークレットです。
+iPadや、スマホ向けの、開発者ツール。ブックマークレットとしてパッケージ化された、外出先でもDOMやjsが触れる。
 
-PC向けDevToolsを完全再現するのではなく、外出先で必要になる最小限の操作を高速に実行できることを重視しました。
+実装の背景、主要機能、運用上の注意点をREADMEの読み味で整理しています。
 
-## Why This Exists
+## Background
 
-- iPadやスマホでは要素調査がしづらい
-- 「少しだけ確認したい」作業のためにPCを開くのは重い
-- ブックマークレットなら導入と共有が速い
+- プロジェクト: 開発者ツールブックマークレット
+- 目的: 短文サマリーではなく、再利用しやすい実装ドキュメントとして残す
+- 方針: デモ向け説明よりも、実装意図と運用条件を優先
 
-## Core Features
+## Key Features
 
-- 表示中ページのHTML要素を確認
-- 一部DOMをその場で書き換えて検証
-- 軽量コンソールでJavaScriptを試行
-- `console.log` が難しい環境向けに `alert` ベースの出力も想定
+### 開発ツール
+
+- HTMLを表示（要素の表示）
+- editHTML（ソースの検証のDOMを部分的に）
+- jsコンソール（エラーは出力されない、console.logではなく、alertで代用）
 
 ## Tech Stack
 
 - JavaScript
+- Developer Tools
+- Debugging Utilities
 - Bookmarklet
-- DOM API
-- Mobile Browser
+- DOM
+- js
+- Dev
+- Console
+- Utilities
+- 開発ツール
+- デバッグユーティリティ
+- ブックマークレット
 
 ## Implementation Notes
 
-- 配布しやすい1本のブックマークレットとして設計
-- 実行時の副作用を抑えるため、処理を局所化
-- 複雑なUIは持たず、検証操作に集中した構成
+- 実装は速度優先で小さく回し、必要に応じて段階的に機能追加
+- ユーザー体験を壊しやすい箇所（同期、権限、外部API制約）を先に固定
+- 学習用途と実運用用途の境界を明示し、用途に応じて使い分ける設計
 
-## Trade-offs
+## README Notes
 
-- 高度なネットワーク解析や詳細トレースは非対応
-- CSPや環境制限によって機能が制約される場合がある
+このツールは「本格DevToolsの代替」ではなく、モバイル環境で最低限の検証を行うための軽量セットです。
+
+1. 対象ページを開いた状態でブックマークレットを起動
+2. HTML表示で現在DOMを確認
+3. editHTMLで必要箇所のみを部分編集して再確認
+4. JSコンソール機能で簡易スクリプトを実行
+
+## Operational Constraints
+
+- モバイル向けのため、デスクトップDevToolsほどの深い追跡は非対応
+- console.log の代替に alert を使うため、長文ログには不向き
+- ページ構造によってはDOM編集結果が即時反映されない場合がある
+
+## Future Improvements
+
+- ログ表示UIの改善（alert依存を縮小）
+- DOM差分表示の導入
+- モバイル画面でも扱いやすい補助操作の追加
 
 ## Links
 
-- [GITHUB](https://github.com/Stasshe/-school-filtering-ignore/tree/main/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88/%E9%96%8B%E7%99%BA%E8%80%85%E5%90%91%E3%81%91%E3%83%84%E3%83%BC%E3%83%ABDeveloper%20tool)
+- [GitHub](https://github.com/Stasshe/-school-filtering-ignore/tree/main/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88/%E9%96%8B%E7%99%BA%E8%80%85%E5%90%91%E3%81%91%E3%83%84%E3%83%BC%E3%83%ABDeveloper%20tool)
 
-## Gallery
+## Screenshots
 
 ![Developer Tools Bookmarklet](assets/bookmarklet/developer/IMG_0378.png)
 ![Developer Tools Bookmarklet](assets/bookmarklet/developer/IMG_0382.png)

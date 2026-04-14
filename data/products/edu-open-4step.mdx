@@ -18,48 +18,53 @@ year: "2024"
 
 ## Overview
 
-学習環境の閲覧制限下でも、必要なページへ到達するために作成した動的プロキシ系サイトです。
+非常にシンプルな構造の、動的規制回避用サイト。コピペするのは2つだけ。gitがわからんくても簡単！
 
-構成を意図的にシンプルにし、`server.js` と `index.html` を中心に導入できるようにしています。
+実装の背景、主要機能、運用上の注意点をREADMEの読み味で整理しています。
 
-## Design Policy
+## Background
 
-- Git操作に慣れていない人でも扱いやすい
-- 無料ホスティング環境で再現可能
-- 複雑な設定を避け、入力して使うだけの構成
+- プロジェクト: プロキシサイト-4step
+- 目的: 短文サマリーではなく、再利用しやすい実装ドキュメントとして残す
+- 方針: デモ向け説明よりも、実装意図と運用条件を優先
 
-## Flow
+## Key Features
 
-1. URLを入力
-2. サーバー側で代理取得
-3. URLを分割・再構成して到達性を補助
-4. 結果をブラウザへ返却
+### 主要機能
+
+- glitchやrenderで簡単にデプロイ（glitchおすすめ）
+- server.jsと、index.htmlをコピーしてペースト
+- URLを入力して、規制回避
+- REST APIを使って、サイトを取得
+- URLを分割して確実に規制を回避し、サイトを取得
 
 ## Tech Stack
 
 - JavaScript
+- Scraping
 - CSS
-- REST API
+- Filtering
+- Rest API
 - Network Protocols
+- Web Security
+- HTML
+- DOM
+- js
+- Simple
+- Dynamic Site
 
-## Key Points
+## Implementation Notes
 
-- Glitch / Renderでのデプロイに対応
-- 最小ファイル構成で検証を開始しやすい
-- 短時間で動作確認まで進められる
-
-## Limits
-
-- 高負荷運用は想定外
-- 対象サイトによっては完全再現できない
-- 利用規約の確認と適切な利用が前提
+- 実装は速度優先で小さく回し、必要に応じて段階的に機能追加
+- ユーザー体験を壊しやすい箇所（同期、権限、外部API制約）を先に固定
+- 学習用途と実運用用途の境界を明示し、用途に応じて使い分ける設計
 
 ## Links
 
-- [GITHUB](https://github.com/Stasshe/-school-filtering-ignore/tree/52e67c116feebfe8e95e8fb1a5edc54070274789/Web%E3%82%B5%E3%82%A4%E3%83%88)
-- [GLITCH](https://edu-open-4step.glitch.me)
+- [GitHub](https://github.com/Stasshe/-school-filtering-ignore/tree/52e67c116feebfe8e95e8fb1a5edc54070274789/Web%E3%82%B5%E3%82%A4%E3%83%88)
+- [Glitch](https://edu-open-4step.glitch.me)
 
-## Gallery
+## Screenshots
 
 ![Filtering Ignore web site](assets/edu-open-4step/IMG_0066.jpeg)
 ![Filtering Ignore web site](assets/edu-open-4step/IMG_0362.png)

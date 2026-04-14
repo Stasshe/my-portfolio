@@ -18,23 +18,45 @@ year: "2024"
 
 ## Overview
 
-プロキシ系、SNS系、ブックマークレット、仮想ブラウザ系を横断して集約したリンクハブです。
+プロキシサイト、SNSアプリ、ブックマークレット等を含む総合的なWebツールコレクション
 
-単体の成果物紹介ではなく、複数プロジェクトの関係と用途を把握しやすくするためのアーカイブとして運用しています。
+実装の背景、主要機能、運用上の注意点をREADMEの読み味で整理しています。
 
-## Purpose
+## Background
 
-- 散在しやすい実験リポジトリを整理
-- 用途別に導線を分けて参照しやすくする
-- 新規プロジェクトの追加を容易にする
+- プロジェクト: 🌐 Web ツールコレクション
+- 目的: 短文サマリーではなく、再利用しやすい実装ドキュメントとして残す
+- 方針: デモ向け説明よりも、実装意図と運用条件を優先
 
-## Categories
+## Key Features
 
-- Proxy / Bypass
-- Chat / Communication
-- Bookmarklet
-- Browser Virtualization
-- Python Utilities
+### プロキシソリューション
+
+- [edu-open-5step](https://edu-open-5step.glitch.me) - 高度なプロキシ実装
+- [Render上のHypertab](https://proxy-render-hypertab-1.onrender.com/) - 代替プロキシソリューション
+- [edu-open-4step](https://edu-open-4step.glitch.me) - 簡略化されたプロキシバージョン
+- [YouTube専用プロキシ](https://angry-magical-carp.glitch.me/) - YouTube特化型プロキシ
+
+### SNSアプリケーション
+
+- [Ventus Talk](https://github.com/Stasshe/Ventus-Talk) - LINE風チャットアプリ
+- [Render上のVentus Talk](https://render-ventus-talk.onrender.com) - ホスティング版
+
+### ブラウザツール
+
+- [ブックマークレットコレクション](https://github.com/Stasshe/-school-filtering-ignore/tree/main/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88) - 含まれる機能:
+- 静的サイト規制回避
+- フル機能対応のno-cookie YouTube
+- 開発者向けツール
+
+### 高度なソリューション
+
+- [ブラウザ内ブラウザ](https://github.com/Stasshe/selenium-Docker-noVNC) - DockerとnoVNCを使用した仮想ブラウザ
+- [Pythonスクレイピングツール](https://github.com/Stasshe/-school-filtering-ignore/tree/main/Python) - 各種スクレイピングユーティリティ
+
+### その他
+
+- [海外のバケモンサイト](https://sdfsdf.cbass92.org/asdjklhfskjafhakfhueoyraehfjkcnjkdscnsjakdreuoiwefh/embed.html)- 海外の規制を回避するためのサイトList
 
 ## Tech Stack
 
@@ -44,25 +66,28 @@ year: "2024"
 - Docker
 - Selenium
 - noVNC
+- JavaScript
+- Glitch
+- Render
 
-## Representative Links
+## Implementation Notes
 
-- [edu-open-5step](https://edu-open-5step.glitch.me)
-- [Render Hypertab](https://proxy-render-hypertab-1.onrender.com/)
-- [edu-open-4step](https://edu-open-4step.glitch.me)
-- [YouTube Proxy](https://angry-magical-carp.glitch.me/)
-- [Ventus Talk Repository](https://github.com/Stasshe/Ventus-Talk)
-- [Ventus Talk on Render](https://render-ventus-talk.onrender.com)
-- [Bookmarklet Collection](https://github.com/Stasshe/-school-filtering-ignore/tree/main/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88)
-- [Selenium noVNC](https://github.com/Stasshe/selenium-Docker-noVNC)
-- [Python Utilities](https://github.com/Stasshe/-school-filtering-ignore/tree/main/Python)
+- 実装は速度優先で小さく回し、必要に応じて段階的に機能追加
+- ユーザー体験を壊しやすい箇所（同期、権限、外部API制約）を先に固定
+- 学習用途と実運用用途の境界を明示し、用途に応じて使い分ける設計
 
-## Curation Rules
+## Links
 
-- 実際に利用できるリンクを優先
-- 役割重複でも比較価値があるものは保持
-- 移行予定のものも、追跡のために一定期間掲載
+- [Glitch](https://edu-open-5step.glitch.me)
+- [Render](https://proxy-render-hypertab-1.onrender.com/)
+- [Glitch](https://edu-open-4step.glitch.me)
+- [Glitch](https://angry-magical-carp.glitch.me/)
+- [GitHub](https://github.com/Stasshe/Ventus-Talk)
+- [Render](https://render-ventus-talk.onrender.com)
+- [GitHub](https://github.com/Stasshe/-school-filtering-ignore/tree/main/%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%83%88)
+- [GitHub](https://github.com/Stasshe/selenium-Docker-noVNC)
+- [GitHub](https://github.com/Stasshe/-school-filtering-ignore/tree/main/Python)
 
-## Gallery
+## Screenshots
 
-![Web Tools Collection](assets/lists/lists.jpeg)
+![🌐 Web Tools Collection screenshot 1](assets/lists/lists.jpeg)
