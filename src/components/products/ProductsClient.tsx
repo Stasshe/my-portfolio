@@ -25,17 +25,24 @@ export default function ProductsClient({ initialProducts, initialCategories }: P
   useCustomCursor(cursorRef, { extraSelectors: ".products-grid-item" });
 
   const filteredProducts = useMemo(() => {
-    return initialProducts.filter((item) => {
-      const matchesCategory = activeCategory === "All" || item.category === activeCategory;
-      const q = searchQuery.trim().toLowerCase();
-      const matchesSearch =
-        q === "" ||
-        item.title.toLowerCase().includes(q) ||
-        (item.summary || "").toLowerCase().includes(q) ||
-        (item.tags || []).some((t) => t.toLowerCase().includes(q)) ||
-        (item.category || "").toLowerCase().includes(q);
-      return matchesCategory && matchesSearch;
-    });
+    return initialProducts
+      .filter((item) => {
+        const matchesCategory = activeCategory === "All" || item.category === activeCategory;
+        const q = searchQuery.trim().toLowerCase();
+        const matchesSearch =
+          q === "" ||
+          item.title.toLowerCase().includes(q) ||
+          (item.summary || "").toLowerCase().includes(q) ||
+          (item.tags || []).some((t) => t.toLowerCase().includes(q)) ||
+          (item.category || "").toLowerCase().includes(q);
+        return matchesCategory && matchesSearch;
+      })
+      .sort((a, b) => {
+        const sizeA = (a.colSpan ?? 1) * (a.rowSpan ?? 1);
+        const sizeB = (b.colSpan ?? 1) * (b.rowSpan ?? 1);
+        if (sizeB !== sizeA) return sizeB - sizeA;
+        return (b.year ?? "").localeCompare(a.year ?? "");
+      });
   }, [initialProducts, activeCategory, searchQuery]);
 
   const handleCategoryClick = useCallback((cat: string) => {
