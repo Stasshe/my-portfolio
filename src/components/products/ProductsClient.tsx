@@ -134,34 +134,33 @@ export default function ProductsClient({ initialProducts, initialCategories }: P
 
 function ProductCard({ item }: { item: MdxProduct }) {
   const cardRef = useRef<HTMLDivElement | null>(null);
+  const tiltLayerRef = useRef<HTMLDivElement | null>(null);
   const [isHovered, setIsHovered] = useState(false);
 
-  const getTiltLayer = useCallback(() => {
-    return cardRef.current?.querySelector<HTMLDivElement>(".products-grid-item-tilt-layer") ?? null;
-  }, []);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
-    const tiltLayer = getTiltLayer();
+    const tiltLayer = tiltLayerRef.current;
     if (!tiltLayer) return;
+
     const rect = cardRef.current.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
     const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+
     gsap.to(tiltLayer, {
       rotateY: x * 4,
       rotateX: -y * 4,
       duration: 0.4,
       ease: "power2.out",
     });
-  }, [getTiltLayer]);
+  };
 
-  const handleMouseLeave = useCallback(() => {
+  const handleMouseLeave = () => {
     setIsHovered(false);
-    const tiltLayer = getTiltLayer();
+    const tiltLayer = tiltLayerRef.current;
     if (tiltLayer) {
       gsap.to(tiltLayer, { rotateY: 0, rotateX: 0, duration: 0.6, ease: "power3.out" });
     }
-  }, [getTiltLayer]);
+  };
 
   const bgStyle: React.CSSProperties = item.thumbnail
     ? { backgroundImage: `url(${item.thumbnail})`, backgroundSize: "cover", backgroundPosition: "center" }
@@ -180,7 +179,7 @@ function ProductCard({ item }: { item: MdxProduct }) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="products-grid-item-tilt-layer">
+      <div ref={tiltLayerRef} className="products-grid-item-tilt-layer">
         <div className="products-grid-item-bg" style={bgStyle}>
           <div className="products-grid-item-noise" />
         </div>
