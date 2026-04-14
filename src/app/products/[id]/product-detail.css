@@ -202,7 +202,7 @@
 /* Headings */
 .product-detail-prose h1 {
   font-family: var(--font-serif);
-  font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
   font-weight: 300;
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -217,7 +217,7 @@
 
 .product-detail-prose h2 {
   font-family: var(--font-serif);
-  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-size: clamp(1.35rem, 2.5vw, 1.8rem);
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: -0.015em;
@@ -228,7 +228,7 @@
 
 .product-detail-prose h3 {
   font-family: var(--font-serif);
-  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-size: clamp(1.1rem, 1.7vw, 1.35rem);
   font-weight: 400;
   line-height: 1.3;
   color: var(--color-dark);
@@ -364,7 +364,7 @@
 
 .product-detail-prose blockquote p {
   font-family: var(--font-serif);
-  font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+  font-size: clamp(1.05rem, 1.3vw, 1.2rem);
   font-style: italic;
   line-height: 1.6;
   color: var(--color-dark-accent);
@@ -407,10 +407,31 @@
 
 /* Images */
 .product-detail-prose img {
-  width: 100%;
+  max-width: 100%;
+  height: auto;
   border-radius: 12px;
-  margin: 2.5rem 0;
+  margin: 2rem auto;
   display: block;
+}
+
+/* Small inline images (badges, icons) — no radius */
+.product-detail-prose img[src*="shields.io"],
+.product-detail-prose img[src*="badge"],
+.product-detail-prose img[height] {
+  display: inline;
+  border-radius: 0;
+  margin: 0 0.15em;
+  vertical-align: middle;
+}
+
+/* Centered div wrapper from MDX align="center" */
+.product-detail-prose div[align="center"],
+.product-detail-prose [align="center"] {
+  text-align: center;
+}
+.product-detail-prose div[align="center"] img {
+  display: inline-block;
+  margin: 1.5rem auto;
 }
 
 /* Horizontal rule */
@@ -627,9 +648,16 @@
   }
 
   .product-detail-prose img {
-    margin: 1.8rem -0.5rem;
-    width: calc(100% + 1rem);
+    margin: 1.5rem auto;
+    max-width: 100%;
     border-radius: 8px;
+  }
+
+  .product-detail-prose img[src*="shields.io"],
+  .product-detail-prose img[src*="badge"],
+  .product-detail-prose img[height] {
+    margin: 0 0.1em;
+    border-radius: 0;
   }
 
   .product-detail-prose table {
