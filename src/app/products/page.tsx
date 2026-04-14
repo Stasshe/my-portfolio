@@ -11,7 +11,7 @@ export default function ProductsPage() {
   ];
 
   return (
-    <div className="products-page-root">
+    <div className="products-page">
       <nav className="products-nav">
         <div className="products-nav-inner">
           <Link href="/" className="products-back-link">
@@ -49,7 +49,7 @@ export default function ProductsPage() {
               <span>Back to Home</span>
               <ArrowLeft className="arrow" size={16} />
             </Link>
-            <span className="footer-copyright">© 2025 Stasshe. All rights reserved.</span>
+            <span className="footer-copyright">© 2026 Stasshe. All rights reserved.</span>
           </div>
         </div>
       </footer>

@@ -66,7 +66,7 @@ export function HomeFooter({ footerRef, scrollToSection }: HomeFooterProps) {
         </div>
 
         <div className="footer-bottom">
-          <span className="footer-copyright">© 2025 Stasshe. All rights reserved.</span>
+          <span className="footer-copyright">© 2026 Stasshe. All rights reserved.</span>
           <span className="label" style={{ color: "rgba(240,236,238,0.3)" }}>
             Built with care
           </span>

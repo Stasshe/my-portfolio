@@ -7,6 +7,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 /* ============================================
    CSS Custom Properties
    ============================================ */
@@ -60,7 +61,8 @@
 }
 
 html {
-  scroll-behavior: auto; /* GSAP handles scroll */
+  scroll-behavior: auto;
+  /* GSAP handles scroll */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -270,7 +272,55 @@ ol {
   width: 100%;
 }
 
-/* Mobile menu button */
+/* Hero section */
+.hero-content {
+  min-height: calc(100vh - 160px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 2rem;
+}
+
+.hero-title-line {
+  overflow: hidden;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.25ch;
+}
+
+.hero-name,
+.hero-name-accent {
+  display: inline-block;
+  line-height: 0.9;
+}
+
+.hero-name-accent {
+  color: var(--color-brand);
+  font-style: italic;
+}
+
+.hero-tagline {
+  color: rgba(var(--color-dark-rgb), 0.72);
+  max-width: 46rem;
+}
+
+.hero-scroll-indicator {
+  font-family: var(--font-mono);
+  letter-spacing: 0.22em;
+}
+
+.hero-scroll-line {
+  width: 2px;
+  height: 70px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--color-brand), transparent);
+}
+
+.hero-deco {
+  filter: blur(1px);
+  will-change: transform, opacity;
+}
+
 .nav-menu-btn {
   display: none;
   align-items: center;
@@ -448,9 +498,10 @@ ol {
   left: 0;
   pointer-events: none;
   z-index: 9999;
-  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
   transform: translate(-50%, -50%);
   mix-blend-mode: difference;
+  backdrop-filter: blur(2px);
 }
 
 .custom-cursor.hovering {

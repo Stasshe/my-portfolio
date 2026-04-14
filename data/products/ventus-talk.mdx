@@ -1,13 +1,13 @@
 ---
 id: "ventus-talk"
 title: "Ventus-Talk"
-summary: "高性能なリアルタイムチャットアプリケーションで、高度な機能と最適化されたユーザー体験を提供します。"
+summary: "高速同期・通知・通話・共有を統合したリアルタイムチャットアプリ。"
 category: "Web App"
 tags:
   - Firestore
   - JavaScript
   - PWA
-  - FCM (Firebase Cloud Messaging)
+  - FCM
   - Google Drive API
   - WebRTC
 thumbnail: "assets/ventus-talk/IMG_0226.png"
@@ -18,20 +18,42 @@ year: "2024"
 
 ## Overview
 
-高性能なリアルタイムチャットアプリケーションで、高度な機能と最適化されたユーザー体験を提供します。
+体感速度を最優先に設計したリアルタイムチャットアプリです。
+
+メッセージ同期だけでなく、通話、通知、ファイル共有まで含めて、日常利用できる会話基盤を目指しました。
+
+## Objective
+
+- 遅延の少ないチャット体験を実現
+- モバイルでも通知導線を維持
+- 連絡から共有までをアプリ内で完結
+
+## Architecture Highlights
+
+- Firestore中心のリアルタイム同期
+- 複数サーバー構成で負荷分散
+- PWA + Service Workerによる通知
+- SkyWay(WebRTC)によるビデオ通話
+- Google Drive APIによるファイル共有
 
 ## Tech Stack
 
 - Firestore
 - JavaScript
-- PWA
-- FCM (Firebase Cloud Messaging)
+- PWA / Service Worker
+- Firebase Cloud Messaging
 - Google Drive API
 - WebRTC
 
-## Key Features
+## Trade-offs
 
-- **主要機能**: 0.05-0.15秒の更新速度でのリアルタイムメッセージング / 4つのFirestoreサーバーによるマルチサーバーアーキテクチャ
+- 無料基盤の制約によりセキュリティ強化は段階的
+- 開発速度とUXを優先した設計判断を含む
+- 高機密データの送受信は想定外
+
+## Result
+
+同期速度と機能幅のバランスを取り、実利用できるチャット体験を構築できました。通知導線と通話連携が特に有効でした。
 
 ## Links
 

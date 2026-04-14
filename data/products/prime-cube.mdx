@@ -1,7 +1,7 @@
 ---
 id: "prime-cube"
 title: "Split into the Prime!"
-summary: "合成数のキューブをタップまたはスライスして素因数に分解する爽快な数学ゲームで、複数の難易度レベルとコンボ・ヒントシステムを備えています。爽快さ全振りのスペシャルモードも！？"
+summary: "素因数分解をアクションゲーム化した、爽快系の数学ゲーム。"
 category: "Web App"
 tags:
   - Swift
@@ -9,7 +9,7 @@ tags:
   - UIKit
   - GameplayKit
   - CoreAnimation
-  - Playgrounds
+  - Educational Game
 thumbnail: "assets/prime-cube/IMG_0354.png"
 colSpan: 2
 rowSpan: 2
@@ -18,7 +18,23 @@ year: "2024"
 
 ## Overview
 
-合成数のキューブをタップまたはスライスして素因数に分解する爽快な数学ゲームで、複数の難易度レベルとコンボ・ヒントシステムを備えています。爽快さ全振りのスペシャルモードも！？
+合成数キューブをタップ・スライスして素因数に分解する、操作感重視の数学ゲームです。
+
+「問題を解く」だけでなく、「反応して分解する」体験へ置き換えることで、学習と爽快感の両立を狙いました。
+
+## Design Intent
+
+- 素因数分解をゲーム操作に翻訳
+- 難易度の段階化で継続プレイを促進
+- コンボと倍率で上達実感を可視化
+
+## Core Systems
+
+- タップベースの分解アクション
+- コンボ倍率スコアリング
+- ライフ制とペナルティ
+- 大きい数向けヒント機能
+- Easy〜Specialまでの複数モード
 
 ## Tech Stack
 
@@ -27,11 +43,15 @@ year: "2024"
 - UIKit
 - GameplayKit
 - CoreAnimation
-- Playgrounds
 
-## Key Features
+## Balancing Notes
 
-- **ゲームプレイメカニクス**: 生ぬるくない、数学付きのためのゲーム / タップベースのキューブ分割メカニクスと、物理エンジン
+- 学習性を保ちつつ爽快感を落とさない調整が重要
+- 高難易度では読みやすさと速度のバランスを継続調整
+
+## Result
+
+数学ゲームとしての堅さを保ちつつ、繰り返し遊びたくなるリズムを作れました。
 
 ## Links
 

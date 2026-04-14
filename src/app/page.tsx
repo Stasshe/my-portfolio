@@ -169,6 +169,7 @@ export default function Home() {
           const texts = [
             document.getElementById("about-text-0"),
             document.getElementById("about-text-1"),
+            document.getElementById("about-text-2"),
           ].filter(Boolean) as HTMLElement[];
           if (texts.length) {
             gsap.from(texts, {

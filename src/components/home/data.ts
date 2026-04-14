@@ -40,6 +40,14 @@ export const PRODUCTS: Product[] = [
     tags: ["UX", "Prototype"],
     gradient: "linear-gradient(135deg, #273582 0%, #AC5D7B 100%)",
   },
+  {
+    id: 5,
+    title: "Project Epsilon",
+    category: "Motion",
+    description: "A refined motion system for interface branding and pleasant interaction.",
+    tags: ["Motion", "Animation"],
+    gradient: "linear-gradient(135deg, #8099B2 0%, #14A8C7 100%)",
+  },
 ];
 
 export const MARQUEE_ITEMS = [
@@ -61,7 +69,7 @@ export const SKILLS = [
   "Figma",
   "UI Design",
   "GSAP",
+  "Motion",
   "CSS",
-  "Three.js",
   "Tailwind",
 ];

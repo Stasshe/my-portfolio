@@ -1,7 +1,7 @@
 ---
 id: "bookmarklet-developer"
 title: "Developer Tools Bookmarklet"
-summary: "iPadや、スマホ向けの、開発者ツール。ブックマークレットとしてパッケージ化された、外出先でもDOMやjsが触れる。"
+summary: "iPadやスマホ向けに、外出先でもDOMやJavaScriptを確認・試行できる軽量開発ブックマークレット。"
 category: "Developer Tool"
 tags:
   - JavaScript
@@ -9,7 +9,7 @@ tags:
   - Debugging Utilities
   - Bookmarklet
   - DOM
-  - js
+  - Mobile
 thumbnail: "assets/bookmarklet/developer/IMG_0378.png"
 colSpan: 2
 rowSpan: 2
@@ -18,20 +18,40 @@ year: "2024"
 
 ## Overview
 
-iPadや、スマホ向けの、開発者ツール。ブックマークレットとしてパッケージ化された、外出先でもDOMやjsが触れる。
+モバイルブラウザでも、ページ構造の確認や簡単なコード検証を行えるようにした開発用ブックマークレットです。
+
+PC向けDevToolsを完全再現するのではなく、外出先で必要になる最小限の操作を高速に実行できることを重視しました。
+
+## Why This Exists
+
+- iPadやスマホでは要素調査がしづらい
+- 「少しだけ確認したい」作業のためにPCを開くのは重い
+- ブックマークレットなら導入と共有が速い
+
+## Core Features
+
+- 表示中ページのHTML要素を確認
+- 一部DOMをその場で書き換えて検証
+- 軽量コンソールでJavaScriptを試行
+- `console.log` が難しい環境向けに `alert` ベースの出力も想定
 
 ## Tech Stack
 
 - JavaScript
-- Developer Tools
-- Debugging Utilities
 - Bookmarklet
-- DOM
-- js
+- DOM API
+- Mobile Browser
 
-## Key Features
+## Implementation Notes
 
-- **開発ツール**: HTMLを表示（要素の表示） / editHTML（ソースの検証のDOMを部分的に）
+- 配布しやすい1本のブックマークレットとして設計
+- 実行時の副作用を抑えるため、処理を局所化
+- 複雑なUIは持たず、検証操作に集中した構成
+
+## Trade-offs
+
+- 高度なネットワーク解析や詳細トレースは非対応
+- CSPや環境制限によって機能が制約される場合がある
 
 ## Links
 

@@ -1,7 +1,7 @@
 ---
 id: "python-filter"
 title: "School Filter Bypass - Python"
-summary: "Pythonを使ったサイト規制回避"
+summary: "PythonのSocket処理を中心に、規制環境でのWeb取得を検証した実験プロジェクト。"
 category: "Automation"
 tags:
   - Python
@@ -9,7 +9,7 @@ tags:
   - Network Protocols
   - Proxy Server
   - HTTP/HTTPS
-  - サイト規制回避
+  - Replit
 thumbnail: "assets/python-filter/IMG_0385.png"
 colSpan: 2
 rowSpan: 2
@@ -18,7 +18,22 @@ year: "2024"
 
 ## Overview
 
-Pythonを使ったサイト規制回避
+JavaScript実装とは別軸で、Pythonの通信処理を使って規制環境の到達性を検証したプロジェクトです。
+
+低レイヤー寄りの理解を深める目的で、Socketを含む構成にしています。
+
+## Motivation
+
+- JSだけでは検証しづらい挙動を補完したい
+- 通信の基礎から制御できる実装を試したい
+- 実行環境差分を比較したい
+
+## Scope
+
+- HTTP/HTTPS取得処理
+- 静的サイト中心の閲覧補助
+- 画像系を含むリソース取得検証
+- Replit中心での実行想定
 
 ## Tech Stack
 
@@ -27,11 +42,16 @@ Pythonを使ったサイト規制回避
 - Network Protocols
 - Proxy Server
 - HTTP/HTTPS
-- サイト規制回避
 
-## Key Features
+## Trade-offs
 
-- **主要機能**: 静的サイトはほとんど見れる / 画像処理系も得意
+- JavaScript版より導入導線が重い
+- Colabでは扱いづらいケースがある
+- 汎用運用より技術検証向き
+
+## Result
+
+低レイヤー観点の理解が進み、特殊ケース対応の選択肢を増やせました。量産用途より、検証と学習向けの価値が高い実装です。
 
 ## Links
 

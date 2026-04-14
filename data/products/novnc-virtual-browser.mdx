@@ -1,7 +1,7 @@
 ---
 id: "novnc-virtual-browser"
 title: "Selenium Virtual Browser"
-summary: "Selenium仮想ブラウザをCodespacesのDockerで立ち上げ"
+summary: "Codespaces上のDocker + Selenium + noVNCで、遠隔ブラウザ操作を実現する検証プロジェクト。"
 category: "Automation"
 tags:
   - Python
@@ -9,7 +9,7 @@ tags:
   - Docker
   - noVNC
   - Codespaces
-  - Virtual
+  - Virtual Browser
 thumbnail: "assets/selenium-Docker/IMG_0288.png"
 colSpan: 2
 rowSpan: 2
@@ -18,7 +18,22 @@ year: "2024"
 
 ## Overview
 
-Selenium仮想ブラウザをCodespacesのDockerで立ち上げ
+GitHub Codespaces上でSeleniumコンテナを起動し、`noVNC` でブラウザ画面を遠隔操作するための構成です。
+
+静的スクレイピングで通らないケースに対して、実ブラウザ挙動をそのまま持ち込むことで到達性を高めます。
+
+## Why This Approach
+
+- JS実行前提のページでは単純取得が通らない
+- 端末性能に依存しない検証環境が欲しい
+- 制限環境でも再現性の高い手段を確保したい
+
+## Architecture
+
+- CodespacesでDocker環境を起動
+- Selenium + Browserをコンテナ内で稼働
+- noVNCを通してブラウザを操作
+- 手元が軽量端末でも利用可能
 
 ## Tech Stack
 
@@ -26,12 +41,17 @@ Selenium仮想ブラウザをCodespacesのDockerで立ち上げ
 - Selenium
 - Docker
 - noVNC
-- Codespaces
-- Virtual
+- GitHub Codespaces
 
-## Key Features
+## Operational Notes
 
-- **100%規制回避**: Selenium仮想ブラウザをCodespacesのDockerで立ち上げて、それをnoVNCで操作 / スクレイピングとは違い、100%の規制回避を実現
+- 通信状態によりラグが発生
+- セッションタイムアウト管理が必要
+- 日常常用というより、難ケース対応の切り札
+
+## Result
+
+規制環境での成功率が上がり、スクレイピング失敗時の代替手段として実用性を確認できました。
 
 ## Links
 

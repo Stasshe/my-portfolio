@@ -1,7 +1,7 @@
 ---
 id: "bookmarklet-scraping"
 title: "Web Content Scraping Tool"
-summary: "サイトが規制されても大丈夫。ブックマークレットから規制を突破して、学校に対抗しよう!"
+summary: "規制環境でも必要情報へ到達するための、ブックマークレット型スクレイピングツール。"
 category: "Developer Tool"
 tags:
   - JavaScript
@@ -18,7 +18,21 @@ year: "2024"
 
 ## Overview
 
-サイトが規制されても大丈夫。ブックマークレットから規制を突破して、学校に対抗しよう!
+閲覧制限のある環境で、必要なWeb情報を取得するために作成したブックマークレットです。
+
+独立サイトを作るのではなく、既存ページ上で動く軽量ツールとして設計することで、導入ハードルを下げています。
+
+## Goals
+
+- インストール不要で実行できること
+- 制限環境でも最低限の情報取得を可能にすること
+- DOM解析結果を短時間で確認できること
+
+## How It Works
+
+- `api.allorigins.win` 経由で対象ページを取得
+- 取得コンテンツを解析して必要情報を抽出
+- 閲覧しやすい形式へ整形して表示
 
 ## Tech Stack
 
@@ -26,12 +40,17 @@ year: "2024"
 - DOM Scraping
 - Data Parsing
 - Bookmarklet
-- Regulation Evasion
-- Site
+- Proxy API (`allorigins`)
 
-## Key Features
+## Caveats
 
-- **機能**: api.allorigins.winを使ってサイトのコンテンツを取得 / これ自体はサイトじゃないからブロックの確率はかなり低い
+- 対象サイトのDOM構造変更に弱い
+- API制限や通信制約により失敗するケースがある
+- 利用規約への配慮が前提
+
+## Result
+
+重いセットアップなしで使える「情報取得の初手」として有効でした。短時間の確認用途で特に強みがあります。
 
 ## Links
 

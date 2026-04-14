@@ -83,6 +83,9 @@ export function AboutSection({ aboutRef, skills }: AboutSectionProps) {
             <p id="about-text-1" className="body-text text-[rgba(var(--color-light-rgb),0.6)] mb-4">
               When I'm not coding or designing, you can find me exploring new technologies or enjoying a good cup of coffee.
             </p>
+            <p id="about-text-2" className="body-text text-[rgba(var(--color-light-rgb),0.6)] mb-4">
+              I bring structural clarity to every project, pairing craft-led detail with thoughtful storytelling.
+            </p>
 
             <div id="about-skills" data-about="skills" className="flex flex-wrap gap-2 mt-4">
               {skills.map((skill, i) => (

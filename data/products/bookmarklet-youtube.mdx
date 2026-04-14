@@ -1,7 +1,7 @@
 ---
 id: "bookmarklet-youtube"
 title: "YouTube Educational Access"
-summary: "no-cookie環境用のYoutube視聴ツール。コメントなども閲覧可能"
+summary: "no-cookie環境向けに、YouTube視聴とコメント確認を補助するブックマークレット。"
 category: "Education"
 tags:
   - JavaScript
@@ -9,7 +9,7 @@ tags:
   - YouTube API
   - DOM Manipulation
   - no-cookie
-  - js
+  - API quota
 colSpan: 2
 rowSpan: 2
 year: "2024"
@@ -17,20 +17,39 @@ year: "2024"
 
 ## Overview
 
-no-cookie環境用のYoutube視聴ツール。コメントなども閲覧可能
+`no-cookie.youtube.com` が利用可能な環境で、教材動画へ素早くアクセスするための補助ツールです。
+
+視聴導線の簡略化に加えて、コメント確認や検索周辺の運用も意識して設計しました。
+
+## Background
+
+- 通常のYouTube導線が使えないケースがある
+- 毎回URLを手作業で変換するのは非効率
+- 授業中や短時間での参照をスムーズにしたい
+
+## Core Features
+
+- ワンクリックで閲覧導線を起動
+- `no-cookie.youtube.com` 前提のアクセス補助
+- コメント閲覧の支援
+- API利用時のクォータを考慮した運用
 
 ## Tech Stack
 
 - JavaScript
 - Bookmarklet
-- YouTube API
+- YouTube Data API
 - DOM Manipulation
-- no-cookie
-- js
 
-## Key Features
+## Operational Notes
 
-- **機能**: ワンクリック起動 / no-cookie.youtube.comが許可されている(ISGCフィルターはおそらくデフォルトで許可されている)時のみ有効
+- 検索系処理はAPIクォータの制約を受ける
+- キー管理のコストが発生する
+- 環境設定により機能差が出るため、用途限定での利用が現実的
+
+## Result
+
+制限下でも「教材へ辿り着くまでの手順」を短縮できました。日常の参照体験を実運用レベルで改善できたプロジェクトです。
 
 ## Links
 

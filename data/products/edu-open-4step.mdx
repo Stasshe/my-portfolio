@@ -1,14 +1,14 @@
 ---
 id: "edu-open-4step"
 title: "Filtering Ignore web site"
-summary: "非常にシンプルな構造の、動的規制回避用サイト。コピペするのは2つだけ。gitがわからんくても簡単！"
+summary: "最小構成で動かせる、動的規制回避サイト。導入手順を極端に短くした実装。"
 category: "Education"
 tags:
   - JavaScript
   - Scraping
   - CSS
   - Filtering
-  - Rest API
+  - REST API
   - Network Protocols
 thumbnail: "assets/edu-open-4step/IMG_0066.jpeg"
 colSpan: 2
@@ -18,20 +18,41 @@ year: "2024"
 
 ## Overview
 
-非常にシンプルな構造の、動的規制回避用サイト。コピペするのは2つだけ。gitがわからんくても簡単！
+学習環境の閲覧制限下でも、必要なページへ到達するために作成した動的プロキシ系サイトです。
+
+構成を意図的にシンプルにし、`server.js` と `index.html` を中心に導入できるようにしています。
+
+## Design Policy
+
+- Git操作に慣れていない人でも扱いやすい
+- 無料ホスティング環境で再現可能
+- 複雑な設定を避け、入力して使うだけの構成
+
+## Flow
+
+1. URLを入力
+2. サーバー側で代理取得
+3. URLを分割・再構成して到達性を補助
+4. 結果をブラウザへ返却
 
 ## Tech Stack
 
 - JavaScript
-- Scraping
 - CSS
-- Filtering
-- Rest API
+- REST API
 - Network Protocols
 
-## Key Features
+## Key Points
 
-- **主要機能**: glitchやrenderで簡単にデプロイ（glitchおすすめ） / server.jsと、index.htmlをコピーしてペースト
+- Glitch / Renderでのデプロイに対応
+- 最小ファイル構成で検証を開始しやすい
+- 短時間で動作確認まで進められる
+
+## Limits
+
+- 高負荷運用は想定外
+- 対象サイトによっては完全再現できない
+- 利用規約の確認と適切な利用が前提
 
 ## Links
 
