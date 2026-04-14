@@ -136,25 +136,32 @@ function ProductCard({ item }: { item: MdxProduct }) {
   const cardRef = useRef<HTMLDivElement | null>(null);
   const [isHovered, setIsHovered] = useState(false);
 
+  const getTiltLayer = useCallback(() => {
+    return cardRef.current?.querySelector<HTMLDivElement>(".products-grid-item-tilt-layer") ?? null;
+  }, []);
+
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
+    const tiltLayer = getTiltLayer();
+    if (!tiltLayer) return;
     const rect = cardRef.current.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
     const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
-    gsap.to(cardRef.current, {
+    gsap.to(tiltLayer, {
       rotateY: x * 4,
       rotateX: -y * 4,
       duration: 0.4,
       ease: "power2.out",
     });
-  }, []);
+  }, [getTiltLayer]);
 
   const handleMouseLeave = useCallback(() => {
     setIsHovered(false);
-    if (cardRef.current) {
-      gsap.to(cardRef.current, { rotateY: 0, rotateX: 0, duration: 0.6, ease: "power3.out" });
+    const tiltLayer = getTiltLayer();
+    if (tiltLayer) {
+      gsap.to(tiltLayer, { rotateY: 0, rotateX: 0, duration: 0.6, ease: "power3.out" });
     }
-  }, []);
+  }, [getTiltLayer]);
 
   const bgStyle: React.CSSProperties = item.thumbnail
     ? { backgroundImage: `url(${item.thumbnail})`, backgroundSize: "cover", backgroundPosition: "center" }
@@ -173,32 +180,34 @@ function ProductCard({ item }: { item: MdxProduct }) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="products-grid-item-bg" style={bgStyle}>
-        <div className="products-grid-item-noise" />
-      </div>
+      <div className="products-grid-item-tilt-layer">
+        <div className="products-grid-item-bg" style={bgStyle}>
+          <div className="products-grid-item-noise" />
+        </div>
 
-      <Link href={`/products/${item.id}`} className="products-grid-item-content-link">
-        <div className="products-grid-item-content">
-          <div className="products-grid-item-top">
-            <span className="products-grid-item-year label">{item.year}</span>
-            <span className="products-grid-item-category label">{item.category}</span>
-          </div>
+        <Link href={`/products/${item.id}`} className="products-grid-item-content-link">
+          <div className="products-grid-item-content">
+            <div className="products-grid-item-top">
+              <span className="products-grid-item-year label">{item.year}</span>
+              <span className="products-grid-item-category label">{item.category}</span>
+            </div>
 
-          <div className="products-grid-item-bottom">
-            <h3 className="products-grid-item-title heading-sm">{item.title}</h3>
-            <p className="products-grid-item-summary body-text-sm">{item.summary}</p>
-            <div className="products-grid-item-tags">
-              {(item.tags || []).map((tag) => (
-                <span key={tag} className="products-grid-item-tag">
-                  {tag}
-                </span>
-              ))}
+            <div className="products-grid-item-bottom">
+              <h3 className="products-grid-item-title heading-sm">{item.title}</h3>
+              <p className="products-grid-item-summary body-text-sm">{item.summary}</p>
+              <div className="products-grid-item-tags">
+                {(item.tags || []).map((tag) => (
+                  <span key={tag} className="products-grid-item-tag">
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-      </Link>
+        </Link>
 
-      <div className="products-grid-item-border" />
+        <div className="products-grid-item-border" />
+      </div>
     </div>
   );
 }
