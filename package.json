@@ -3,11 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "npm run prebuild && next dev",
     "prebuild": "node scripts/copy-assets.mjs",
     "build": "next build",
-    "preexport": "node scripts/copy-assets.mjs",
-    "export": "BUILD_MODE=production next build",
     "preview:static": "npx serve out -l 3000",
     "start": "next start",
     "lint": "biome check src/",
