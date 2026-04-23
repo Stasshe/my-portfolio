@@ -19,11 +19,30 @@ export type MdxProduct = {
 
 const PRODUCTS_DIR = path.join(process.cwd(), "data", "products");
 
+function normalizeBasePath(value: string): string {
+  if (!value) return "";
+  const withLeadingSlash = value.startsWith("/") ? value : `/${value}`;
+  return withLeadingSlash.endsWith("/") ? withLeadingSlash.slice(0, -1) : withLeadingSlash;
+}
+
+const BASE_PATH = normalizeBasePath(process.env.NEXT_PUBLIC_BASE_PATH || "");
+
+function withBasePath(urlPath: string): string {
+  if (!BASE_PATH || !urlPath.startsWith("/")) return urlPath;
+  if (urlPath === BASE_PATH || urlPath.startsWith(`${BASE_PATH}/`)) return urlPath;
+  return `${BASE_PATH}${urlPath}`;
+}
+
 function resolveImagePath(imagePath: string): string {
-  if (!imagePath || imagePath.startsWith("http") || imagePath.startsWith("/")) {
+  if (!imagePath || imagePath.startsWith("http") || imagePath.startsWith("data:") || imagePath.startsWith("blob:")) {
     return imagePath;
   }
-  return `/data/products/${imagePath}`;
+
+  if (imagePath.startsWith("/")) {
+    return withBasePath(imagePath);
+  }
+
+  return withBasePath(`/data/products/${imagePath}`);
 }
 
 function getMdxFiles(): string[] {
@@ -32,7 +51,7 @@ function getMdxFiles(): string[] {
 }
 
 function resolveImagePathsInHtml(html: string): string {
-  return html.replace(/src="(?!(?:https?:\/\/|\/|data:))([^"]+)"/g, (_match, imagePath) => {
+  return html.replace(/src="([^"]+)"/g, (_match, imagePath) => {
     return `src="${resolveImagePath(imagePath)}"`;
   });
 }
