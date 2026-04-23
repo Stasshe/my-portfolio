@@ -6,8 +6,8 @@ name: Deploy Next.js site to Pages
 
 on:
   # Runs on pushes targeting the default branch
-  # push:
-  #   branches: ["main"]
+  push:
+    branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -49,8 +49,6 @@ jobs:
         run: npm ci
       - name: Build with Next.js
         env:
-          NEXT_PUBLIC_IS_PRODUCTION_BUILD: 'true'
-          NEXT_PUBLIC_BASE_PATH: 'Kyoute-Keisya-calc'
           BUILD_MODE: production
         run: npm run build
       - name: Upload artifact
