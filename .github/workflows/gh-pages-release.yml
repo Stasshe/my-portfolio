@@ -50,7 +50,10 @@ jobs:
       - name: Build with Next.js
         env:
           BUILD_MODE: production
+          NEXT_PUBLIC_BASE_PATH: /my-portfolio
         run: npm run build
+      - name: Disable Jekyll processing
+        run: touch out/.nojekyll
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
