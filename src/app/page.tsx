@@ -20,7 +20,7 @@ export default function Home() {
     })
     .slice(0, 5)
     .map((item, index) => ({
-      id: Number(item.id) || index + 1,
+      id: item.id,
       title: item.title,
       category: item.category || "Project",
       description: item.summary || "",

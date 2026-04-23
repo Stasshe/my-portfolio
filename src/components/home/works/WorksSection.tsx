@@ -32,17 +32,17 @@ export function WorksSection({ worksRef, products }: WorksSectionProps) {
 
         <div className="works-grid">
           {products.map((product) => (
-            <Link href="/products" key={product.id} className="work-card">
+            <Link href={`/products/${product.id}`} key={product.id} className="work-card">
               <div className="work-card-visual">
                 <div
                   className="work-card-gradient"
                   style={
                     product.thumbnail
                       ? {
-                        backgroundImage: `url(${product.thumbnail})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                      }
+                          backgroundImage: `url(${product.thumbnail})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }
                       : { background: product.gradient }
                   }
                 />
