@@ -39,10 +39,10 @@ export function WorksSection({ worksRef, products }: WorksSectionProps) {
                   style={
                     product.thumbnail
                       ? {
-                          backgroundImage: `url(${product.thumbnail})`,
-                          backgroundSize: "cover",
-                          backgroundPosition: "center",
-                        }
+                        backgroundImage: `url(${product.thumbnail})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }
                       : { background: product.gradient }
                   }
                 />
