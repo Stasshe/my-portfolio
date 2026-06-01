@@ -32,7 +32,7 @@
 
 .work-card {
   position: relative;
-  border-radius: 16px;
+  border-radius: 8px;
   overflow: hidden;
   background-color: rgba(var(--color-dark-rgb), 0.03);
   border: 1px solid rgba(var(--color-dark-rgb), 0.06);

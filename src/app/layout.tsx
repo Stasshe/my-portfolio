@@ -7,11 +7,13 @@ import "./products/products.css";
 import "./products/[id]/product-detail.css";
 
 export const metadata: Metadata = {
-  title: "Stasshe — Portfolio",
-  description: "Creative portfolio of Stasshe. Design, development, and everything in between.",
+  title: "Naoki Ishida / Stasshe — Portfolio",
+  description:
+    "Portfolio of Naoki Ishida, a software builder focused on browser IDEs, real-world operations tools, UX under constraints, and context-aware engineering.",
   openGraph: {
-    title: "Stasshe — Portfolio",
-    description: "Creative portfolio of Stasshe. Design, development, and everything in between.",
+    title: "Naoki Ishida / Stasshe — Portfolio",
+    description:
+      "Browser IDEs, school operations tools, UX under constraints, and context-aware engineering.",
     type: "website",
   },
 };

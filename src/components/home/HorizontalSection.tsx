@@ -21,23 +21,24 @@ export function HorizontalSection({
               className="label"
               style={{ color: "var(--color-brand)", marginBottom: "1.5rem", display: "block" }}
             >
-              My approach
+              Operating Model
             </span>
             <h2 className="heading-lg" style={{ maxWidth: "620px" }}>
-              I find{" "}
-              <span style={{ color: "var(--color-brand)", fontStyle: "italic" }}>friction.</span>
+              Constraints become
               <br />
-              Then I fix it.
+              <span style={{ color: "var(--color-brand)", fontStyle: "italic" }}>
+                product requirements.
+              </span>
             </h2>
             <p
               className="body-text"
               style={{
-                maxWidth: "460px",
+                maxWidth: "560px",
                 marginTop: "2rem",
                 color: "var(--color-light-accent)",
               }}
             >
-              高校2年のとき、学食システムの脆弱性に気づき、学校の事務を通じて制作会社へ報告した。後日、複数の指摘を確認した旨の返信をいただいた。セキュリティの知識以上に、自分が使うサービスに責任を持つ姿勢と、適切な手順で伝えることの重要性を学んだ。
+              端末の制約、短い準備期間、現場の例外処理、利用者の不安。実装前にそれらを整理し、機能の正しさだけでなく、変更しやすさと運用時の信頼性まで設計対象にします。
             </p>
           </div>
         </div>
@@ -52,25 +53,28 @@ export function HorizontalSection({
                 display: "block",
               }}
             >
-              Recognition
+              Evidence
             </span>
             <h2 className="heading-lg" style={{ maxWidth: "680px" }}>
-              Two works.
+              Contest results
               <br />
-              One contest.{" "}
+              and live operation.{" "}
               <span style={{ color: "var(--color-dark-accent)", fontStyle: "italic" }}>
-                A first.
+                Both matter.
               </span>
             </h2>
             <p
               className="body-text"
               style={{
-                maxWidth: "460px",
+                maxWidth: "560px",
                 marginTop: "2rem",
                 color: "rgba(240,236,238,0.6)",
               }}
             >
-              U-22プログラミング・コンテスト2025に2作品が同時に事前審査を通過。複数作品の同時通過は大会初と認識している。うち1作品は経済産業大臣賞〈テクノロジー部門〉とアクセンチュア賞を受賞し、もう1作品は現在も学校で実際に運用されている。
+              U-22プログラミング・コンテスト2025では、Pyxis-CodeCanvas と Celeritas
+              の2作品が同時に事前審査を通過。Pyxis
+              は経済産業大臣賞〈テクノロジー部門〉とアクセンチュア賞を受賞し、Celeritas
+              は学校行事の運営システムとして実運用されています。
             </p>
             <div style={{ marginTop: "1.5rem" }}>
               <a
@@ -98,16 +102,49 @@ export function HorizontalSection({
         </div>
 
         <div id="horizontal-panel-2" className="horizontal-panel">
+          <div id="panel-content-2" className="panel-content container">
+            <span
+              className="label"
+              style={{
+                color: "var(--color-brand)",
+                marginBottom: "1.5rem",
+                display: "block",
+              }}
+            >
+              AI Era
+            </span>
+            <h2 className="heading-lg" style={{ maxWidth: "760px" }}>
+              Code generation is fast.
+              <br />
+              <span style={{ color: "var(--color-dark-accent)", fontStyle: "italic" }}>
+                Context still decides quality.
+              </span>
+            </h2>
+            <p
+              className="body-text"
+              style={{
+                maxWidth: "620px",
+                marginTop: "2rem",
+                color: "rgba(240,236,238,0.6)",
+              }}
+            >
+              AI
+              に任せる部分と、人間が判断する部分を分ける。目的、利用者、過去の設計判断、将来の変更、性能と安全性のトレードオフを見て、生成されたコードを批判的に評価する側に立ちます。
+            </p>
+          </div>
+        </div>
+
+        <div id="horizontal-panel-3" className="horizontal-panel">
           <div
-            id="panel-content-2"
+            id="panel-content-3"
             className="panel-content container"
             style={{ maxWidth: "700px" }}
           >
             <h2 className="heading-lg">
-              Now see what
+              Read the work,
               <br />
               <span style={{ color: "var(--color-dark-accent)", fontStyle: "italic" }}>
-                I&apos;ve built.
+                not just the claim.
               </span>
             </h2>
             <div style={{ marginTop: "3rem" }}>

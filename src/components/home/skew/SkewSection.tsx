@@ -10,29 +10,29 @@ export function SkewSection({ skewRef }: SkewSectionProps) {
       <div id="skew-content" className="skew-content">
         <div className="skew-text-row">
           <div id="skew-text-0" className="skew-text">
-            <span className="filled">Problem</span>
+            <span className="filled">Requirements</span>
             &nbsp;&nbsp;&nbsp;
-            <span className="stroke">Finding</span>
+            <span className="stroke">Design</span>
             &nbsp;&nbsp;&nbsp;
-            <span className="italic">& Solving</span>
+            <span className="italic">& Operation</span>
           </div>
         </div>
         <div className="skew-text-row">
           <div id="skew-text-1" className="skew-text">
-            <span className="stroke">Security</span>
+            <span className="stroke">Responsible</span>
             &nbsp;&nbsp;&nbsp;
-            <span className="filled">Mindset</span>
+            <span className="filled">Disclosure</span>
             &nbsp;&nbsp;&nbsp;
-            <span className="italic">& Disclosure</span>
+            <span className="italic">& Trust</span>
           </div>
         </div>
         <div className="skew-text-row">
           <div id="skew-text-2" className="skew-text">
-            <span className="italic">Real-World</span>
+            <span className="italic">AI-Aware</span>
             &nbsp;&nbsp;&nbsp;
-            <span className="filled">Software</span>
+            <span className="filled">Engineering</span>
             &nbsp;&nbsp;&nbsp;
-            <span className="stroke">& Impact</span>
+            <span className="stroke">& Fundamentals</span>
           </div>
         </div>
       </div>

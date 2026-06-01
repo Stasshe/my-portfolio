@@ -175,6 +175,7 @@ export default function HomeClient({ products }: HomeClientProps) {
             document.getElementById("about-text-0"),
             document.getElementById("about-text-1"),
             document.getElementById("about-text-2"),
+            document.getElementById("about-text-3"),
           ].filter(Boolean) as HTMLElement[];
           if (texts.length) {
             gsap.from(texts, {
@@ -190,7 +191,7 @@ export default function HomeClient({ products }: HomeClientProps) {
             });
           }
 
-          const stats = ["about-stat-0", "about-stat-1", "about-stat-2"]
+          const stats = ["about-stat-0", "about-stat-1", "about-stat-2", "about-stat-3"]
             .map((id) => document.getElementById(id))
             .filter(Boolean) as HTMLElement[];
           const statsTrigger = document.getElementById("about-stats") ?? aboutEl;

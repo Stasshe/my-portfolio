@@ -52,15 +52,15 @@ export function HeroSection({ heroRef }: HeroSectionProps) {
             id="hero-subtag"
             className="inline-block heading-md text-[var(--color-light-accent)] font-[300]"
           >
-            &mdash; build, solve & ship
+            Context driven software builder
           </span>
         </div>
 
         <p
           id="hero-tagline"
-          className="body-text hero-tagline mt-16 text-[var(--color-light-accent)] max-w-[500px]"
+          className="body-text hero-tagline mt-16 text-[var(--color-light-accent)] max-w-[620px]"
         >
-          I find problems that actually exist, then build software that holds up in the real world.
+          身近な不便や制約を起点に、実装だけで終わらないソフトウェアを作る。要件、設計、UX、運用までをつないで、使い続けられる形にすることを重視しています。
         </p>
       </div>
 
