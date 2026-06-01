@@ -281,7 +281,7 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 1.5rem;
-  color: var(--color-light);
+  color: var(--card-text-color, var(--color-light));
 }
 
 .products-grid-item-content-link {
@@ -299,7 +299,7 @@
 
 .products-grid-item-year {
   opacity: 0.6;
-  color: var(--color-light);
+  color: var(--card-text-color, var(--color-light));
 }
 
 .products-grid-item-category {
@@ -309,7 +309,7 @@
   padding: 0.25rem 0.75rem;
   border-radius: 100px;
   font-size: 0.6rem;
-  color: var(--color-light);
+  color: var(--card-text-color, var(--color-light));
 }
 
 .products-grid-item-bottom {
@@ -324,13 +324,13 @@
 }
 
 .products-grid-item-title {
-  color: var(--color-light);
+  color: var(--card-text-color, var(--color-light));
   margin-bottom: 0.5rem;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
 }
 
 .products-grid-item-summary {
-  color: rgba(var(--color-light-rgb), 0.8);
+  color: color-mix(in srgb, var(--card-text-color, var(--color-light)) 80%, transparent);
   margin-bottom: 0.75rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -352,9 +352,9 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   padding: 0.2rem 0.55rem;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid color-mix(in srgb, var(--card-text-color, var(--color-light)) 25%, transparent);
   border-radius: 100px;
-  color: rgba(var(--color-light-rgb), 0.75);
+  color: color-mix(in srgb, var(--card-text-color, var(--color-light)) 75%, transparent);
   backdrop-filter: blur(4px);
 }
 

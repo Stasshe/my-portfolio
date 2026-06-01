@@ -174,7 +174,7 @@ function ProductCard({ item }: { item: MdxProduct }) {
     <div
       ref={cardRef}
       className={`products-grid-item ${sizeClass} ${isHovered ? "hovered" : ""} ${item.alwaysShowSummary ? "always-show-summary" : ""}`}
-      style={{ gridColumn: `span ${col}`, gridRow: `span ${row}` }}
+      style={{ gridColumn: `span ${col}`, gridRow: `span ${row}`, ...(item.textColor ? { "--card-text-color": item.textColor } as React.CSSProperties : {}) }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
