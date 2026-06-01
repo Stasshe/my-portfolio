@@ -52,7 +52,7 @@ export function HeroSection({ heroRef }: HeroSectionProps) {
             id="hero-subtag"
             className="inline-block heading-md text-[var(--color-light-accent)] font-[300]"
           >
-            &mdash; design, craft & curiosity
+            &mdash; build, solve & ship
           </span>
         </div>
 
@@ -60,8 +60,7 @@ export function HeroSection({ heroRef }: HeroSectionProps) {
           id="hero-tagline"
           className="body-text hero-tagline mt-16 text-[var(--color-light-accent)] max-w-[500px]"
         >
-          Building thoughtful digital experiences with care for detail, warmth, and a touch of
-          playfulness.
+          I find problems that actually exist, then build software that holds up in the real world.
         </p>
       </div>
 

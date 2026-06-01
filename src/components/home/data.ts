@@ -9,14 +9,14 @@ export type Product = {
 };
 
 export const MARQUEE_ITEMS = [
-  "Design",
-  "Development",
-  "Branding",
-  "Strategy",
-  "Creative",
-  "Digital",
+  "Build",
+  "Solve",
+  "Security",
+  "UX",
+  "Ship",
   "Craft",
-  "Experience",
+  "Real-World",
+  "Impact",
 ];
 
 export const SKILLS = [

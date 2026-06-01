@@ -29,11 +29,11 @@ export function AboutSection({ aboutRef, skills }: AboutSectionProps) {
               About Me
             </span>
             <h2 id="about-title" className="heading-lg mb-8">
-              Designer,
+              Builder,
               <br />
-              developer,
+              solver,
               <br />
-              <span className="accent text-[var(--color-dark-accent)] italic">& dreamer.</span>
+              <span className="accent text-[var(--color-dark-accent)] italic">& maker.</span>
             </h2>
 
             <div
@@ -42,35 +42,35 @@ export function AboutSection({ aboutRef, skills }: AboutSectionProps) {
             >
               <div id="about-stat-0">
                 <div className="font-serif text-[clamp(2.5rem,4vw,3.5rem)] font-light text-[var(--color-brand)] leading-none mb-2">
-                  5+
+                  2×
                 </div>
                 <div
                   className="font-mono text-[0.7rem] uppercase tracking-[0.12em]"
                   style={{ color: "rgba(var(--color-light-rgb), 0.4)" }}
                 >
-                  Years of experience
+                  U-22 awards
                 </div>
               </div>
               <div id="about-stat-1">
                 <div className="font-serif text-[clamp(2.5rem,4vw,3.5rem)] font-light text-[var(--color-brand)] leading-none mb-2">
-                  30+
+                  10+
                 </div>
                 <div
                   className="font-mono text-[0.7rem] uppercase tracking-[0.12em]"
                   style={{ color: "rgba(var(--color-light-rgb), 0.4)" }}
                 >
-                  Projects completed
+                  Products shipped
                 </div>
               </div>
               <div id="about-stat-2">
                 <div className="font-serif text-[clamp(2.5rem,4vw,3.5rem)] font-light text-[var(--color-brand)] leading-none mb-2">
-                  &infin;
+                  2
                 </div>
                 <div
                   className="font-mono text-[0.7rem] uppercase tracking-[0.12em]"
                   style={{ color: "rgba(var(--color-light-rgb), 0.4)" }}
                 >
-                  Cups of coffee
+                  Schools using my software
                 </div>
               </div>
             </div>
@@ -78,13 +78,22 @@ export function AboutSection({ aboutRef, skills }: AboutSectionProps) {
 
           <div>
             <p id="about-text-0" className="body-text text-[rgba(var(--color-light-rgb),0.6)] mb-4">
-              I'm a passionate designer and developer with a love for creating meaningful digital experiences.
+              十数個のプロダクトを開発してきた。そのうち2つは今も学校で実際に使われている。
             </p>
             <p id="about-text-1" className="body-text text-[rgba(var(--color-light-rgb),0.6)] mb-4">
-              When I'm not coding or designing, you can find me exploring new technologies or enjoying a good cup of coffee.
+              U-22プログラミング・コンテスト2025に{" "}
+              <a
+                href="https://u22procon.com/2025/report/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "var(--color-brand)", textDecoration: "underline" }}
+              >
+                2作品が同時に事前審査を通過
+              </a>
+              。複数作品の同時通過は大会初と認識している。うち1作品は経済産業大臣賞〈テクノロジー部門〉とアクセンチュア賞を同時受賞。
             </p>
             <p id="about-text-2" className="body-text text-[rgba(var(--color-light-rgb),0.6)] mb-4">
-              I bring structural clarity to every project, pairing craft-led detail with thoughtful storytelling.
+              大学入学まで自分のPCを持っておらず、iPadで開発していた。環境の制約が、UX設計への関心の出発点になった。
             </p>
 
             <div id="about-skills" data-about="skills" className="flex flex-wrap gap-2 mt-4">
