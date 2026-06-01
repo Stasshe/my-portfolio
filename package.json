@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run prebuild && next dev",
+    "dev": "pnpm run prebuild && next dev",
     "prebuild": "node scripts/copy-assets.mjs",
     "build": "next build",
     "preview:static": "npx serve out -l 3000",
@@ -12,6 +12,7 @@
     "lint:fix": "biome check --write src/",
     "format": "biome format --write src/"
   },
+  "packageManager": "pnpm@11.4.0",
   "dependencies": {
     "gray-matter": "^4.0.3",
     "gsap": "^3.14.2",
