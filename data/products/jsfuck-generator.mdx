@@ -1,0 +1,80 @@
+---
+id: "jsfuck-generator"
+title: "JSFuck Generator"
+summary: "ASCII文字列からJSFuck式を生成するライブラリとWeb UI。DAGベースのパターン辞書と導出ツリーで生成過程を可視化。"
+category: "Web App"
+tags:
+  - TypeScript
+  - Next.js
+  - Tailwind CSS
+  - Algorithm
+  - JavaScript
+thumbnail: "assets/jsfuck/genmode.png"
+colSpan: 3
+rowSpan: 2
+year: "2026"
+---
+
+## Overview
+
+`jsfuck-gen` は、任意の ASCII 文字列を `[]()!+` だけで表現できる JSFuck 式に変換するコアライブラリ。DAG ベースのパターン辞書を持ち、`constructor` や `toString` などの中間表現も `role` 付きパターンとして管理することで、式の組み立て過程を `Derivation` ツリーとして追跡できる。
+
+Next.js の Web UI から Generate / Quiz / Pattern Viewer の 3 モードで試せる。
+
+![スクショ](assets/genmode.png)
+
+## Background
+
+- JSFuck の式生成を単なる文字列置換でなく、依存関係を持つ DAG として設計
+- 生成過程の説明（Derivation）と難易度評価を公開 API として提供し、クイズ生成に活用
+- strict mode で `pure: true` パターンのみを使う制約を課し、厳密な `[]()!+` 限定モードを実現
+
+## Key Features
+
+### DAG ベースのパターン辞書
+
+- `kind: "jsfuck"` の最終出力パターンと `kind: "subexpr"` の中間表現パターンを統一管理
+- `expression` 内の `@{role}` プレースホルダーを再帰解決して最終式を組み立て
+- tier 1〜4 でパターンの取得経路の複雑さを表現（基本プリミティブ → `toString(36)` → `Function` コンストラクタ → `escape`/`unescape`）
+
+### セグメンテーション DP + Variety Pool
+
+- 入力文字列に対して推定式長をコストにした DP でセグメント分割
+- difficulty に応じた探索予算で最短式だけでなく多様な候補を生成
+- リネームや難易度差を考慮した `explorationLevel` で高 difficulty ほど候補の幅を広げる
+
+### strict mode
+
+- `strict: true` で `pure: true` パターンのみ使用
+- 数値添字を JSFuck 式に展開した `strictExpression` / `strictAlternates` を使い、出力が `[]()!+` のみになることを保証
+
+### Quiz 生成
+
+- difficulty から出題文字数レンジを決定し、評価可能な JSFuck 式を生成
+- `actualDifficulty` と目標難易度の差分チェック付きで品質を保証
+- Breakdown テーブルでセグメントごとの難易度・タグ・依存関係を可視化
+
+### Web UI（Next.js）
+
+- `/generate`: ASCII 入力 → JSFuck 式変換。Copy ボタン・Breakdown テーブル付き
+- `/quiz`: 式を読んで評価結果を答えるクイズ
+- `/patterns`: パターン辞書・deps・tags・difficulty のフィルタリング表示
+
+## Tech Stack
+
+- TypeScript
+- Next.js
+- Tailwind CSS
+- Vitest（辞書整合性・生成検証・eval 検証）
+- pnpm workspaces（`packages/jsfuck-gen` + `apps/web`）
+
+## Implementation Notes
+
+- `patternDifficulty` はティアと出力文字数の積で算出し、`actualDifficulty` は全セグメントの加重平均
+- 辞書の整合性（id 一意性・deps 循環なし・printable ASCII 全カバー）は Vitest で自動保証
+- `pure: true` パターンは `strictExpression` 必須・数値添字禁止の制約もテストで保証
+- 外部状態なし。React local state のみで状態管理
+
+## Links
+
+- [GitHub](https://github.com/Stasshe/jsfuck-generator)

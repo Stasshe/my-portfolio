@@ -1,0 +1,75 @@
+---
+id: "gle-ctx-gleaner"
+title: "gle (ctx-gleaner)"
+summary: "Claude Code の作業意図を自動収集し、LLM でコミットメッセージを生成するCLIツール。通常の git commit を壊さず、why まで書けるコミットログを実現。"
+category: "CLI Tool"
+tags:
+  - CLI
+  - LLM
+  - Git
+  - Claude Code
+  - Gemini
+thumbnail: "assets/gle/github.png"
+colSpan: 3
+rowSpan: 2
+year: "2026"
+---
+
+## Overview
+
+`gle` は、Claude Code セッション中の「作業の意図（prompt）」と「作業要約（stop summary）」を `.git/GLE_COMMIT_CONTEXT.md` に自動蓄積し、`gle commit` 実行時に LLM でコミットメッセージを生成する CLI ツール。
+
+`git diff` だけでは読めない **why** を、AI セッションログから自動で補う。通常の `git commit` / `git commit -m` は一切変更しない。
+
+## Background
+
+- コミットメッセージの手書きが面倒で、しかも what しか書けない問題
+- Claude Code の tty 問題でセッション出力をパイプできないため、Hooks を経由してコンテキストを収集する設計
+- `git mv` や大量リネーム後に diff が肥大化するケースを前処理で解消
+
+## Key Features
+
+### コンテキスト自動収集（Claude Code Hooks）
+
+- `UserPromptSubmit` hook でプロンプト文字列を `.git/GLE_COMMIT_CONTEXT.md` に追記
+- `Stop` hook（非同期）でアシスタントの応答サマリーを追記
+- `.git/` 直下に配置するため gitignore 設定不要・push されない
+
+### `gle commit` によるメッセージ生成
+
+- staged diff（リネーム検出・ロックファイル除外・maxDiffChars 切り詰め）と蓄積コンテキストを LLM に渡して生成
+- `--edit` フラグで生成後にエディタを起動して確認・編集
+- `-m` / `--amend` 指定時は生成をスキップして通常の `git commit` にフォールバック
+- コミット成功時のみコンテキストをリセット（失敗時は保持）
+
+### マルチプロバイダー対応
+
+- Gemini（デフォルト: `gemini-2.5-flash`）
+- OpenAI（デフォルト: `gpt-4o`）
+- LiteLLM（Ollama・LM Studio など任意のローカル LLM も対応）
+
+### 既存ワークフローを壊さない設計
+
+- 通常の `git commit` / `git commit -m` は手を付けない
+- Husky v9+ との共存対応（`.husky/post-commit` に追記）
+- `core.hooksPath` を他ツールが使っていても上書きしない
+
+## Tech Stack
+
+- TypeScript
+- Node.js 18+（外部依存なし・組み込み fetch のみ使用）
+- Claude Code Hooks（UserPromptSubmit / Stop）
+- Gemini API / OpenAI API / LiteLLM
+- Git（isomorphic ではなく CLI 経由）
+
+## Implementation Notes
+
+- API キーは環境変数のみで管理。`~/.gle/glerc.json` には書かない
+- `gle install` はグローバルインストールのみサポート（hook の参照先の安定性のため）
+- `gle prepare` でリポジトリ単位の有効化を分離し、意図しないプロジェクトへの影響を防ぐ
+- hook は `stop_hook_active: true` を検出して無限ループを防止
+
+## Links
+
+- [npm (ctx-gleaner)](https://www.npmjs.com/package/ctx-gleaner)
+- [GitHub](https://github.com/Stasshe/ctx-gleaner)
