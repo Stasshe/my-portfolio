@@ -13,6 +13,7 @@ export type MdxProduct = {
   colSpan?: number;
   rowSpan?: number;
   year?: string;
+  alwaysShowSummary?: boolean;
   contentHtml: string;
   raw: string;
 };
@@ -77,6 +78,7 @@ export function getAllProductsFromMdx(): MdxProduct[] {
       colSpan: Number(data.colSpan ?? 1),
       rowSpan: Number(data.rowSpan ?? 1),
       year: String(data.year ?? ""),
+      alwaysShowSummary: Boolean(data.alwaysShowSummary ?? false),
       contentHtml: resolvedHtml,
       raw,
     } as MdxProduct;

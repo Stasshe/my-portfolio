@@ -173,7 +173,7 @@ function ProductCard({ item }: { item: MdxProduct }) {
   return (
     <div
       ref={cardRef}
-      className={`products-grid-item ${sizeClass} ${isHovered ? "hovered" : ""}`}
+      className={`products-grid-item ${sizeClass} ${isHovered ? "hovered" : ""} ${item.alwaysShowSummary ? "always-show-summary" : ""}`}
       style={{ gridColumn: `span ${col}`, gridRow: `span ${row}` }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseMove={handleMouseMove}

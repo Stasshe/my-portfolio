@@ -433,9 +433,8 @@
   border-color: rgba(255, 255, 255, 0.25);
 }
 
-/* Always show title (even without hover) for large items */
-.products-grid-item[style*="span 4"][style*="span 3"] .products-grid-item-bottom,
-.products-grid-item[style*="span 3"][style*="span 3"] .products-grid-item-bottom {
+/* Always show summary when explicitly set in MDX frontmatter */
+.products-grid-item.always-show-summary .products-grid-item-bottom {
   transform: translateY(0);
   opacity: 1;
 }
