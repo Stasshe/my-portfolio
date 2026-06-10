@@ -43,7 +43,7 @@
   "editor.minimap.enabled": true,
   "workbench.startupEditor": "none",
   "workbench.colorTheme": "Dark Modern",
-  "workbench.iconTheme": "vs-seti",
+  "workbench.iconTheme": "vscode-icons",
   "explorer.confirmDelete": false,
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": "active",
