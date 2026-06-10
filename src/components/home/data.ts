@@ -8,26 +8,17 @@ export type Product = {
   thumbnail?: string;
 };
 
-export const MARQUEE_ITEMS = [
-  "Build",
-  "Solve",
-  "Security",
-  "UX",
-  "Ship",
-  "Craft",
-  "Real-World",
-  "Impact",
-];
-
 export const SKILLS = [
+  "TypeScript",
   "React",
   "Next.js",
-  "TypeScript",
+  "Svelte / SolidJS",
+  "Astro",
+  "Swift",
+  "Rust",
+  "WebAssembly",
+  "Web Workers",
   "Node.js",
-  "Figma",
-  "UI Design",
   "GSAP",
-  "Motion",
-  "CSS",
-  "Tailwind",
+  "Figma",
 ];

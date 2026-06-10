@@ -1,10 +1,11 @@
-import "@/components/home/marquee/MarqueeSection.css";
-import "@/components/home/skew/SkewSection.css";
+import "@/components/home/hero/HeroSection.css";
+import "@/components/home/principles/PrinciplesSection.css";
 import "@/components/home/works/WorksSection.css";
 import type { Metadata } from "next";
 import "./globals.css";
 import "./products/products.css";
 import "./products/[id]/product-detail.css";
+import "./about/about.css";
 
 export const metadata: Metadata = {
   title: "Naoki Ishida / Stasshe — Portfolio",

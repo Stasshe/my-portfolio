@@ -18,15 +18,15 @@ export function WorksSection({ worksRef, products }: WorksSectionProps) {
               className="label"
               style={{ color: "var(--color-brand)", marginBottom: "1rem", display: "block" }}
             >
-              Selected Works
+              Featured Work
             </span>
             <h2 className="heading-lg">
               Things I&apos;ve{" "}
-              <span style={{ color: "var(--color-dark-accent)", fontStyle: "italic" }}>made.</span>
+              <span style={{ color: "var(--color-dark-accent)", fontStyle: "italic" }}>built.</span>
             </h2>
           </div>
           <span className="label works-count">
-            {String(products.length).padStart(2, "0")} Projects
+            Showing {String(products.length).padStart(2, "0")}
           </span>
         </div>
 
@@ -39,10 +39,10 @@ export function WorksSection({ worksRef, products }: WorksSectionProps) {
                   style={
                     product.thumbnail
                       ? {
-                        backgroundImage: `url(${product.thumbnail})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                      }
+                          backgroundImage: `url(${product.thumbnail})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }
                       : { background: product.gradient }
                   }
                 />

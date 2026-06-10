@@ -1,75 +1,87 @@
+import Link from "next/link";
 import type { RefObject } from "react";
 
 type HeroSectionProps = {
   heroRef: RefObject<HTMLElement | null>;
 };
 
+const HIGHLIGHTS = [
+  {
+    value: "30+",
+    label: "Products shipped",
+    detail: "ブラウザIDE、学校行事運営システムなどを継続的に開発。",
+  },
+  {
+    value: "2 / 2",
+    label: "U-22 2025 — Double pass",
+    detail: "Pyxis-CodeCanvas と Celeritas が同時に事前審査通過（大会初）。",
+  },
+  {
+    value: "2",
+    label: "Awards — Pyxis-CodeCanvas",
+    detail: "経済産業大臣賞〈テクノロジー部門〉/ アクセンチュア賞 同時受賞。",
+  },
+  {
+    value: "2",
+    label: "Schools, in production",
+    detail: "Pyxis と Celeritas が学校現場で実際に稼働中。",
+  },
+];
+
 export function HeroSection({ heroRef }: HeroSectionProps) {
   return (
-    <section
-      ref={heroRef}
-      id="hero"
-      className="min-h-screen flex flex-col justify-center relative overflow-hidden"
-    >
-      <div
-        id="hero-deco-1"
-        className="hero-deco hero-deco-1 absolute rounded-full pointer-events-none opacity-10 w-[600px] h-[600px] bg-[var(--color-brand)] -top-[200px] -right-[200px]"
-      />
-      <div
-        id="hero-deco-2"
-        className="hero-deco hero-deco-2 absolute rounded-full pointer-events-none opacity-10 w-[400px] h-[400px] bg-[var(--color-dark-accent)] -bottom-[100px] -left-[100px]"
-      />
-      <div
-        id="hero-deco-3"
-        className="hero-deco hero-deco-3 absolute rounded-full pointer-events-none opacity-10 w-[200px] h-[200px] bg-[var(--color-dark)] top-[30%] right-[15%]"
-      />
+    <section ref={heroRef} id="hero" className="hero-section">
+      <div className="hero-grid-lines" aria-hidden="true" />
 
-      <div id="hero-content" className="container hero-content relative z-10 py-32">
-        <span
-          id="hero-greeting"
-          className="label hero-greeting text-[var(--color-light-accent)] mb-8 block"
-        >
-          Portfolio of
-        </span>
+      <div id="hero-content" className="container hero-content">
+        <div className="hero-main">
+          <span id="hero-greeting" className="label hero-eyebrow">
+            Software Builder — Context-Driven Engineering
+          </span>
 
-        <div id="hero-title-line" className="hero-title-line overflow-hidden">
-          <span id="hero-title-span-0" className="heading-xl hero-name inline-block">
-            Sta
-          </span>
-          <span
-            id="hero-title-span-1"
-            className="heading-xl hero-name-accent inline-block text-[var(--color-brand)] italic"
-          >
-            ss
-          </span>
-          <span id="hero-title-span-2" className="heading-xl hero-name inline-block">
-            he
-          </span>
+          <h1 className="hero-name">
+            <span id="hero-title-span-0" className="hero-name-line">
+              Naoki Ishida
+            </span>
+            <span id="hero-title-span-1" className="hero-name-handle font-mono">
+              Stasshe
+            </span>
+          </h1>
+
+          <p id="hero-subtag" className="heading-md hero-statement">
+            身近な不便や制約を見つけ、<span className="accent">使い続けられる</span>
+            形まで設計する。
+          </p>
+
+          <p id="hero-tagline" className="body-text hero-description">
+            TypeScript・React・Next.js
+            を中心に、ブラウザ上で動く開発環境や学校現場の運営システムを開発。実装だけでなく、要件・設計・UX・運用までを一続きの問題として扱います。
+          </p>
+
+          <div id="hero-actions" className="hero-actions">
+            <Link href="/products" className="cta-button">
+              <span>View Products</span>
+            </Link>
+            <Link href="/about" className="cta-button cta-button--outline">
+              <span>Philosophy &amp; Background</span>
+            </Link>
+          </div>
         </div>
 
-        <div id="hero-title-line-sub" className="hero-title-line mt-2">
-          <span
-            id="hero-subtag"
-            className="inline-block heading-md text-[var(--color-light-accent)] font-[300]"
-          >
-            Context driven software builder
-          </span>
+        <div id="hero-panel" className="hero-panel" aria-label="Highlights">
+          {HIGHLIGHTS.map((item) => (
+            <div className="hero-stat" key={item.label}>
+              <span className="hero-stat-value font-serif">{item.value}</span>
+              <span className="hero-stat-label label">{item.label}</span>
+              <p className="hero-stat-detail body-text-sm">{item.detail}</p>
+            </div>
+          ))}
         </div>
-
-        <p
-          id="hero-tagline"
-          className="body-text hero-tagline mt-16 text-[var(--color-light-accent)] max-w-[620px]"
-        >
-          身近な不便や制約を起点に、実装だけで終わらないソフトウェアを作る。要件、設計、UX、運用までをつないで、使い続けられる形にすることを重視しています。
-        </p>
       </div>
 
-      <div
-        id="hero-scroll-indicator"
-        className="hero-scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[var(--color-light-accent)]"
-      >
-        <span className="label text-[0.6rem]">Scroll</span>
-        <div className="hero-scroll-line w-px h-[60px] bg-gradient-to-b from-[var(--color-brand)] to-transparent animate-pulse-slow" />
+      <div id="hero-scroll-indicator" className="hero-scroll-indicator">
+        <span className="label">Scroll</span>
+        <div className="hero-scroll-line" />
       </div>
     </section>
   );

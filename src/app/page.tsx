@@ -18,7 +18,7 @@ export default function Home() {
       if (areaB !== areaA) return areaB - areaA;
       return (b.year ?? "").localeCompare(a.year ?? "");
     })
-    .slice(0, 5)
+    .slice(0, 3)
     .map((item, index) => ({
       id: item.id,
       title: item.title,

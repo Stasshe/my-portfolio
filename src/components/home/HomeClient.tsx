@@ -1,22 +1,17 @@
 "use client";
 
 import type { Product } from "@/components/home/data";
+import { SiteFooter } from "@/components/shared/SiteFooter";
+import { SiteNav } from "@/components/shared/SiteNav";
 import { useCustomCursor } from "@/lib/useCustomCursor";
 import gsap from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
-import { HomeFooter } from "./HomeFooter";
-import { HomeNavigation } from "./HomeNavigation";
-import { HorizontalSection } from "./HorizontalSection";
-import { AboutSection } from "./about/AboutSection";
-import { MARQUEE_ITEMS, SKILLS } from "./data";
 import { HeroSection } from "./hero/HeroSection";
-import { MarqueeSection } from "./marquee/MarqueeSection";
-import { SkewSection } from "./skew/SkewSection";
+import { PrinciplesSection } from "./principles/PrinciplesSection";
 import { WorksSection } from "./works/WorksSection";
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+gsap.registerPlugin(ScrollTrigger);
 
 type HomeClientProps = {
   products: Product[];
@@ -25,13 +20,8 @@ type HomeClientProps = {
 export default function HomeClient({ products }: HomeClientProps) {
   const mainRef = useRef<HTMLDivElement>(null);
   const heroRef = useRef<HTMLElement>(null);
-  const marqueeRef = useRef<HTMLDivElement>(null);
-  const horizontalRef = useRef<HTMLElement>(null);
-  const horizontalWrapRef = useRef<HTMLDivElement>(null);
+  const principlesRef = useRef<HTMLElement>(null);
   const worksRef = useRef<HTMLElement>(null);
-  const aboutRef = useRef<HTMLElement>(null);
-  const skewRef = useRef<HTMLElement>(null);
-  const footerRef = useRef<HTMLElement>(null);
   const navRef = useRef<HTMLElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -59,8 +49,8 @@ export default function HomeClient({ products }: HomeClientProps) {
           const heroContentEl = document.getElementById("hero-content");
           if (heroContentEl) {
             gsap.to(heroContentEl, {
-              yPercent: -30,
-              opacity: 0.3,
+              yPercent: -15,
+              opacity: 0.4,
               scrollTrigger: {
                 trigger: heroRef.current,
                 start: "top top",
@@ -71,38 +61,32 @@ export default function HomeClient({ products }: HomeClientProps) {
           }
         }
 
-        if (horizontalRef.current && horizontalWrapRef.current) {
-          const panels = Array.from(horizontalWrapRef.current.children) as HTMLElement[];
-          const getTotalWidth = () => (panels.length - 1) * window.innerWidth;
-
-          gsap.to(horizontalWrapRef.current, {
-            x: () => -getTotalWidth(),
-            ease: "none",
+        const principlesHeaderEl = document.getElementById("principles-header");
+        if (principlesHeaderEl && principlesRef.current) {
+          gsap.from(principlesHeaderEl, {
             scrollTrigger: {
-              trigger: horizontalRef.current,
-              start: "top top",
-              end: () => `+=${getTotalWidth()}`,
-              scrub: 1,
-              pin: true,
-              anticipatePin: 1,
-              invalidateOnRefresh: true,
+              trigger: principlesRef.current,
+              start: "top 80%",
             },
+            y: 40,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power3.out",
           });
+        }
 
-          panels.forEach((panel) => {
-            const content = panel.firstElementChild as HTMLElement | null;
-            if (content) {
-              gsap.from(content, {
-                x: 100,
-                opacity: 0,
-                scrollTrigger: {
-                  trigger: panel,
-                  start: "left center",
-                  end: "center center",
-                  scrub: true,
-                },
-              });
-            }
+        const principleCards = principlesRef.current?.querySelectorAll(".principle-card");
+        if (principleCards?.length) {
+          gsap.from(Array.from(principleCards), {
+            scrollTrigger: {
+              trigger: principlesRef.current,
+              start: "top 70%",
+            },
+            y: 40,
+            opacity: 0,
+            duration: 0.7,
+            ease: "power3.out",
+            stagger: 0.12,
           });
         }
 
@@ -138,141 +122,6 @@ export default function HomeClient({ products }: HomeClientProps) {
                 overwrite: "auto",
               });
             },
-          });
-        }
-
-        if (aboutRef.current) {
-          const aboutEl = aboutRef.current;
-          const label = document.getElementById("about-label");
-          if (label) {
-            gsap.from(label, {
-              scrollTrigger: {
-                trigger: aboutEl,
-                start: "top 75%",
-              },
-              x: -40,
-              opacity: 0,
-              duration: 0.8,
-              ease: "power3.out",
-            });
-          }
-
-          const title = document.getElementById("about-title");
-          if (title) {
-            gsap.from(title, {
-              scrollTrigger: {
-                trigger: aboutEl,
-                start: "top 70%",
-              },
-              y: 60,
-              opacity: 0,
-              duration: 1,
-              ease: "power3.out",
-            });
-          }
-
-          const texts = [
-            document.getElementById("about-text-0"),
-            document.getElementById("about-text-1"),
-            document.getElementById("about-text-2"),
-            document.getElementById("about-text-3"),
-          ].filter(Boolean) as HTMLElement[];
-          if (texts.length) {
-            gsap.from(texts, {
-              scrollTrigger: {
-                trigger: aboutEl,
-                start: "top 60%",
-              },
-              y: 40,
-              opacity: 0,
-              duration: 0.8,
-              ease: "power3.out",
-              stagger: 0.1,
-            });
-          }
-
-          const stats = ["about-stat-0", "about-stat-1", "about-stat-2", "about-stat-3"]
-            .map((id) => document.getElementById(id))
-            .filter(Boolean) as HTMLElement[];
-          const statsTrigger = document.getElementById("about-stats") ?? aboutEl;
-          if (stats.length) {
-            gsap.from(stats, {
-              scrollTrigger: {
-                trigger: statsTrigger,
-                start: "top 85%",
-              },
-              y: 40,
-              opacity: 0,
-              duration: 0.6,
-              ease: "power3.out",
-              stagger: 0.1,
-            });
-          }
-
-          const skillsContainer = document.getElementById("about-skills");
-          const skills = skillsContainer
-            ? (Array.from(skillsContainer.children) as HTMLElement[])
-            : [];
-          const skillsTrigger = skillsContainer ?? aboutEl;
-          if (skills.length) {
-            gsap.from(skills, {
-              scrollTrigger: {
-                trigger: skillsTrigger,
-                start: "top 90%",
-              },
-              scale: 0.8,
-              opacity: 0,
-              duration: 0.4,
-              immediateRender: false,
-              ease: "back.out(1.7)",
-              stagger: 0.05,
-            });
-          }
-
-          const deco1 = document.getElementById("about-deco-1");
-          if (deco1) {
-            gsap.to(deco1, {
-              y: -80,
-              scrollTrigger: {
-                trigger: aboutEl,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 1,
-              },
-            });
-          }
-
-          const deco2 = document.getElementById("about-deco-2");
-          if (deco2) {
-            gsap.to(deco2, {
-              y: 60,
-              scrollTrigger: {
-                trigger: aboutEl,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 1,
-              },
-            });
-          }
-        }
-
-        if (skewRef.current) {
-          const rows = [
-            document.getElementById("skew-text-0"),
-            document.getElementById("skew-text-1"),
-            document.getElementById("skew-text-2"),
-          ].filter(Boolean) as HTMLElement[];
-          rows.forEach((row, i) => {
-            gsap.from(row, {
-              x: i % 2 === 0 ? -200 : 200,
-              opacity: 0,
-              scrollTrigger: {
-                trigger: row,
-                start: "top 90%",
-                end: "top 40%",
-                scrub: 1,
-              },
-            });
           });
         }
 
@@ -334,18 +183,16 @@ export default function HomeClient({ products }: HomeClientProps) {
       const titleSpans = [
         document.getElementById("hero-title-span-0"),
         document.getElementById("hero-title-span-1"),
-        document.getElementById("hero-title-span-2"),
       ].filter(Boolean) as HTMLElement[];
       const subtagEls = [document.getElementById("hero-subtag")].filter(Boolean) as HTMLElement[];
       const taglineEls = [document.getElementById("hero-tagline")].filter(Boolean) as HTMLElement[];
+      const actionEls = [document.getElementById("hero-actions")].filter(Boolean) as HTMLElement[];
+      const panelStats = Array.from(
+        document.getElementById("hero-panel")?.querySelectorAll(".hero-stat") ?? [],
+      ) as HTMLElement[];
       const scrollIndicators = [document.getElementById("hero-scroll-indicator")].filter(
         Boolean,
       ) as HTMLElement[];
-      const decoEls = [
-        document.getElementById("hero-deco-1"),
-        document.getElementById("hero-deco-2"),
-        document.getElementById("hero-deco-3"),
-      ].filter(Boolean) as HTMLElement[];
 
       heroTl
         .from(greetingEls, {
@@ -357,7 +204,7 @@ export default function HomeClient({ products }: HomeClientProps) {
         .from(
           titleSpans,
           {
-            y: 120,
+            y: 80,
             opacity: 0,
             duration: 1,
             ease: "power3.out",
@@ -386,50 +233,38 @@ export default function HomeClient({ products }: HomeClientProps) {
           "-=0.4",
         )
         .from(
+          actionEls,
+          {
+            y: 20,
+            opacity: 0,
+            duration: 0.6,
+            ease: "power3.out",
+          },
+          "-=0.4",
+        )
+        .from(
+          panelStats,
+          {
+            y: 30,
+            opacity: 0,
+            duration: 0.6,
+            ease: "power3.out",
+            stagger: 0.1,
+          },
+          "-=0.5",
+        )
+        .from(
           scrollIndicators,
           {
             opacity: 0,
             duration: 0.6,
           },
           "-=0.2",
-        )
-        .from(
-          decoEls,
-          {
-            scale: 0,
-            opacity: 0,
-            duration: 1.2,
-            ease: "power2.out",
-            stagger: 0.2,
-          },
-          "-=1",
         );
-
-      const marqueeTrack = document.getElementById("marquee-track");
-      if (marqueeTrack) {
-        gsap.to(marqueeTrack, {
-          xPercent: -50,
-          repeat: -1,
-          duration: 25,
-          ease: "none",
-        });
-      }
     }, mainRef);
 
     return () => ctx.revert();
   }, []);
-
-  const scrollToSection = (id: string) => {
-    setMenuOpen(false);
-    const el = document.getElementById(id);
-    if (el) {
-      gsap.to(window, {
-        scrollTo: { y: el, offsetY: 0 },
-        duration: 1.2,
-        ease: "power3.inOut",
-      });
-    }
-  };
 
   return (
     <div ref={mainRef}>
@@ -441,24 +276,12 @@ export default function HomeClient({ products }: HomeClientProps) {
         </span>
       </div>
 
-      <HomeNavigation
-        navRef={navRef}
-        menuOpen={menuOpen}
-        setMenuOpen={setMenuOpen}
-        scrollToSection={scrollToSection}
-      />
+      <SiteNav navRef={navRef} menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 
       <HeroSection heroRef={heroRef} />
-      <MarqueeSection marqueeRef={marqueeRef} items={MARQUEE_ITEMS} />
-      <HorizontalSection
-        horizontalRef={horizontalRef}
-        horizontalWrapRef={horizontalWrapRef}
-        scrollToSection={scrollToSection}
-      />
-      <SkewSection skewRef={skewRef} />
+      <PrinciplesSection principlesRef={principlesRef} />
       <WorksSection worksRef={worksRef} products={products} />
-      <AboutSection aboutRef={aboutRef} skills={SKILLS} />
-      <HomeFooter footerRef={footerRef} scrollToSection={scrollToSection} />
+      <SiteFooter />
     </div>
   );
 }

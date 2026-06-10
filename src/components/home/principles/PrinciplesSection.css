@@ -1,0 +1,63 @@
+/* ============================================
+   Operating Principles
+   ============================================ */
+.principles-section {
+  background-color: var(--color-light);
+  border-top: 1px solid rgba(var(--color-dark-rgb), 0.06);
+}
+
+.principles-header {
+  max-width: 680px;
+  margin-bottom: var(--space-xl);
+}
+
+.principles-intro {
+  margin-top: var(--space-md);
+  color: var(--color-light-accent);
+}
+
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.principle-card {
+  padding: var(--space-md);
+  border: 1px solid rgba(var(--color-dark-rgb), 0.08);
+  border-radius: 12px;
+  background-color: rgba(var(--color-dark-rgb), 0.015);
+  transition: border-color var(--transition-base), transform var(--transition-base);
+}
+
+.principle-card:hover {
+  border-color: rgba(var(--color-brand-rgb), 0.3);
+  transform: translateY(-2px);
+}
+
+.principle-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(var(--color-brand-rgb), 0.1);
+  color: var(--color-brand);
+  margin-bottom: var(--space-sm);
+}
+
+.principle-card-title {
+  color: var(--color-dark);
+  margin-bottom: 0.6rem;
+}
+
+.principle-card-detail {
+  color: var(--color-light-accent);
+}
+
+@media (max-width: 900px) {
+  .principles-grid {
+    grid-template-columns: 1fr;
+  }
+}

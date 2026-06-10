@@ -1,3 +1,5 @@
+import { SiteFooter } from "@/components/shared/SiteFooter";
+import { SiteNav } from "@/components/shared/SiteNav";
 import { getAllProductsFromMdx, getProductById } from "@/lib/mdx";
 import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
@@ -44,22 +46,16 @@ export default async function ProductPage({
 
   return (
     <div className="product-detail-root">
-      {/* ── Navigation ── */}
-      <nav className="product-detail-nav">
-        <div className="product-detail-nav-inner">
-          <Link href="/products" className="product-detail-back">
-            <ArrowLeft size={16} className="back-icon" />
-            <span className="label">Products</span>
-          </Link>
-          <Link href="/" className="nav-logo" style={{ color: "var(--color-dark)" }}>
-            Stasshe
-          </Link>
-        </div>
-      </nav>
+      <SiteNav solid />
 
       {/* ── Hero ── */}
       <header className="product-detail-hero">
         <div className="product-detail-hero-inner">
+          <Link href="/products" className="product-detail-back">
+            <ArrowLeft size={16} className="back-icon" />
+            <span className="label">Products</span>
+          </Link>
+
           {/* Meta: category + year */}
           <div className="product-detail-meta">
             {product.category && (
@@ -113,18 +109,7 @@ export default async function ProductPage({
         />
       </article>
 
-      {/* ── Footer ── */}
-      <footer className="product-detail-footer">
-        <div className="product-detail-footer-inner">
-          <Link href="/products" className="product-detail-footer-back">
-            <ArrowLeft size={14} />
-            <span>All Products</span>
-          </Link>
-          <span className="product-detail-footer-copy">
-            © {new Date().getFullYear()} Stasshe
-          </span>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }
