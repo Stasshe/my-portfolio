@@ -1,0 +1,119 @@
+---
+id: "web-synth-nexona"
+title: "Web Synth - Nexona"
+summary: "ブラウザ上で動くリアルタイム wavetable シンセサイザー。AudioWorklet上のTypeScript製DSPエンジンとSharedArrayBufferによる低レイテンシ音響処理を、Next.js + ReactのUIで操る。3オシレーター・モジュレーションマトリクス・8種エフェクトを備えた本格音源。"
+category: "Web App"
+tags:
+  - TypeScript
+  - Next.js
+  - AudioWorklet
+  - DSP
+  - SharedArrayBuffer
+  - Web Audio API
+thumbnail: "assets/web-synth-nexona/cover.png"
+colSpan: 4
+rowSpan: 4
+alwaysShowSummary: true
+year: "2026"
+---
+
+<div align="center">
+
+# Web Synth - Nexona
+
+### *ブラウザのタブが、本物のシンセサイザーになる。*
+
+**AudioWorklet上のDSPエンジンで動く、リアルタイム wavetable シンセ。**
+
+</div>
+
+---
+
+## ひとことで言うと
+
+Web Synth - Nexona は、**インストール不要・ブラウザのタブひとつで動く、本格的な wavetable シンセサイザー**です。3つのオシレーター、モジュレーションマトリクス、8種のエフェクト、波形エディタ — デスクトップのソフトシンセに期待される機能を、Web Audio APIの上に実装しました。
+
+ただのデモではありません。音の生成は**AudioWorklet上で動くTypeScript製DSPエンジン**が担い、UIスレッドとは `SharedArrayBuffer` で繋がります。鍵盤を押してから音が出るまでのレイテンシを、Webの制約の中で可能な限り詰めた構成です。
+
+このプロジェクトは私にとって、**「Wasm・WebWorker・AudioWorkletといったWebの最先端低レイヤ技術を、音という一切ごまかしの効かない題材で扱い切る」**挑戦でした。音はわずかな処理落ちでも即座に破綻するので、UIと音声処理の責務分離がそのまま音質に直結します。
+
+---
+
+## なぜ「ブラウザで本格シンセ」が難しいのか
+
+ブラウザで音を出すこと自体は簡単です。難しいのは、**演奏に耐えるリアルタイム性**を出すこと。
+
+メインスレッドでDSPを回せば、Reactの再描画やGCの一瞬の停止が、そのまま音のプチッというノイズになります。だからNexonaは音声処理を **AudioWorkletProcessor**（オーディオ専用スレッド）に隔離し、128サンプルのブロック単位で確定的に処理します。UIから送るパラメータは `SharedArrayBuffer` + `Atomics` で共有 — メッセージのコピーや非同期の遅延を挟まず、ノブを回した変化が次のオーディオブロックに即反映されます。
+
+<div align="center">
+
+| Webで音を出すときの壁 | Nexonaの対処 |
+|:---|:---|
+| メインスレッドのGC/描画が音を割る | DSPをAudioWorkletスレッドへ完全隔離 |
+| パラメータ送信の遅延・コピーコスト | SharedArrayBuffer + Atomics で共有 |
+| ノート発音のタイミングずれ | MessagePortでイベント、SABで連続値 |
+| 重い音作りデータの保存・共有 | gzip + base64 でURLハッシュ化 |
+
+</div>
+
+---
+
+## 何ができるのか
+
+### 音作りの中核
+
+- **3オシレーター構成（OSC A / B / C）** + Sub Oscillator + Noise
+- **Wavetable** プリセット切替・フレーム位置モーフィング・ユニゾン（Voice数 / Detune / Spread）
+- **2段Warp**（Bend / Sync / PhaseDistortion / FM / Formant など10種）
+- **Spectral Morph**（Vocode / FormantScale / Shepard Tone など12種のスペクトル変形）
+- **波形エディタ** — Control Pointベースで、Linear / Smooth / Step / Sine のカーブを描いてカスタム波形をwavetable化
+
+### フィルター・エンベロープ・モジュレーション
+
+- **2系統フィルター**（Analog / Ladder / Comb / Formant のカテゴリ切替、レジストリ方式）
+- Amp / Filter の **ADSRエンベロープ**
+- **モジュレーションマトリクス** — 11ソース（LFO / Envelope / Velocity / KeyTrack / Macro / Random）× 60ターゲット。**UI上でドラッグ&ドロップ**してルーティングを作る
+
+### エフェクト・演奏・共有
+
+- Distortion / Compressor / Chorus / Flanger / Phaser / Delay / Reverb / EQ の **8エフェクト**
+- 画面鍵盤（縦位置でベロシティ変化）と **QWERTYキーボード演奏**
+- パッチを **URLハッシュで共有**（gzip → base64）。起動時にURLから自動復元
+- JSONC（コメント可）でパラメータを直接編集する Param Editor
+
+---
+
+## 技術的な裏側
+
+このプロジェクトの本質は、UIの華やかさよりも**スレッド境界とメモリ共有の設計**にあります。
+
+- **2層スレッド構成** — UI: Next.js 16 / React 19 / Valtio。音声: AudioWorkletProcessor上のpure TypeScript DSP。両者を `node.ts`（UI側ラッパ）と `processor.ts`（worklet本体）が橋渡し
+- **SAB仕様** — 256スロット。Float32をInt32に再解釈して `Atomics.store` / `Atomics.load`。モジュレーション結果はUIへ返送して可視化
+- **ビルドパイプライン** — worklet（`processor.ts`）は esbuild で単独バンドルして `public/worklet/processor.js` を生成してから `next build`。通常のバンドラに混ぜない
+- **必須ヘッダー** — SharedArrayBuffer のため `COOP: same-origin` / `COEP: require-corp` を `next.config.ts` と `vercel.json` の両方に設定
+- **DSPの検証** — Osc / LFO / Filter / Envelope / Effects / Warp / SpectralMorph・エンジン層・SABレイアウトを **Vitest** でユニットテスト。音響アルゴリズムを「耳」だけでなくテストで担保
+- **モジュール分割** — `dsp/` 配下をoscillator / wavetable / warp / spectralMorph / filter / envelope / lfo / modulation / effects に細かく分割し、フィルターは `FILTER_REGISTRY` で差し替え可能に
+
+---
+
+## どんな意識で作ったか
+
+意識したのは **「Webだから」を言い訳にしない**ことです。「ブラウザにしてはよく鳴る」ではなく、シンセとして成立しているか。そのために、いちばん地味で、いちばん効く部分 — スレッド分離とメモリ共有 — に設計の重心を置きました。
+
+音は、ごまかしが効きません。状態管理を一箇所でも間違えれば、それは音割れやレイテンシとして即座に耳に届きます。policyに書いた**「フレームワークの抽象化の裏側にある、メモリ・通信・並行処理を理解していなければ、複雑なバグの原因は切り分けられない」**という問題意識を、Nexonaは音という容赦のないフィードバックループの中で実地に確かめたプロジェクトです。
+
+---
+
+## リンク
+
+- [GitHub](https://github.com/Stasshe/Web-Synth-Nexona)
+
+<div align="center">
+
+---
+
+*タブを開けば、そこに音源がある。*
+
+**MIT License**
+
+</div>

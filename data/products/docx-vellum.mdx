@@ -1,0 +1,110 @@
+---
+id: "docx-vellum"
+title: "docx-vellum"
+summary: "サーバー往復ゼロで、.docxをブラウザ内でページ分割HTMLとして同期レンダリングするTypeScriptライブラリ。Reconの文書プレビューエンジンであり、単体publish可能なnpmパッケージへと育てている。"
+category: "Developer Tool"
+tags:
+  - TypeScript
+  - OOXML
+  - Browser
+  - Rendering
+  - npm
+  - Library
+thumbnail: "assets/docx-vellum/cover.png"
+colSpan: 2
+rowSpan: 3
+year: "2026"
+---
+
+<div align="center">
+
+# docx-vellum
+
+### *Wordを、サーバーを介さず、その場で描く。*
+
+**ブラウザ内で `.docx` をページ分割HTMLへ同期レンダリングするライブラリ。**
+
+</div>
+
+---
+
+## ひとことで言うと
+
+docx-vellum は、`.docx` ファイルを**サーバー往復なし**でブラウザ上にレンダリングするTypeScriptライブラリです。Open XML（`.docx`）を解析し、ページ分割されたHTMLを直接DOMコンテナへ描き出します。
+
+[[recon]] という文書バージョン管理システムの**プレビューエンジン**として生まれ、現在はそこから切り出して、単体でpublishできる独立npmパッケージへと育てているところです。Reconが「差分を計算する」なら、docx-vellumは「その文書を実際に画面へ描く」役割を担います。
+
+---
+
+## どんな課題を解決するのか
+
+文書を扱うWebアプリで「Wordプレビュー」を出そうとすると、たいていの選択肢はサーバー側変換に行き着きます。LibreOfficeをヘッドレスで回す、外部APIにdocxを投げてPNG/PDFを受け取る — どれも**ファイルをサーバーに送る**ことを意味します。
+
+機密文書を扱う場面では、これは大きな制約です。docx-vellumは描画を**完全にクライアントサイド**で完結させます。`.docx` のバイト列がブラウザの外に出ない。これは、文書VCSであるReconがWebView内で差分プレビューを安全に出すための、絶対条件でした。
+
+<div align="center">
+
+| よくある手段 | docx-vellumの立場 |
+|:---|:---|
+| サーバーでLibreOffice変換 | ブラウザ内で完結、往復ゼロ |
+| 外部APIにdocxを送信 | バイト列が端末外に出ない |
+| 非同期で重い初回描画 | 同期・ページネーション対応の描画 |
+
+</div>
+
+---
+
+## 何ができるのか
+
+```ts
+import { renderSync } from "docx-vellum";
+
+const blob = await (await fetch("/sample.docx")).blob();
+const body  = document.getElementById("document-container");
+const style = document.getElementById("style-container");
+
+// 解析 → ページ分割HTMLを body に描画
+const doc = await renderSync(blob, body, style, { breakPages: true });
+```
+
+主なAPI:
+
+- **`parseAsync(data, options?)`** — docx（`Blob` / `ArrayBuffer` / `Uint8Array`）を描画せず `WordDocument` モデルへ解析
+- **`renderSync(...)`** — 同期・ページネーション対応レンダラで解析＋描画
+- **`renderAsync(...)`** — upstream由来の非同期レンダラ（互換用）
+- **`renderDocument(doc, ...)`** — 解析済みモデルを描画
+
+ESM / CJS / UMD の3形態をバンドルし、`.d.ts` も同梱。バンドラ経由でも、CDNから `<script>` で読み込むグローバル（`docx`）としても使えます。
+
+---
+
+## 由来とライセンスへの誠実さ
+
+docx-vellumは、**millet0328氏の docx-preview-sync** のフォークであり、それ自体が **Volodymyr Baydalka氏の docx-preview / docxjs** から派生したものです。両プロジェクトは Apache-2.0 ライセンスで、このフォークもそれを引き継いでいます。
+
+OSSの系譜を曖昧にせず、`NOTICE` ファイルで帰属を明記する — これは、サブセットであることを隠さない[[fluxa-webcp]]と同じ、**設計上の誠実さ**だと考えています。「どこまでが先人の仕事で、どこからが自分の拡張か」をはっきりさせることは、ライブラリ作者の責任です。
+
+---
+
+## 技術的な裏側 と 現在地
+
+- **言語** — TypeScript。ランタイム依存は `jszip`（ZIP展開）、`konva`（描画）、`lodash-es` を通常依存として宣言
+- **ビルド** — Rollupで ESM / CJS / UMD を出力。`.d.ts` 同梱
+- **テスト** — Vitestによるユニットテストに加え、**Playwright** による実ブラウザでの描画回帰テスト。`tests/golden/*.html` をgolden出力として、レンダリング結果のリグレッションを検出
+- **ステータス** — `0.x`。現行の `renderSync` / `renderAsync` はupstream由来の入口で、今後**構造化された `RenderResult`（ページハンドル / ソースマップ / オーバーレイ層）**へと再設計予定。依存する場合はバージョン固定を推奨
+
+upstreamの「とにかく描く」段階から、**Reconが必要とする「差分のbefore/afterを重ねて見せる」**ための土台 — ページハンドルやオーバーレイ層 — へ進化させている最中です。フォークを単に使うのではなく、自分のユースケースに向けて作り変えていく過程そのものが、このプロジェクトの中身です。
+
+## リンク
+
+- [GitHub](https://github.com/recon-vcs/docx-vellum)
+
+<div align="center">
+
+---
+
+*文書は、送らずに、その場で見せられる。*
+
+**Apache-2.0 License**
+
+</div>

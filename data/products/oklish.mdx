@@ -1,0 +1,113 @@
+---
+id: "oklish"
+title: "OKLISH"
+summary: "どんなWebページにも非侵襲的に差し込める、フローティング型の開発者インスペクションツールキット。Svelte 5製で、Elements / Console / Network / Application パネルとプラグイン拡張を備えた「持ち運べるDevTools」。"
+category: "Developer Tool"
+tags:
+  - Svelte
+  - TypeScript
+  - DevTools
+  - Plugin Architecture
+  - Library
+  - npm
+thumbnail: "assets/oklish/cover.png"
+colSpan: 2
+rowSpan: 3
+year: "2025"
+---
+
+<div align="center">
+
+# OKLISH
+
+### *DevToolsを、ページの中へ持ち込む。*
+
+**どんなページにも差し込める、フローティング型の開発者ツールキット。**
+
+</div>
+
+---
+
+## ひとことで言うと
+
+OKLISH は、Chrome DevToolsのような操作感を、**ページ内のフローティングウィンドウとして**実現する開発者向けインスペクションツールキットです。Svelte 5 + TypeScript で実装され、既存ページに**非侵襲的に**組み込めるライブラリとして配布します。
+
+ブラウザのDevToolsは強力ですが、「そのページに埋め込んで配る」ことはできません。OKLISHは、`OKLISH.init()` の一行で任意のページにElements / Console / Network / Application パネルを召喚します。検証環境、社内ツール、デモ、教育用ページ — **DevToolsを開けない・開かせたくない場面で、必要な観測機能だけを持ち運ぶ**ための道具です。
+
+---
+
+## どんな課題を解決するのか
+
+<div align="center">
+
+| ありがちな場面 | OKLISHの答え |
+|:---|:---|
+| 配布物の中で動作を観測させたい | ページ内蔵のフローティングDevTools |
+| iPad等、DevToolsが開きにくい端末 | UIとして埋め込むので端末を選ばない |
+| 用途ごとに観測機能を足したい | プラグインで後付け登録できる |
+| ウィンドウ配置や設定を保持したい | sessionStorageで状態を永続化 |
+
+</div>
+
+ネイティブのDevToolsが使える環境では不要かもしれません。けれど、**「ページに同梱して、誰の手元でも同じ観測ができる」**ことには、別の価値があります。OKLISHはその隙間を埋めます。
+
+---
+
+## 何ができるのか
+
+```html
+<script src="https://unpkg.com/oklish/dist/oklish.js"></script>
+<script>OKLISH.init();</script>
+```
+
+または npm パッケージとして:
+
+```js
+import OKLISH from "oklish";
+OKLISH.init({ theme: "dark" });
+// OKLISH.registerPlugin(myPlugin);  // ランタイムでパネル追加
+// OKLISH.destroy();                 // 破棄・状態クリーンアップ
+```
+
+組み込みパネル（初期実装）:
+
+- **Elements** — DOMツリーの探索とスタイル編集
+- **Console** — ログ表示と式の評価
+- **Network** — fetch / xhr のリクエスト監視（インターセプト）
+- **Application** — Storage / ServiceWorker の情報
+
+公開APIは `init()` / `destroy()` / `registerPlugin()` の3つだけ。**小さく保ったコア**の上に、必要な機能をプラグインで足していく設計です。
+
+---
+
+## 技術的な裏側
+
+- **フレームワーク** — Svelte 5。コンパイル時に軽量なコードへ落ちるため、観測対象のページへの負荷を抑えつつ、リッチなフローティングUIを実現
+- **非侵襲な統合** — 既存ページのスタイルと衝突しないよう配慮しながら、ドラッグ / リサイズ / ドッキング可能なウィンドウとして重ねる
+- **プラグインアーキテクチャ** — `registerPlugin` でランタイムにパネルを登録。コアは観測の土台に徹し、機能拡張は外側へ
+- **状態永続化** — `sessionStorage` でウィンドウ配置・設定を保持
+- **ビルド** — 配布用は Rollup、開発用は Vite。テストは Vitest、lint/format は Biome。アイコンは Lucide Svelte
+
+---
+
+## どんな意識で作ったか
+
+意識したのは、**コアを太らせないこと**でした。DevTools的なツールは機能を足し続けると際限なく肥大化します。OKLISHは公開APIを3つに絞り、すべての拡張をプラグイン側へ追い出すことで、「観測の土台」と「個別の機能」をきれいに分けました。
+
+Svelte 5 という比較的新しいフレームワークを採用したのも、**Next.jsに固定されず、SvelteやSolidJS、Astroといった選択肢を実地で評価する**という自分の方針の一環です。フレームワークごとの「コンパイル時最適化」「非侵襲な埋め込みやすさ」の違いを、ツールキットという題材で確かめました。
+
+---
+
+## リンク
+
+- [GitHub](https://github.com/Stasshe/OKLISH)
+
+<div align="center">
+
+---
+
+*観測する力を、ページごと持ち歩く。*
+
+**MIT License**
+
+</div>

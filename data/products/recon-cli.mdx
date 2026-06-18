@@ -1,0 +1,145 @@
+---
+id: "recon-cli"
+title: "recon-cli"
+summary: "Reconの心臓部。Rustで書かれた、Office文書の意味的バージョン管理コア。.docxをZIP+Open XMLとして解析し、Merkle構造の意味モデルとchange mapperで「文書上の意味的変化」を決定論的に生成するライブラリ＋CLI。"
+category: "CLI Tool"
+tags:
+  - Rust
+  - OOXML
+  - Version Control
+  - CLI
+  - Algorithm
+  - Library
+thumbnail: "assets/recon-cli/cover.png"
+colSpan: 3
+rowSpan: 3
+year: "2026"
+---
+
+<div align="center">
+
+# recon-cli
+
+### *文書の差分を「生成する」側の、すべて。*
+
+**Rust製。Office文書の意味的バージョン管理コアと、Git風CLI。**
+
+</div>
+
+---
+
+## ひとことで言うと
+
+recon-cli は、[[recon]] というデスクトップアプリの**エンジンルーム**です。GUIが文書差分を**見せる**側だとすれば、recon-cliは差分を**作る**側 — `.docx` を解析し、意味モデルを構築し、変化を計算する、システムの心臓部にあたります。
+
+ライブラリとして外部から呼ばれることを前提に設計され、同時に `init / add / commit / status / diff / log / restore` というGit風のCLIも提供します。GUI（Tauri）も、コマンドラインも、自動化スクリプトも、すべてこの同じコアの上に乗ります。
+
+私にとってこのリポジトリは、**「フロントエンドで得た実装経験を出発点に、低レイヤ・アルゴリズム・システム設計へ視野を広げる」**という自分のテーマを、Rustで正面から実践した場でもあります。
+
+---
+
+## なぜRustなのか
+
+文書VCSのコアに求められるのは、**単一バイナリでの配布、クロスプラットフォーム、ZIP/XML/hash処理の堅牢さ、そしてTauri GUIとの統合のしやすさ** — このすべてを満たす言語がRustでした。
+
+加えて、所有権・借用・ライフタイムという制約は、「コミットの原子性」「オブジェクトストアの不変性」「復元のバイト保証」といった、**壊れてはいけない不変条件を型で守る**のにそのまま効きます。`unwrap` / `panic!` をライブラリ本体で禁止し、エラーは `thiserror` で型として表現する。安全側に倒すべきツールにとって、これは贅沢ではなく必然でした。
+
+---
+
+## どんな課題を解決するのか
+
+<div align="center">
+
+| 技術的な難所 | recon-cliの解法 |
+|:---|:---|
+| docxの保存ごとに変わるrsid/paraId | 意味モデル生成時に「読まない」exclusion方式 |
+| 巨大文書を毎回フル比較すると遅い | BlockごとのhashによるMerkle構造で下層をスキップ |
+| fuzzy matchは誤検知が多く非決定的 | LCSはアンカー生成のみ。判定は規則ベースで決定論的 |
+| 「復元したら中身が違う」は許されない | コミットの原子性 + hash検証付きrestore |
+| 将来pptxにも対応したい | OOXML共通基盤と形式別ロジックをクレート分離 |
+
+</div>
+
+---
+
+## 何ができるのか — パイプライン
+
+recon-cliの処理は、一方向の明快なパイプラインです。
+
+```
+[original blob]
+      ↓  ZIP展開・rId解決（r:embed→media hash、r:link→URL）
+[semantic projection]   ← 文書グラフ。本文 + スタイル + メディア
+      ↓  projection diff engine（階層diff + Merkle skip）
+[ProjectionChange列]    ← 低レベルの構造差分
+      ↓  change mapper
+[ChangeEvent列]         ← 「段落変更」「画像挿入」等の意味的イベント
+      ↓
+CLI出力 / GUIへ
+```
+
+差分は文書全体を一発で取りません。**Block列 → Inline列 → 文字列**と階層を降りていき、上位hashが一致する部分は下層を丸ごとスキップします。画像・スタイル・表にはそれぞれ専用のdiffがあります。
+
+認識できない変化（unknown ProjectionChange）は黙って捨てず、projection pathつきで構造化ログ（`tracing`）に記録します。**「未知のものをサイレントに無視しない」**のも設計原則のひとつです。
+
+---
+
+## CLIコマンド
+
+```bash
+recon init [path] [--author]      # .recon/ を作成
+recon add report.docx             # blob保存 + 意味モデル生成・キャッシュ
+recon commit -m "初稿"            # 原子的にコミット、HEAD更新
+recon status                      # 作業ディレクトリ vs HEAD の差分
+recon diff [--json] [<commit>]    # ChangeEvent列を出力（JSON対応）
+recon log [-n N] [--oneline]      # コミット履歴
+recon restore <commit> <file>     # hash検証済みoriginal blobから復元
+```
+
+`--json` 出力は内部のRust型を素のまま晒さず、`diff_schema_version` を持つ**外部互換のenvelope**として整形されます。GUIはこのdiff resultを消費して描画します。
+
+---
+
+## クレート構成
+
+モノレポとして、責務ごとにクレートを分けています。OOXMLの共通処理と、形式（docx）固有のロジックを最初から分離してあるため、将来 `recon-pptx` を差し込んでも基盤を再利用できます。
+
+```
+crates/
+  recon-core/      VCSコア。object store / commit / refs / index / restore / 共通diff型
+  recon-package/   Open XML共通処理。ZIP展開・relationships解決・media抽出
+  recon-docx/      DocxProjection・docx parser・diff engine・change mapper
+  recon-pptx/      （将来）pptx対応の差し込み口
+  recon-cli/       init/add/commit/status/diff/log/restore
+```
+
+依存は一方向で、循環なし（`cli → core, package, docx` / `docx → core, package` / `package → core`）。各ファイルは800行未満を厳守し、肥大化したら**行数ではなく責務**で割ります。
+
+---
+
+## 技術的な裏側
+
+- **言語** — Rust。`unsafe` 禁止、グローバルmutable state禁止、安易な `clone` 禁止。エラーは `thiserror`、CLI境界のみ `anyhow`、ライブラリ内に `anyhow::Error` を露出させない
+- **意味モデル** — 本文をParagraph / Table / SectionBreakのBlock列で表現。TableはRow > Cell > Block の再帰構造。各BlockがMerkle hashを持つ
+- **正規化** — raw XMLは書き換えない。`rsid` / `paraId` / `textId` / `wp:docPr@id` / `w:proofErr` / `lastRenderedPageBreak` などWord起源・不安定な情報を抽出時に除外
+- **rId解決** — `r:embed` は参照先コンテンツのSHA-256に変換、`r:link` はURL文字列として保持。rId値そのものはモデルに残さない
+- **ストレージ** — コンテンツアドレスのオブジェクトストア（immutable）。意味モデルはzstd圧縮JSONでpart分割キャッシュ。本文だけ変わればbody_hashのみ更新し他partは再利用
+- **品質** — `cargo fmt` / `cargo clippy -D warnings` / `cargo test` をゲートに。正常系に加え、空入力・巨大入力・不正形式・境界値を異常系テストで担保（`tempfile` / `insta`）
+
+---
+
+## なぜ作ったか
+
+policyとして掲げていることがあります — **「AIが局所的な実装に強い時代に、人間が担うべきは、AIの視野が届かない広いコンテキストと、低レイヤの妥当性を批判的に評価する力だ」**。
+
+その力を本当に持つには、フレームワークが抽象化してくれる「裏側」 — メモリ、所有権、ファイルシステム、hash、原子的書き込み — を自分の手で扱える必要があります。recon-cliは、フロントエンド開発で曖昧なままにしてきたその地盤を、**docxという具体的で逃げ場のない題材**で固めるために選んだ実装です。
+
+「動く」ではなく「壊れないことが型と設計で保証されている」。recon-cliで目指したのは、その水準です。
+
+<div align="center">
+
+---
+
+*差分を見せるのはGUIの仕事。差分が正しいことを保証するのは、ここの仕事。*
+
+</div>

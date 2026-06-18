@@ -1,0 +1,112 @@
+---
+id: "latexium"
+title: "Latexium"
+summary: "LaTeXの数式を構文木へ解析し、展開・因数分解・評価を行うTypeScriptライブラリ。答えだけでなく、計算の途中過程を step-by-step で出力するのが核。数式処理を「結果」ではなく「過程」として扱う。"
+category: "Developer Tool"
+tags:
+  - TypeScript
+  - LaTeX
+  - AST
+  - CAS
+  - Algorithm
+  - npm
+thumbnail: "assets/latexium/cover.png"
+colSpan: 3
+rowSpan: 2
+year: "2025"
+---
+
+<div align="center">
+
+# Latexium
+
+### *答えだけでなく、「どう解いたか」を返す数式エンジン。*
+
+**LaTeX数式を解析・変形するTypeScriptライブラリ。**
+
+</div>
+
+---
+
+## ひとことで言うと
+
+Latexium は、`(x+1)(x+2)` のようなLaTeX数式の文字列を**抽象構文木（AST）**へ解析し、その上で**展開・因数分解・評価**を行うTypeScriptライブラリです。
+
+最大の特徴は、**計算過程を `steps` 配列として返す**こと。多くの数式処理系が「答え」だけを返すのに対し、Latexiumは「どういう手順でその答えに至ったか」を構造化して吐き出します。デバッグにも、教育用途にも、計算の検証にも使える設計です。
+
+```ts
+import { parseLatex, analyze } from "latexium";
+
+const ast = parseLatex("(x+1)(x+2)").ast;
+const result = analyze(ast, { task: "distribute" });
+
+result.value;  // "x^2 + 3x + 2"
+result.steps;  // ["Expand: (x+1)(x+2)", "Step 1: x*(x+2) = x^2 + 2x", ...]
+```
+
+---
+
+## なぜ「過程」にこだわるのか
+
+数式処理系をブラックボックスとして使うと、出てきた答えが正しいかは「信じる」しかありません。けれど学習の場面でも、自分の実装を検証する場面でも、本当に欲しいのは**「なぜその答えになるのか」**です。
+
+Latexiumの `steps` は、その問いに答えます。因数分解なら、共通因数の抽出、パターン認識による二次式の分解、部分式への再帰的な適用 — その一段一段が、入れ子構造のログとして残ります。
+
+```json
+"steps": [
+  "Starting factorization of: x^{2} + 2x - 3",
+  "PatternRecognitionStrategy: Applied pattern 'quadratic-factorization'.",
+  "✓ Applied pattern-recognition: (x - 1)(x + 3)",
+  "Final factored form: x(x - 1)(x + 3)"
+]
+```
+
+これは、[[fluxa-webcp]] が「コードの実行過程を見せる」ことに賭けたのと同じ思想です。**結果ではなく過程を観測可能にする** — 私のツールに通底するテーマのひとつです。
+
+---
+
+## 何ができるのか
+
+`analyze(ast, { task })` で、現在サポートするタスク:
+
+- **`distribute`** — 積や累乗を展開（`(x+1)(x+2)` → `x^2 + 3x + 2`）
+- **`factor`** — 多項式の因数分解。パターン認識に加え、LLL・Berlekamp-Zassenhaus といった本格的な因数分解アルゴリズムの実装に取り組み中
+- **`evaluate`** — 数値評価（`2^3 + 1` → `9`）
+
+すべてのタスクが `value`（結果）と `steps`（過程）を返し、完全なTypeScript型定義を備えます。
+
+> **開発中であることを隠さない:** 微分・積分・極限（`\lim`）・階乗簡約などは未対応で開発中。LLL/BZ因数分解も現状は完全には機能しません。`tests/master.test.mjs` に実際に通るケースを正直に記載しています。**「できること」と「まだできないこと」の境界を明示する**のは、ライブラリ作者の誠実さだと考えています。
+
+---
+
+## 技術的な裏側
+
+- **言語** — TypeScript。LaTeX文字列 → AST → 解析、という一方向のパイプライン
+- **パーサ** — `parseLatex(expression)` がLaTeX数式をASTへ変換。`x^{3} + 2x^{2} - 3x` のような記法を構造として扱う
+- **因数分解戦略** — パターン認識（quadratic-factorization 等）を第一手とし、共通因数抽出・部分式への再帰適用を組み合わせる戦略パターン構成
+- **step出力** — 各変形を入れ子配列としてログ化。`overlapSimplify` のような統合簡約パスが、内部で何をしたかを階層的に記録
+- **配布** — `npm install latexium` で利用可能。テストは `tests/master.test.mjs` にエッジケースを含めて集約
+
+---
+
+## なぜ作ったか
+
+数式を「計算するもの」ではなく「変形の過程を観測するもの」として扱いたい、という動機から始めました。とくに因数分解のような問題は、答えよりも**「どの戦略がなぜ効いたか」**の方が学びとして価値があります。
+
+同時にこれは、**LLLやBerlekamp-Zassenhausといった、計算機代数の古典的アルゴリズムを自分の手で実装する**という、低レイヤ・アルゴリズムへの視野を広げる試みでもあります。フロントエンドの抽象化の外側にある「数学そのものの計算手続き」を、逃げずに実装し切ることを目指しているプロジェクトです。
+
+---
+
+## リンク
+
+- [GitHub](https://github.com/Stasshe/Latexium)
+
+<div align="center">
+
+---
+
+*数式の答えは一行。でも、過程には全部が書いてある。*
+
+**MIT License**
+
+</div>
