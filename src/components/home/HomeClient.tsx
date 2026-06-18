@@ -200,8 +200,11 @@ export default function HomeClient({ products, indexItems, totalProducts }: Home
     <div ref={mainRef}>
       <div ref={cursorRef} className="custom-cursor" />
 
-      <div className="page-loader">
-        <span className="page-loader-text" style={{ opacity: 0, transform: "translateY(20px)" }}>
+      <div className="page-loader fixed inset-0 z-[10000] flex items-center justify-center bg-dark">
+        <span
+          className="page-loader-text font-serif text-[clamp(1.6rem,3vw,2.6rem)] font-bold tracking-[0.08em] text-white"
+          style={{ opacity: 0, transform: "translateY(20px)" }}
+        >
           Stasshe
         </span>
       </div>

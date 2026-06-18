@@ -1,6 +1,7 @@
 import { SiteFooter } from "@/components/shared/SiteFooter";
 import { SiteNav } from "@/components/shared/SiteNav";
 import { getAllProductsFromMdx, getProductById } from "@/lib/mdx";
+import { labelClass } from "@/lib/styles";
 import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -51,7 +52,7 @@ export default async function ProductPage({ params }: { params: MaybePromise<{ i
         <div className="product-detail-hero-inner">
           <Link href="/products" className="product-detail-back">
             <ArrowLeft size={16} className="back-icon" />
-            <span className="label">Products</span>
+            <span className={labelClass}>Products</span>
           </Link>
 
           {/* Meta: category + year */}

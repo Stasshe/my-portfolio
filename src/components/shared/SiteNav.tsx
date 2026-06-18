@@ -1,5 +1,6 @@
 "use client";
 
+import { cx } from "@/lib/styles";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
@@ -29,18 +30,29 @@ export function SiteNav({
   const menuOpen = menuOpenProp ?? menuOpenState;
   const setMenuOpen = setMenuOpenProp ?? setMenuOpenState;
   const resolvedTheme = theme ?? (solid ? "light" : "light");
+  const isDark = resolvedTheme === "dark";
+  const navLinkClass =
+    "relative cursor-pointer py-1 font-sans text-[0.78rem] font-medium uppercase tracking-[0.1em] text-inherit transition-colors duration-[400ms] ease-out-expo after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-brand after:transition-[width] after:duration-[400ms] after:ease-out-expo hover:after:w-full";
 
   return (
     <>
-      <nav className={`nav theme-${resolvedTheme}`}>
-        <div className="nav-inner">
-          <Link href="/" className="nav-logo">
+      <nav
+        className={cx(
+          "relative z-[100] w-full border-b",
+          isDark ? "border-line-dark bg-dark text-white" : "border-line bg-light text-dark",
+        )}
+      >
+        <div className="mx-auto flex max-w-[var(--container-max)] items-center justify-between px-[var(--container-pad)] py-3.5">
+          <Link
+            href="/"
+            className="cursor-pointer font-serif text-[1.2rem] font-bold tracking-[0.01em] text-inherit transition-opacity duration-[400ms] ease-out-expo hover:opacity-60"
+          >
             Stasshe
           </Link>
 
-          <div className="nav-links">
+          <div className="hidden items-center gap-[1.9rem] md:flex">
             {NAV_LINKS.map((link) => (
-              <Link key={link.href} href={link.href} className="nav-link">
+              <Link key={link.href} href={link.href} className={navLinkClass}>
                 {link.label}
               </Link>
             ))}
@@ -48,32 +60,47 @@ export function SiteNav({
               href="https://github.com/Stasshe"
               target="_blank"
               rel="noopener noreferrer"
-              className="nav-link nav-link--accent"
+              className={cx(navLinkClass, isDark ? "text-brand" : "text-dark-accent")}
             >
               GitHub ↗
             </a>
           </div>
 
           <button
-            className="nav-menu-btn"
+            className="relative z-[1001] flex cursor-pointer items-center justify-center p-1 text-inherit md:hidden"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             type="button"
           >
-            {menuOpen ? <X className="menu-icon" /> : <Menu className="menu-icon" />}
+            {menuOpen ? (
+              <X className="h-6 w-6 transition-transform duration-300" />
+            ) : (
+              <Menu className="h-6 w-6 transition-transform duration-300" />
+            )}
           </button>
         </div>
       </nav>
 
-      <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
-        <Link href="/" className="nav-link" onClick={() => setMenuOpen(false)}>
+      <div
+        className={cx(
+          "fixed inset-0 z-[999] flex flex-col items-center justify-center gap-[1.8rem] bg-dark text-white transition-opacity duration-[400ms] md:hidden",
+          menuOpen
+            ? "pointer-events-auto visible opacity-100"
+            : "pointer-events-none invisible opacity-0",
+        )}
+      >
+        <Link
+          href="/"
+          className={cx(navLinkClass, "text-[1.1rem]")}
+          onClick={() => setMenuOpen(false)}
+        >
           Home
         </Link>
         {NAV_LINKS.map((link) => (
           <Link
             key={link.href}
             href={link.href}
-            className="nav-link"
+            className={cx(navLinkClass, "text-[1.1rem]")}
             onClick={() => setMenuOpen(false)}
           >
             {link.label}
@@ -83,7 +110,7 @@ export function SiteNav({
           href="https://github.com/Stasshe"
           target="_blank"
           rel="noopener noreferrer"
-          className="nav-link nav-link--accent"
+          className={cx(navLinkClass, "text-[1.1rem] text-brand")}
         >
           GitHub ↗
         </a>
