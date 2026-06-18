@@ -53,6 +53,7 @@ export default function ProductsClient({ initialProducts, initialCategories }: P
         return (b.year ?? "").localeCompare(a.year ?? "");
       });
   }, [initialProducts, activeCategory, searchQuery]);
+  const productAnimationKey = filteredProducts.map((item) => item.id).join("|");
 
   const handleCategoryClick = useCallback((cat: string) => {
     setActiveCategory(cat);
@@ -66,6 +67,8 @@ export default function ProductsClient({ initialProducts, initialCategories }: P
 
   // animate on mount / filter
   useEffect(() => {
+    if (!productAnimationKey) return;
+
     const ctx = gsap.context(() => {
       const items = pageRef.current?.querySelectorAll(".products-grid-item") ?? [];
       gsap.fromTo(
@@ -76,7 +79,7 @@ export default function ProductsClient({ initialProducts, initialCategories }: P
     }, pageRef);
 
     return () => ctx.revert();
-  }, [filteredProducts]);
+  }, [productAnimationKey]);
 
   return (
     <div ref={pageRef} className="relative min-h-screen bg-light">

@@ -1,5 +1,3 @@
-import Link from "next/link";
-import type { RefObject } from "react";
 import {
   bodyTextClass,
   containerClass,
@@ -9,6 +7,8 @@ import {
   ctaOutlineClass,
   labelClass,
 } from "@/lib/styles";
+import Link from "next/link";
+import type { RefObject } from "react";
 
 type HeroSectionProps = {
   heroRef: RefObject<HTMLElement | null>;
@@ -31,10 +31,14 @@ export function HeroSection({ heroRef }: HeroSectionProps) {
         <div id="hero-content" className={`${containerClass} relative z-[1]`}>
           <h1 className="font-serif text-[clamp(2.5rem,8.2vw,7.75rem)] font-black leading-[0.98] tracking-[-0.02em] max-sm:text-[2.35rem] max-sm:leading-[1.05] max-[380px]:text-[1.85rem]">
             <span id="hero-title-span-0" className="block whitespace-nowrap">
-              <span className="text-brand">現場</span>に向き合い、<br />判断し、
+              <span className="text-brand">現場</span>に向き合い、
+              <br />
+              判断し、
             </span>
             <span id="hero-title-span-1" className="block whitespace-nowrap">
-              <span className="text-brand">使われ続ける</span><br />ものをつくる。
+              <span className="text-brand">使われ続ける</span>
+              <br />
+              ものをつくる。
             </span>
           </h1>
 
@@ -81,7 +85,10 @@ export function HeroSection({ heroRef }: HeroSectionProps) {
         </div>
       </section>
 
-      <section className="stat-bar border-b-2 border-dark bg-brand text-dark" aria-label="In numbers">
+      <section
+        className="stat-bar border-b-2 border-dark bg-brand text-dark"
+        aria-label="In numbers"
+      >
         <div
           className={`${containerClass} flex min-h-[76px] flex-wrap items-center gap-x-11 gap-y-4 py-0 max-sm:flex-col max-sm:items-start max-sm:gap-2`}
         >
@@ -89,7 +96,10 @@ export function HeroSection({ heroRef }: HeroSectionProps) {
             In numbers —
           </span>
           {STATS.map((stat) => (
-            <span className="stat-bar-item inline-flex items-baseline gap-2 text-[1.05rem]" key={stat.label}>
+            <span
+              className="stat-bar-item inline-flex items-baseline gap-2 text-[1.05rem]"
+              key={stat.label}
+            >
               <b className="font-serif text-[1.6rem] font-black leading-none">{stat.value}</b>
               <span className="text-dark/80">{stat.label}</span>
             </span>

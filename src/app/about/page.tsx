@@ -114,7 +114,10 @@ export default function AboutPage() {
 
           <ol className="flex max-w-[760px] flex-col gap-[var(--space-lg)]">
             {TIMELINE.map((item) => (
-              <li className="flex items-start gap-[var(--space-md)] max-sm:gap-[var(--space-sm)]" key={item.index}>
+              <li
+                className="flex items-start gap-[var(--space-md)] max-sm:gap-[var(--space-sm)]"
+                key={item.index}
+              >
                 <span className="w-14 flex-shrink-0 font-accent text-[1.6rem] leading-[1.2] text-dark-accent max-sm:w-10 max-sm:text-[1.3rem]">
                   {item.index}
                 </span>
@@ -140,7 +143,9 @@ export default function AboutPage() {
       <section className={`${sectionClass} bg-dark text-white`}>
         <div className={containerClass}>
           <span className={`${labelClass} mb-4 block text-brand`}>Case Studies</span>
-          <h2 className={`${headingLgClass} mb-[var(--space-lg)] max-w-[22ch] text-white max-[900px]:max-w-full`}>
+          <h2
+            className={`${headingLgClass} mb-[var(--space-lg)] max-w-[22ch] text-white max-[900px]:max-w-full`}
+          >
             設計で何を優先したか。
           </h2>
 
@@ -152,7 +157,9 @@ export default function AboutPage() {
                 key={item.title}
               >
                 <span className={`${labelClass} mb-2 block text-brand`}>{item.type}</span>
-                <h3 className={`${headingSmClass} mb-[var(--space-sm)] text-white`}>{item.title}</h3>
+                <h3 className={`${headingSmClass} mb-[var(--space-sm)] text-white`}>
+                  {item.title}
+                </h3>
                 <dl className="flex flex-col gap-[0.85rem]">
                   <div>
                     <dt className={`${labelClass} mb-1 text-brand`}>Problem</dt>
@@ -176,7 +183,9 @@ export default function AboutPage() {
       <section className={sectionClass}>
         <div className={containerClass}>
           <span className={`${labelClass} mb-4 block text-dark-accent`}>Philosophy</span>
-          <h2 className={`${headingLgClass} mb-[var(--space-lg)] max-w-[22ch] text-dark max-[900px]:max-w-full`}>
+          <h2
+            className={`${headingLgClass} mb-[var(--space-lg)] max-w-[22ch] text-dark max-[900px]:max-w-full`}
+          >
             情報系人材としての在り方。
           </h2>
 
@@ -186,7 +195,9 @@ export default function AboutPage() {
 
           <div className="my-[var(--space-lg)] grid grid-cols-2 gap-[var(--space-xl)] max-[900px]:grid-cols-1">
             <div>
-              <h3 className={`${headingSmClass} mb-[var(--space-sm)] text-dark`}>Where I&apos;m strong</h3>
+              <h3 className={`${headingSmClass} mb-[var(--space-sm)] text-dark`}>
+                Where I&apos;m strong
+              </h3>
               <ul className="flex flex-col gap-[0.7rem]">
                 {STRENGTHS.map((item) => (
                   <li key={item} className="flex items-start gap-2 text-dark/80">
@@ -248,7 +259,10 @@ export default function AboutPage() {
               </h2>
               <ul className="flex flex-col gap-[0.85rem]">
                 {NOW.map((item) => (
-                  <li key={item} className={`${bodyTextSmClass} border-l-2 border-brand pl-4 text-white/80`}>
+                  <li
+                    key={item}
+                    className={`${bodyTextSmClass} border-l-2 border-brand pl-4 text-white/80`}
+                  >
                     {item}
                   </li>
                 ))}

@@ -2,7 +2,8 @@ export function cx(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const containerClass = "mx-auto w-full max-w-[var(--container-max)] px-[var(--container-pad)]";
+export const containerClass =
+  "mx-auto w-full max-w-[var(--container-max)] px-[var(--container-pad)]";
 
 export const sectionClass = "relative py-[var(--section-padding)]";
 
@@ -26,11 +27,9 @@ export const bodyTextSmClass = "font-sans text-body-text-sm leading-[1.85]";
 export const ctaButtonClass =
   "group relative inline-flex items-center gap-[0.65rem] overflow-hidden border-[1.5px] border-dark bg-transparent px-[1.7rem] py-[0.85rem] font-sans text-[0.75rem] font-medium uppercase tracking-[0.12em] text-dark transition-[color,border-color] duration-[400ms] ease-out-expo before:absolute before:inset-0 before:origin-left before:scale-x-0 before:bg-brand before:transition-transform before:duration-500 before:ease-out-expo hover:border-dark hover:text-dark hover:before:scale-x-100";
 
-export const ctaLightClass =
-  "border-white/40 text-white hover:border-brand hover:text-dark";
+export const ctaLightClass = "border-white/40 text-white hover:border-brand hover:text-dark";
 
-export const ctaOutlineClass =
-  "before:hidden hover:bg-brand";
+export const ctaOutlineClass = "before:hidden hover:bg-brand";
 
 export const ctaContentClass = "relative z-[1]";
 

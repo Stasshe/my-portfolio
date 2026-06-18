@@ -1,5 +1,3 @@
-import { Compass, Layers, ShieldCheck } from "lucide-react";
-import type { RefObject } from "react";
 import {
   bodyTextClass,
   bodyTextSmClass,
@@ -8,6 +6,8 @@ import {
   headingSmClass,
   labelClass,
 } from "@/lib/styles";
+import { Compass, Layers, ShieldCheck } from "lucide-react";
+import type { RefObject } from "react";
 
 type PrinciplesSectionProps = {
   principlesRef: RefObject<HTMLElement | null>;

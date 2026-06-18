@@ -1,18 +1,18 @@
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
-import type { RefObject } from "react";
 import {
   bodyTextSmClass,
   containerClass,
   ctaArrowClass,
   ctaButtonClass,
   ctaContentClass,
+  cx,
   headingMdClass,
   headingSmClass,
   inkLinkClass,
   labelClass,
-  cx,
 } from "@/lib/styles";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import type { RefObject } from "react";
 import type { IndexItem, Product } from "../data";
 
 type WorksSectionProps = {
@@ -49,7 +49,9 @@ export function WorksSection({ worksRef, products, indexItems, totalProducts }: 
                 {String(i + 1).padStart(2, "0")}
               </span>
               <h3 className={`${headingSmClass} mt-3 text-dark`}>{product.title}</h3>
-              <span className={`${labelClass} mt-2 block text-dark-accent`}>{product.category}</span>
+              <span className={`${labelClass} mt-2 block text-dark-accent`}>
+                {product.category}
+              </span>
               <p className={`${bodyTextSmClass} mt-3 max-w-[42em] text-light-accent`}>
                 {product.description}
               </p>
@@ -81,7 +83,9 @@ export function WorksSection({ worksRef, products, indexItems, totalProducts }: 
       <div className={`${containerClass} mt-[clamp(3rem,7vw,6rem)]`}>
         <div className="mb-[clamp(1.25rem,2.5vw,1.75rem)] flex flex-wrap items-baseline justify-between gap-4">
           <h2 className={`${headingMdClass} text-dark`}>プロダクト・インデックス</h2>
-          <span className="font-accent text-base italic text-light-accent">{totalProducts}+ projects</span>
+          <span className="font-accent text-base italic text-light-accent">
+            {totalProducts}+ projects
+          </span>
         </div>
 
         <div className="border-t-2 border-dark">

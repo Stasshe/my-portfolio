@@ -10,7 +10,7 @@ import { notFound } from "next/navigation";
 type MaybePromise<T> = T | Promise<T>;
 
 function resolveMaybe<T>(v: MaybePromise<T>): Promise<T> {
-  return Promise.resolve(v as any) as Promise<T>;
+  return Promise.resolve(v);
 }
 
 export async function generateStaticParams() {
@@ -40,8 +40,10 @@ export default async function ProductPage({ params }: { params: MaybePromise<{ i
   const product = getProductById(id);
   if (!product) return notFound();
 
-  const hasThumbnail = product.thumbnail && product.thumbnail.length > 0;
-  const hasTags = product.tags && product.tags.length > 0;
+  const tags = product.tags ?? [];
+  const thumbnail = product.thumbnail ?? "";
+  const hasThumbnail = thumbnail.length > 0;
+  const hasTags = tags.length > 0;
 
   return (
     <div className="product-detail-root">
@@ -72,7 +74,7 @@ export default async function ProductPage({ params }: { params: MaybePromise<{ i
           {/* Tags */}
           {hasTags && (
             <div className="product-detail-tags">
-              {product.tags!.map((tag) => (
+              {tags.map((tag) => (
                 <span key={tag} className="product-detail-tag">
                   {tag}
                 </span>
@@ -90,7 +92,7 @@ export default async function ProductPage({ params }: { params: MaybePromise<{ i
       {/* ── Thumbnail ── */}
       {hasThumbnail && (
         <div className="product-detail-thumbnail-wrap">
-          <img className="product-detail-thumbnail" src={product.thumbnail!} alt={product.title} />
+          <img className="product-detail-thumbnail" src={thumbnail} alt={product.title} />
         </div>
       )}
 
@@ -98,6 +100,7 @@ export default async function ProductPage({ params }: { params: MaybePromise<{ i
       <article className="product-detail-article">
         <div
           className="product-detail-prose"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: Product MDX is rendered to static HTML at build time.
           dangerouslySetInnerHTML={{ __html: product.contentHtml }}
         />
       </article>
