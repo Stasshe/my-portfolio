@@ -3,8 +3,8 @@
    ============================================ */
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: minmax(80px, auto);
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: clamp(190px, 19vw, 240px);
   grid-auto-flow: dense;
   gap: 1rem;
 }
@@ -16,7 +16,6 @@
   overflow: hidden;
   cursor: pointer;
   perspective: 800px;
-  min-height: 200px;
   transition: box-shadow 0.5s var(--ease-out-expo);
 }
 
@@ -98,6 +97,22 @@
   border-radius: 100px;
   font-size: 0.6rem;
   color: var(--card-text-color, var(--color-light));
+}
+
+.products-grid-item-pin {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: var(--color-brand);
+  color: var(--color-dark);
+  padding: 0.25rem 0.6rem;
+  border-radius: 100px;
+  font-family: var(--font-sans);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .products-grid-item-bottom {
@@ -231,26 +246,11 @@
    Products Page — Responsive
    ============================================ */
 
-/* Tablet */
+/* Tablet — same tile spans, fewer columns */
 @media (max-width: 1024px) {
   .products-grid {
-    grid-template-columns: repeat(6, 1fr);
-    grid-auto-rows: minmax(100px, auto);
-  }
-
-  .products-grid-item {
-    grid-column: span 3 !important;
-    grid-row: span 2 !important;
-  }
-
-  .products-grid-item:first-child {
-    grid-column: span 6 !important;
-    grid-row: span 3 !important;
-  }
-
-  .products-grid-item:nth-child(4) {
-    grid-column: span 6 !important;
-    grid-row: span 2 !important;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: clamp(180px, 32vw, 230px);
   }
 
   /* Always show bottom content on tablet */
@@ -272,10 +272,8 @@
     gap: 0.75rem;
   }
 
-  /* All cards same size, ordered top-to-bottom by product (colSpan * rowSpan) desc */
-  .products-grid-item,
-  .products-grid-item:first-child,
-  .products-grid-item:nth-child(4) {
+  /* All cards same size, ordered top-to-bottom (pinned first) */
+  .products-grid-item {
     grid-column: span 1 !important;
     grid-row: span 1 !important;
     min-height: 260px;

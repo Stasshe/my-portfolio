@@ -23,6 +23,43 @@ type Props = {
   initialCategories: string[];
 };
 
+// Normalize 12-col authored spans into a coarse 4-col tile (1x1 / 1x2 / 2x2).
+function tileSpan(item: MdxProduct): { col: number; row: number } {
+  if (item.pinned) return { col: 2, row: 2 };
+  const col = (item.colSpan ?? 1) >= 4 ? 2 : 1;
+  const row = (item.rowSpan ?? 1) >= 3 ? 2 : 1;
+  return { col, row };
+}
+
+const isBigTile = (item: MdxProduct) => {
+  const t = tileSpan(item);
+  return t.col === 2 && t.row === 2;
+};
+
+// Spread 2x2 tiles evenly through the list so they don't all cluster at the top.
+function weaveTiles(items: MdxProduct[]): MdxProduct[] {
+  const big = items.filter(isBigTile);
+  const rest = items.filter((it) => !isBigTile(it));
+  if (big.length === 0) return rest;
+
+  const out: MdxProduct[] = [];
+  const gap = Math.max(1, Math.ceil(rest.length / (big.length + 1)));
+  let bi = 0;
+  rest.forEach((it, i) => {
+    const next = big[bi];
+    if (i % gap === 0 && next) {
+      out.push(next);
+      bi++;
+    }
+    out.push(it);
+  });
+  for (; bi < big.length; bi++) {
+    const tail = big[bi];
+    if (tail) out.push(tail);
+  }
+  return out;
+}
+
 export default function ProductsClient({ initialProducts, initialCategories }: Props) {
   const pageRef = useRef<HTMLDivElement | null>(null);
   const cursorRef = useRef<HTMLDivElement | null>(null);
@@ -34,7 +71,7 @@ export default function ProductsClient({ initialProducts, initialCategories }: P
   useCustomCursor(cursorRef, { extraSelectors: ".products-grid-item" });
 
   const filteredProducts = useMemo(() => {
-    return initialProducts
+    const filtered = initialProducts
       .filter((item) => {
         const matchesCategory = activeCategory === "All" || item.category === activeCategory;
         const q = searchQuery.trim().toLowerCase();
@@ -45,13 +82,15 @@ export default function ProductsClient({ initialProducts, initialCategories }: P
           (item.tags || []).some((t) => t.toLowerCase().includes(q)) ||
           (item.category || "").toLowerCase().includes(q);
         return matchesCategory && matchesSearch;
-      })
-      .sort((a, b) => {
-        const sizeA = (a.colSpan ?? 1) * (a.rowSpan ?? 1);
-        const sizeB = (b.colSpan ?? 1) * (b.rowSpan ?? 1);
-        if (sizeB !== sizeA) return sizeB - sizeA;
-        return (b.year ?? "").localeCompare(a.year ?? "");
       });
+
+    const byArea = (a: MdxProduct, b: MdxProduct) =>
+      (b.colSpan ?? 1) * (b.rowSpan ?? 1) - (a.colSpan ?? 1) * (a.rowSpan ?? 1);
+
+    const pinned = filtered.filter((it) => it.pinned).sort(byArea);
+    const rest = filtered.filter((it) => !it.pinned).sort(byArea);
+
+    return [...pinned, ...weaveTiles(rest)];
   }, [initialProducts, activeCategory, searchQuery]);
   const productAnimationKey = filteredProducts.map((item) => item.id).join("|");
 
@@ -196,9 +235,8 @@ function ProductCard({ item }: { item: MdxProduct }) {
     }
     : { background: "linear-gradient(135deg,#f3f4f6,#e5e7eb)" };
 
-  const col = item.colSpan ?? 1;
-  const row = item.rowSpan ?? 1;
-  const sizeClass = col <= 2 ? "span-sm" : col <= 3 ? "span-md" : "span-lg";
+  const { col, row } = tileSpan(item);
+  const sizeClass = col === 2 ? (row === 2 ? "span-lg" : "span-md") : "span-sm";
 
   return (
     <div
@@ -222,6 +260,7 @@ function ProductCard({ item }: { item: MdxProduct }) {
           <div className="products-grid-item-content">
             <div className="products-grid-item-top">
               <span className={`products-grid-item-year ${labelClass}`}>{item.year}</span>
+              {item.pinned && <span className="products-grid-item-pin">★ Pinned</span>}
               <span className={`products-grid-item-category ${labelClass}`}>{item.category}</span>
             </div>
 

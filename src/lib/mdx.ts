@@ -12,6 +12,7 @@ export type MdxProduct = {
   thumbnail?: string;
   colSpan?: number;
   rowSpan?: number;
+  pinned?: boolean;
   year?: string;
   alwaysShowSummary?: boolean;
   textColor?: string;
@@ -83,6 +84,7 @@ export function getAllProductsFromMdx(): MdxProduct[] {
       thumbnail: resolveImagePath(String(data.thumbnail ?? "")),
       colSpan: Number(data.colSpan ?? 1),
       rowSpan: Number(data.rowSpan ?? 1),
+      pinned: Boolean(data.pinned ?? false),
       year: String(data.year ?? ""),
       alwaysShowSummary: Boolean(data.alwaysShowSummary ?? false),
       textColor: data.textColor ? String(data.textColor) : undefined,
