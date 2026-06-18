@@ -53,5 +53,9 @@ public/data/
 
 old-data/
 
-.claude/
+.claude/skills/ui-ux-pro-max
+.claude/settings.json
+.claude/settings.local.json
 .codex/skills/ui-ux-pro-max
+
+tmp
