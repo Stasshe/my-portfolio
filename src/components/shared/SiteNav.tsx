@@ -38,7 +38,7 @@ export function SiteNav({
     <>
       <nav
         className={cx(
-          "relative z-[100] w-full border-b",
+          "fixed left-0 top-0 z-[500] w-full border-b",
           isDark ? "border-line-dark bg-dark text-white" : "border-line bg-light text-dark",
         )}
       >
@@ -80,6 +80,7 @@ export function SiteNav({
           </button>
         </div>
       </nav>
+      <div className="h-[53px]" aria-hidden="true" />
 
       <div
         className={cx(

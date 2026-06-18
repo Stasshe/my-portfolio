@@ -36,7 +36,10 @@ export function SiteFooter() {
               ものを。
             </h2>
             <div className="mt-[var(--space-md)]">
-              <a href="mailto:hello@stasshe.com" className={`${ctaButtonClass} ${ctaLightClass}`}>
+              <a
+                href="mailto:mathfunction142857@gmail.com"
+                className={`${ctaButtonClass} ${ctaLightClass}`}
+              >
                 <span className={ctaContentClass}>Get in touch</span>
                 <ArrowRight className={ctaArrowClass} size={16} />
               </a>
@@ -66,7 +69,7 @@ export function SiteFooter() {
               >
                 GitHub
               </a>
-              <a href="mailto:hello@stasshe.com" className={footerLinkClass}>
+              <a href="mailto:mathfunction142857@gmail.com" className={footerLinkClass}>
                 Email
               </a>
             </div>
