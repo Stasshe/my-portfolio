@@ -21,23 +21,23 @@ import { useState } from "react";
 const TIMELINE = [
   {
     index: "01",
-    title: "Responsible disclosure, before it had a name",
-    body: "高校2年生の頃、出身高校の学食システムを利用する中で脆弱性の可能性に気づきました。内容を直接公開するのではなく、学校の事務を通じてEC サイト制作会社へ報告し、後日、複数の指摘を確認した旨の返信を受けました。学んだのは、自分が使うサービスに責任を持つ姿勢と、適切な相手に適切な手順で伝えることの重要性です。",
+    title: "脆弱性に気づき、正しい手順で伝えた",
+    body: "高校2年生の頃、出身高校の学食システムを利用する中で脆弱性の可能性に気づきました。内容を直接公開するのではなく、学校の事務を通じてECサイト制作会社へ報告し、後日、複数の指摘を確認した旨の返信を受けました。学んだのは、自分が使うサービスに責任を持つ姿勢と、適切な相手に適切な手順で伝えることの重要性です。",
   },
   {
     index: "02",
-    title: "30+ products, and a first for the contest",
-    body: "その後、十数個のプロダクト開発を重ね、高校3年生の頃にはU-22プログラミング・コンテスト2025で2作品が同時に事前審査を通過しました。複数作品の同時通過は確認した限り大会初です。",
+    title: "30以上のプロダクト",
+    body: "これまでに30個ほどのプロダクトを開発してきました。高校3年生の頃にはU-22プログラミング・コンテスト2025で2作品が同時に事前審査を通過。",
   },
   {
     index: "03",
-    title: "Pyxis-CodeCanvas — two awards at once",
+    title: "Pyxis-CodeCanvas — 二冠受賞",
     body: "iPad向けブラウザIDE「Pyxis-CodeCanvas」は、経済産業大臣賞〈テクノロジー部門〉とアクセンチュア賞を同時受賞。自分のPCを持たずiPadで開発していた経験から、高性能な端末がなくても本格的に開発できる環境を目指しました。現在は摂津市立第一中学校の部活動でも利用されています。",
   },
   {
     index: "04",
-    title: "Celeritas — still running at my high school",
-    body: "「Celeritas-freedom-student-council」は、出身高校のスポーツ祭運営を支援するWebシステムです。理想的な自動化ではなく、当日の急な変更に人が対応できる手動調整機能を重視して設計し、現在も実際に運用されています。",
+    title: "Celeritas — 今も母校で稼働中",
+    body: "「Celeritas-freedom-student-council」は、出身高校のスポーツ祭運営を支援するWebシステムです。理想的な自動化ではなく、当日の急な変更に人が対応できる手動調整機能を重視して設計し、現在も実際に運用されています。運営・先生・一般生徒からの評判も良好です。",
   },
 ];
 
@@ -63,6 +63,7 @@ const CASE_STUDIES = [
 ];
 
 const STRENGTHS = [
+  "目的から逆算し、妥協と断行を見極める設計判断",
   "AIに何を任せ、何を任せないかを判断する力",
   "コードベース全体の構造を把握する力",
   "機能の責任範囲・境界を考える力",
@@ -78,9 +79,16 @@ const GROWTH_AREAS = [
 ];
 
 const NOW = [
+  "Branding Hackathon の運営",
   "ハッカソンの運営・講師",
   "学生サークルでのメンター",
   "大阪府摂津市立中学校 部活動の技術顧問（教育委員会委託・不定期）",
+];
+
+const BEYOND = [
+  "小中高で自然科学系の探求に取り組み、高校ではJR四国と連携した一般販売ツアーを企画。その成果を県で発表しました。",
+  "友人と学校全体を巻き込む企画を起こし、所属していた部活の人数は15倍に。チームや組織を動かす中で、コミュニケーション能力とプレゼンスキルを磨きました。",
+  "趣味はヴァイオリン。手を出せることはすべてやってきた結果、挑戦する心と戦闘心が刻まれています。",
 ];
 
 export default function AboutPage() {
@@ -92,15 +100,15 @@ export default function AboutPage() {
 
       <header className="border-b-2 border-dark pt-[clamp(3rem,7vw,6rem)] pb-[var(--space-lg)] max-sm:pt-[clamp(2.5rem,8vw,4rem)]">
         <div className={containerClass}>
-          <span className={`${labelClass} mb-4 block text-dark-accent`}>About</span>
+          <span className={`${labelClass} mb-4 block text-dark-accent`}>About — 石田 尚幹</span>
           <h1 className={`${headingXlClass} text-dark`}>
-            What I build,
+            つくるものと、
             <br />
-            and how I{" "}
-            <span className="font-accent font-normal italic text-dark-accent">judge it.</span>
+            それを{" "}
+            <span className="font-accent font-normal italic text-dark-accent">見極める目。</span>
           </h1>
           <p className={`${bodyTextClass} mt-[var(--space-md)] max-w-[640px] text-light-accent`}>
-            身近な不便や制約を見つけ、実用性と保守性を重視して課題解決に取り組んできました。単に動くものを作るのではなく、実際の利用者が安心して使い続けられる状態まで設計することを大切にしています。趣味はヴァイオリンです。
+            身近な不便や制約を見つけ、実用性と保守性を重視して課題解決に取り組んできました。単に動くものを作るのではなく、実際の利用者が安心して使い続けられる状態まで設計することを大切にしています。これまでに30以上のプロダクトを開発。基本は個人開発ですが、チーム開発の経験もあります。
           </p>
         </div>
       </header>
@@ -189,14 +197,14 @@ export default function AboutPage() {
             情報系人材としての在り方。
           </h2>
 
-          <p className={`${bodyTextClass} mb-[var(--space-lg)] max-w-[74ch] text-dark/80`}>
+          <p className={`${bodyTextClass} mb-[var(--space-lg)] text-dark/80`}>
             コード生成AIの発展で、実装の速度は大きく向上しました。しかし、実装が速くなることは、必ずしも良い設計につながりません。コードはプロジェクトの目的、利用者の要求、過去の設計判断、将来の保守方針と結びついています。AIの出力が一見正しく動いても、責務として妥当か、後から変更しやすいか、安全性や性能を損なわないかは、人間が判断する必要があります。AIの弱点は知識の不足ではなく、文脈を広く保ち続けることの難しさにあると考えています。
           </p>
 
           <div className="my-[var(--space-lg)] grid grid-cols-2 gap-[var(--space-xl)] max-[900px]:grid-cols-1">
             <div>
               <h3 className={`${headingSmClass} mb-[var(--space-sm)] text-dark`}>
-                Where I&apos;m strong
+                強みがあるところ
               </h3>
               <ul className="flex flex-col gap-[0.7rem]">
                 {STRENGTHS.map((item) => (
@@ -209,7 +217,7 @@ export default function AboutPage() {
             </div>
             <div>
               <h3 className={`${headingSmClass} mb-[var(--space-sm)] text-dark`}>
-                Where I&apos;m building
+                これから固めるところ
               </h3>
               <p className={`${bodyTextSmClass} mb-[var(--space-sm)] text-light-accent`}>
                 この半年はAIを活用した開発が中心になり、ゼロから細かいコードを書く力は相対的に弱くなったと感じています。一方で、AIに任せる範囲を判断する力や、コードベース全体を俯瞰する力は伸びました。今は次の領域の基礎を学び直しています。
@@ -227,9 +235,28 @@ export default function AboutPage() {
             </div>
           </div>
 
-          <p className={`${bodyTextClass} mb-[var(--space-lg)] max-w-[74ch] text-dark/80`}>
+          <p className={`${bodyTextClass} mb-[var(--space-lg)] text-dark/80`}>
             目指しているのは、AIより詳しくなることでも、ミクロな実装でAIと競うことでもありません。AIやフレームワークが扱う局所的な文脈を超えて、要件・設計・実装・評価・運用を連続的な視点で観察し、判断できる情報系人材になることです。Web開発で得た実装経験を出発点に、計算機科学の基礎・低レイヤ・セキュリティ・ソフトウェア設計を学び、AIに適切なコンテキストを与え、その出力を批判的に評価できる人材を目指します。ミクロからマクロへ。
           </p>
+        </div>
+      </section>
+
+      <section className={sectionClass}>
+        <div className={containerClass}>
+          <span className={`${labelClass} mb-4 block text-dark-accent`}>Beyond Code</span>
+          <h2 className={`${headingLgClass} mb-[var(--space-lg)] max-w-[22ch] text-dark`}>
+            コードの外で育ったもの。
+          </h2>
+          <ul className="flex max-w-[760px] flex-col gap-[var(--space-md)]">
+            {BEYOND.map((item) => (
+              <li
+                key={item}
+                className={`${bodyTextClass} border-l-2 border-dark-accent pl-[var(--space-md)] text-dark/80`}
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
@@ -238,9 +265,13 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 gap-[var(--space-xl)] max-[900px]:grid-cols-1">
             <div>
               <span className={`${labelClass} mb-4 block text-brand`}>Technical Base</span>
-              <h2 className={`${headingLgClass} mb-[var(--space-lg)] max-w-[22ch] text-white`}>
-                よく使う技術。
+              <h2 className={`${headingLgClass} mb-[var(--space-md)] max-w-[22ch] text-white`}>
+                よく使う技術
               </h2>
+              <p className={`${bodyTextSmClass} mb-[var(--space-md)] max-w-[52ch] text-white/70`}>
+                Next.js を中心に Svelte / SolidJS / Astro / Nuxt、Rust・Swift にも対応。WebAssembly・Web
+                Worker・Audio Worklet など Web の最先端技術と、React の最適化に通じています。
+              </p>
               <div className="flex flex-wrap gap-2.5">
                 {SKILLS.map((skill) => (
                   <span

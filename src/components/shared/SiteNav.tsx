@@ -15,6 +15,7 @@ type SiteNavProps = {
 };
 
 const NAV_LINKS = [
+  { href: "/", label: "Home" },
   { href: "/products", label: "Work" },
   { href: "/about", label: "About" },
   { href: "/#contact", label: "Contact" },
@@ -47,7 +48,7 @@ export function SiteNav({
             href="/"
             className="cursor-pointer font-serif text-[1.2rem] font-bold tracking-[0.01em] text-inherit transition-opacity duration-[400ms] ease-out-expo hover:opacity-60"
           >
-            Stasshe
+            石田尚幹/Stasshe
           </Link>
 
           <div className="hidden items-center gap-[1.9rem] md:flex">
