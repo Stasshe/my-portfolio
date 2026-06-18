@@ -177,7 +177,6 @@ export default function HomeClient({ products, indexItems, totalProducts }: Home
       const titleSpans = [
         document.getElementById("hero-title-span-0"),
         document.getElementById("hero-title-span-1"),
-        document.getElementById("hero-title-span-2"),
       ].filter(Boolean) as HTMLElement[];
       const subtagEls = [document.getElementById("hero-subtag")].filter(Boolean) as HTMLElement[];
       const taglineEls = [document.getElementById("hero-tagline")].filter(Boolean) as HTMLElement[];

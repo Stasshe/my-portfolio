@@ -6,6 +6,7 @@
   color: #fff;
   position: relative;
   overflow: hidden;
+  padding-top: clamp(3.25rem, 6vh, 5rem);
   padding-bottom: clamp(3rem, 7vh, 5rem);
 }
 
@@ -13,7 +14,6 @@
 .hero-content {
   position: relative;
   z-index: 1;
-  padding-top: clamp(2rem, 5vw, 3.5rem);
 }
 
 .hero-headline {
@@ -26,6 +26,7 @@
 
 .hero-headline-line {
   display: block;
+  white-space: nowrap;
 }
 
 .hero-headline-accent {
@@ -140,6 +141,15 @@
 }
 
 @media (max-width: 640px) {
+  .hero-section {
+    padding-top: clamp(4rem, 10vh, 5.75rem);
+  }
+
+  .hero-headline {
+    font-size: 2.35rem;
+    line-height: 1.05;
+  }
+
   .hero-scroll-indicator {
     display: none;
   }
@@ -148,5 +158,11 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 0.6rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-headline {
+    font-size: 1.85rem;
   }
 }

@@ -164,17 +164,16 @@
    Responsive
    ============================================ */
 @media (max-width: 768px) {
+  /* Mobile: ignore column/row layout — every card uniform, stacked top-down */
   .work-card {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
-  .work-card--reverse .work-card-text {
-    order: 2;
-  }
-
+  /* Reset reverse ordering so all cards look identical (text → visual) */
+  .work-card--reverse .work-card-text,
   .work-card--reverse .work-card-visual {
-    order: 1;
+    order: 0;
   }
 
   .works-index-row {

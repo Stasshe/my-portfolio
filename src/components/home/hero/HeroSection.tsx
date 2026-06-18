@@ -18,13 +18,10 @@ export function HeroSection({ heroRef }: HeroSectionProps) {
         <div id="hero-content" className="container hero-content">
           <h1 className="hero-headline">
             <span id="hero-title-span-0" className="hero-headline-line">
-              現場に向き合い、
+              現場に向き合い、<br />判断し、
             </span>
             <span id="hero-title-span-1" className="hero-headline-line">
-              判断し、<span className="hero-headline-accent">使われ続ける</span>
-            </span>
-            <span id="hero-title-span-2" className="hero-headline-line">
-              ものをつくる。
+              <span className="hero-headline-accent">使われ続ける</span><br />ものをつくる。
             </span>
           </h1>
 
@@ -57,7 +54,7 @@ export function HeroSection({ heroRef }: HeroSectionProps) {
           <span className="label">Scroll</span>
           <div className="hero-scroll-line" />
         </div>
-      </section>
+      </section >
 
       <section className="stat-bar" aria-label="In numbers">
         <div className="container stat-bar-inner">
