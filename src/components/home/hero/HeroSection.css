@@ -9,26 +9,6 @@
   padding-bottom: clamp(3rem, 7vh, 5rem);
 }
 
-/* ---- Meta row ---- */
-.hero-meta-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  padding: clamp(1.5rem, 3vw, 2.2rem) 0 clamp(0.8rem, 1.5vw, 1rem);
-  border-bottom: 1px solid var(--color-line-dark);
-}
-
-.hero-meta-accent {
-  font-size: 1rem;
-  color: var(--color-brand);
-}
-
-.hero-meta-name {
-  color: var(--color-muted-dark);
-}
-
 /* ---- Headline ---- */
 .hero-content {
   position: relative;
@@ -118,11 +98,12 @@
 
 .stat-bar-inner {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   flex-wrap: wrap;
-  gap: 1rem 2.75rem;
-  padding-top: 1.15rem;
-  padding-bottom: 1.15rem;
+  gap: 1rem 44px;
+  min-height: 76px;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .stat-bar-lead {

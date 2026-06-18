@@ -36,7 +36,12 @@ function withBasePath(urlPath: string): string {
 }
 
 function resolveImagePath(imagePath: string): string {
-  if (!imagePath || imagePath.startsWith("http") || imagePath.startsWith("data:") || imagePath.startsWith("blob:")) {
+  if (
+    !imagePath ||
+    imagePath.startsWith("http") ||
+    imagePath.startsWith("data:") ||
+    imagePath.startsWith("blob:")
+  ) {
     return imagePath;
   }
 

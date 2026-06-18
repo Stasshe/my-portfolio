@@ -108,7 +108,9 @@ export default function ProductsClient({ initialProducts, initialCategories }: P
             </div>
 
             <div className="products-count">
-              <span className="label">{String(filteredProducts.length).padStart(2, "0")} items</span>
+              <span className="label">
+                {String(filteredProducts.length).padStart(2, "0")} items
+              </span>
             </div>
           </div>
         </div>
@@ -163,7 +165,11 @@ function ProductCard({ item }: { item: MdxProduct }) {
   };
 
   const bgStyle: React.CSSProperties = item.thumbnail
-    ? { backgroundImage: `url(${item.thumbnail})`, backgroundSize: "cover", backgroundPosition: "center" }
+    ? {
+        backgroundImage: `url(${item.thumbnail})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }
     : { background: "linear-gradient(135deg,#f3f4f6,#e5e7eb)" };
 
   const col = item.colSpan ?? 1;
@@ -174,7 +180,11 @@ function ProductCard({ item }: { item: MdxProduct }) {
     <div
       ref={cardRef}
       className={`products-grid-item ${sizeClass} ${isHovered ? "hovered" : ""} ${item.alwaysShowSummary ? "always-show-summary" : ""}`}
-      style={{ gridColumn: `span ${col}`, gridRow: `span ${row}`, ...(item.textColor ? { "--card-text-color": item.textColor } as React.CSSProperties : {}) }}
+      style={{
+        gridColumn: `span ${col}`,
+        gridRow: `span ${row}`,
+        ...(item.textColor ? ({ "--card-text-color": item.textColor } as React.CSSProperties) : {}),
+      }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}

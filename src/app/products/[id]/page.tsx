@@ -34,9 +34,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProductPage({
-  params,
-}: { params: MaybePromise<{ id: string }> }) {
+export default async function ProductPage({ params }: { params: MaybePromise<{ id: string }> }) {
   const { id } = await resolveMaybe(params);
   const product = getProductById(id);
   if (!product) return notFound();
@@ -68,9 +66,7 @@ export default async function ProductPage({
           <h1 className="product-detail-title">{product.title}</h1>
 
           {/* Summary */}
-          {product.summary && (
-            <p className="product-detail-summary">{product.summary}</p>
-          )}
+          {product.summary && <p className="product-detail-summary">{product.summary}</p>}
 
           {/* Tags */}
           {hasTags && (
@@ -93,11 +89,7 @@ export default async function ProductPage({
       {/* ── Thumbnail ── */}
       {hasThumbnail && (
         <div className="product-detail-thumbnail-wrap">
-          <img
-            className="product-detail-thumbnail"
-            src={product.thumbnail!}
-            alt={product.title}
-          />
+          <img className="product-detail-thumbnail" src={product.thumbnail!} alt={product.title} />
         </div>
       )}
 

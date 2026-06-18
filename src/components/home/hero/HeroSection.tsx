@@ -7,7 +7,7 @@ type HeroSectionProps = {
 
 const STATS = [
   { value: "30+", label: "プロダクト開発" },
-  { value: "2作品", label: "U-22 同時通過（大会初）" },
+  { value: "2作品", label: "U-22 同時通過" },
   { value: "経産大臣賞", label: "+ アクセンチュア賞 同時受賞" },
 ];
 
@@ -15,13 +15,6 @@ export function HeroSection({ heroRef }: HeroSectionProps) {
   return (
     <>
       <section ref={heroRef} id="hero" className="hero-section">
-        <div className="container">
-          <div id="hero-greeting" className="hero-meta-row">
-            <span className="accent-italic hero-meta-accent">The work of a builder</span>
-            <span className="hero-meta-name label">石田尚幹 — STASSHE</span>
-          </div>
-        </div>
-
         <div id="hero-content" className="container hero-content">
           <h1 className="hero-headline">
             <span id="hero-title-span-0" className="hero-headline-line">

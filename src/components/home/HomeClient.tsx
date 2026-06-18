@@ -174,9 +174,6 @@ export default function HomeClient({ products, indexItems, totalProducts }: Home
 
       const heroTl = gsap.timeline({ delay: 1.8 });
 
-      const greetingEls = [document.getElementById("hero-greeting")].filter(
-        Boolean,
-      ) as HTMLElement[];
       const titleSpans = [
         document.getElementById("hero-title-span-0"),
         document.getElementById("hero-title-span-1"),
@@ -190,12 +187,7 @@ export default function HomeClient({ products, indexItems, totalProducts }: Home
       ) as HTMLElement[];
 
       heroTl
-        .from(greetingEls, { y: 30, opacity: 0, duration: 0.8, ease: "power3.out" })
-        .from(
-          titleSpans,
-          { y: 80, opacity: 0, duration: 1, ease: "power3.out", stagger: 0.1 },
-          "-=0.4",
-        )
+        .from(titleSpans, { y: 80, opacity: 0, duration: 1, ease: "power3.out", stagger: 0.1 })
         .from(subtagEls, { y: 20, opacity: 0, duration: 0.7, ease: "power3.out" }, "-=0.6")
         .from(taglineEls, { y: 30, opacity: 0, duration: 0.8, ease: "power3.out" }, "-=0.4")
         .from(actionEls, { y: 20, opacity: 0, duration: 0.6, ease: "power3.out" }, "-=0.4")
