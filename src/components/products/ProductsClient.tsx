@@ -133,7 +133,7 @@ export default function ProductsClient({ initialProducts, initialCategories }: P
 
             <div className="whitespace-nowrap text-light-accent max-sm:self-end">
               <span className={labelClass}>
-                {String(filteredProducts.length).padStart(2, "0")} items
+                - {String(filteredProducts.length).padStart(2, "0")} items
               </span>
             </div>
           </div>
