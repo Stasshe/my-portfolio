@@ -18,7 +18,7 @@ export function HeroSection({ heroRef }: HeroSectionProps) {
         <div id="hero-content" className="container hero-content">
           <h1 className="hero-headline">
             <span id="hero-title-span-0" className="hero-headline-line">
-              現場に向き合い、<br />判断し、
+              <span className="hero-headline-accent">現場</span>に向き合い、<br />判断し、
             </span>
             <span id="hero-title-span-1" className="hero-headline-line">
               <span className="hero-headline-accent">使われ続ける</span><br />ものをつくる。
