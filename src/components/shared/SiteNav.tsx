@@ -2,12 +2,13 @@
 
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
-import { type RefObject, useState } from "react";
+import { useState } from "react";
 
 type SiteNavProps = {
-  navRef?: RefObject<HTMLElement | null>;
-  /** Pages without a transparent hero should render the nav background from the start. */
+  /** Inner pages start on a white background and use the light header. */
   solid?: boolean;
+  /** Explicit theme override. Defaults to "light" unless set to "dark" (used over the dark hero). */
+  theme?: "dark" | "light";
   menuOpen?: boolean;
   setMenuOpen?: (isOpen: boolean) => void;
 };
@@ -19,17 +20,19 @@ const NAV_LINKS = [
 ];
 
 export function SiteNav({
-  navRef,
   solid,
+  theme,
   menuOpen: menuOpenProp,
   setMenuOpen: setMenuOpenProp,
 }: SiteNavProps) {
   const [menuOpenState, setMenuOpenState] = useState(false);
   const menuOpen = menuOpenProp ?? menuOpenState;
   const setMenuOpen = setMenuOpenProp ?? setMenuOpenState;
+  const resolvedTheme = theme ?? (solid ? "light" : "light");
+
   return (
     <>
-      <nav ref={navRef} className={`nav${solid ? " scrolled" : ""}`}>
+      <nav className={`nav theme-${resolvedTheme}`}>
         <div className="nav-inner">
           <Link href="/" className="nav-logo">
             Stasshe
@@ -41,6 +44,14 @@ export function SiteNav({
                 {link.label}
               </Link>
             ))}
+            <a
+              href="https://github.com/Stasshe"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nav-link nav-link--accent"
+            >
+              GitHub ↗
+            </a>
           </div>
 
           <button
@@ -68,6 +79,14 @@ export function SiteNav({
             {link.label}
           </Link>
         ))}
+        <a
+          href="https://github.com/Stasshe"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="nav-link nav-link--accent"
+        >
+          GitHub ↗
+        </a>
       </div>
     </>
   );

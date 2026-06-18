@@ -1,5 +1,5 @@
 /* ============================================
-   About Page
+   About Page — B3-Ink editorial
    ============================================ */
 .about-page {
   background-color: var(--color-light);
@@ -8,12 +8,13 @@
 
 /* ---- Header ---- */
 .about-hero {
-  padding-top: calc(72px + var(--space-xl));
+  padding-top: clamp(3rem, 7vw, 6rem);
   padding-bottom: var(--space-lg);
+  border-bottom: 2px solid var(--color-dark);
 }
 
 .about-eyebrow {
-  color: var(--color-brand);
+  color: var(--color-dark-accent);
   display: block;
   margin-bottom: 1rem;
 }
@@ -23,8 +24,10 @@
 }
 
 .about-title .accent {
-  color: var(--color-dark-accent);
+  font-family: var(--font-accent);
   font-style: italic;
+  font-weight: 400;
+  color: var(--color-dark-accent);
 }
 
 .about-intro {
@@ -35,21 +38,28 @@
 
 /* ---- Shared section header ---- */
 .about-section--muted {
-  background-color: rgba(var(--color-dark-rgb), 0.02);
-  border-top: 1px solid rgba(var(--color-dark-rgb), 0.06);
-  border-bottom: 1px solid rgba(var(--color-dark-rgb), 0.06);
+  background-color: var(--color-dark);
+  color: #fff;
+}
+
+.about-section--muted .section-label {
+  color: var(--color-brand);
+}
+
+.about-section--muted .section-heading {
+  color: #fff;
 }
 
 .section-label {
-  color: var(--color-brand);
+  color: var(--color-dark-accent);
   display: block;
   margin-bottom: 1rem;
 }
 
 .section-heading {
   color: var(--color-dark);
-  margin-bottom: var(--space-xl);
-  max-width: 18ch;
+  margin-bottom: var(--space-lg);
+  max-width: 22ch;
 }
 
 /* ---- Timeline ---- */
@@ -70,9 +80,9 @@
 .about-timeline-index {
   flex-shrink: 0;
   width: 3.5rem;
-  font-size: 1.4rem;
-  color: var(--color-brand);
-  opacity: 0.45;
+  font-family: var(--font-accent);
+  font-size: 1.6rem;
+  color: var(--color-dark-accent);
   line-height: 1.2;
 }
 
@@ -88,9 +98,14 @@
 .about-report-link {
   display: inline-block;
   margin-top: var(--space-lg);
-  color: var(--color-brand);
-  border-bottom: 1px solid var(--color-brand);
+  color: var(--color-dark);
+  border-bottom: 2px solid var(--color-brand);
   padding-bottom: 0.15rem;
+  transition: opacity var(--transition-base);
+}
+
+.about-report-link:hover {
+  opacity: 0.65;
 }
 
 /* ---- Case studies ---- */
@@ -103,16 +118,15 @@
 .about-case-card {
   display: block;
   padding: var(--space-md);
-  border: 1px solid rgba(var(--color-dark-rgb), 0.08);
-  border-radius: 12px;
-  background-color: var(--color-light);
-  transition: border-color var(--transition-base), transform var(--transition-base);
+  border: 1px solid var(--color-line-dark);
+  background-color: rgba(255, 255, 255, 0.02);
+  transition: border-color var(--transition-base), background-color var(--transition-base);
   cursor: pointer;
 }
 
 .about-case-card:hover {
-  border-color: rgba(var(--color-brand-rgb), 0.35);
-  transform: translateY(-2px);
+  border-color: var(--color-brand);
+  background-color: rgba(var(--color-brand-rgb), 0.06);
 }
 
 .about-case-type {
@@ -122,7 +136,7 @@
 }
 
 .about-case-title {
-  color: var(--color-dark);
+  color: #fff;
   margin-bottom: var(--space-sm);
 }
 
@@ -133,18 +147,18 @@
 }
 
 .about-case-rows dt {
-  color: var(--color-light-accent);
+  color: var(--color-brand);
   margin-bottom: 0.25rem;
 }
 
 .about-case-rows dd {
-  color: rgba(var(--color-dark-rgb), 0.75);
+  color: rgba(255, 255, 255, 0.75);
 }
 
 /* ---- Philosophy ---- */
 .about-philosophy-text {
   max-width: 74ch;
-  color: rgba(var(--color-dark-rgb), 0.75);
+  color: rgba(var(--color-dark-rgb), 0.78);
   margin-bottom: var(--space-lg);
 }
 
@@ -170,11 +184,11 @@
   display: flex;
   align-items: flex-start;
   gap: 0.6rem;
-  color: rgba(var(--color-dark-rgb), 0.75);
+  color: rgba(var(--color-dark-rgb), 0.78);
 }
 
 .about-strength-icon {
-  color: var(--color-brand);
+  color: var(--color-dark-accent);
   flex-shrink: 0;
   margin-top: 0.15rem;
 }
@@ -195,9 +209,8 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   padding: 0.4rem 0.85rem;
-  border: 1px solid rgba(var(--color-dark-rgb), 0.12);
-  border-radius: 8px;
-  color: rgba(var(--color-dark-rgb), 0.6);
+  border: 1px solid rgba(var(--color-dark-rgb), 0.18);
+  color: var(--color-light-accent);
 }
 
 /* ---- Skills & Now ---- */
@@ -218,15 +231,16 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   padding: 0.5rem 1rem;
-  border-radius: 100px;
-  border: 1px solid rgba(var(--color-dark-rgb), 0.12);
-  color: var(--color-dark);
-  transition: all var(--transition-base);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.85);
+  transition: color var(--transition-base), background-color var(--transition-base), border-color
+    var(--transition-base);
 }
 
 .about-skill:hover {
   border-color: var(--color-brand);
-  color: var(--color-brand);
+  background-color: var(--color-brand);
+  color: var(--color-dark);
 }
 
 .about-now-list {
@@ -236,9 +250,9 @@
 }
 
 .about-now-list li {
-  border-left: 1px solid var(--color-brand);
+  border-left: 2px solid var(--color-brand);
   padding-left: 1rem;
-  color: var(--color-light-accent);
+  color: rgba(255, 255, 255, 0.78);
 }
 
 /* ============================================
@@ -258,7 +272,7 @@
 
 @media (max-width: 640px) {
   .about-hero {
-    padding-top: calc(64px + var(--space-lg));
+    padding-top: clamp(2.5rem, 8vw, 4rem);
   }
 
   .about-timeline-item {
@@ -267,6 +281,6 @@
 
   .about-timeline-index {
     width: 2.5rem;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
   }
 }

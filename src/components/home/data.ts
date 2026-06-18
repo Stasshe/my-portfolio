@@ -8,6 +8,12 @@ export type Product = {
   thumbnail?: string;
 };
 
+export type IndexItem = {
+  id: string;
+  title: string;
+  category: string;
+};
+
 export const SKILLS = [
   "TypeScript",
   "React",

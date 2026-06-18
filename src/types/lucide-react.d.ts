@@ -12,4 +12,8 @@ declare module "lucide-react" {
   export const ArrowUpRight: (props: IconProps) => JSX.Element;
   export const Menu: (props: IconProps) => JSX.Element;
   export const X: (props: IconProps) => JSX.Element;
+  export const Check: (props: IconProps) => JSX.Element;
+  export const Compass: (props: IconProps) => JSX.Element;
+  export const Layers: (props: IconProps) => JSX.Element;
+  export const ShieldCheck: (props: IconProps) => JSX.Element;
 }

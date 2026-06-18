@@ -14,12 +14,12 @@ export function SiteFooter() {
         <div className="footer-top">
           <div className="footer-cta">
             <h2 id="footer-cta-title" className="heading-lg footer-cta-title">
-              Let&apos;s build something <span className="accent">that lasts.</span>
+              現場に向き合い、<span className="accent">使われ続ける</span>ものを。
             </h2>
             <div style={{ marginTop: "var(--space-md)" }}>
               <a href="mailto:hello@stasshe.com" className="cta-button cta-button--light">
                 <span>Get in touch</span>
-                <ArrowRight className="arrow" />
+                <ArrowRight className="arrow" size={16} />
               </a>
             </div>
           </div>
@@ -44,10 +44,8 @@ export function SiteFooter() {
         </div>
 
         <div className="footer-bottom">
-          <span className="footer-copyright">© 2026 Stasshe. All rights reserved.</span>
-          <span className="label" style={{ color: "rgba(240,236,238,0.3)" }}>
-            Built with care
-          </span>
+          <span className="footer-name">石田尚幹</span>
+          <span className="footer-copyright">© 2026 Stasshe — Portfolio</span>
         </div>
       </div>
     </footer>

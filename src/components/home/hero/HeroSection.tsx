@@ -5,84 +5,78 @@ type HeroSectionProps = {
   heroRef: RefObject<HTMLElement | null>;
 };
 
-const HIGHLIGHTS = [
-  {
-    value: "30+",
-    label: "Products shipped",
-    detail: "ブラウザIDE、学校行事運営システムなどを継続的に開発。",
-  },
-  {
-    value: "2 / 2",
-    label: "U-22 2025 — Double pass",
-    detail: "Pyxis-CodeCanvas と Celeritas が同時に事前審査通過（大会初）。",
-  },
-  {
-    value: "2",
-    label: "Awards — Pyxis-CodeCanvas",
-    detail: "経済産業大臣賞〈テクノロジー部門〉/ アクセンチュア賞 同時受賞。",
-  },
-  {
-    value: "2",
-    label: "Schools, in production",
-    detail: "Pyxis と Celeritas が学校現場で実際に稼働中。",
-  },
+const STATS = [
+  { value: "30+", label: "プロダクト開発" },
+  { value: "2作品", label: "U-22 同時通過（大会初）" },
+  { value: "経産大臣賞", label: "+ アクセンチュア賞 同時受賞" },
 ];
 
 export function HeroSection({ heroRef }: HeroSectionProps) {
   return (
-    <section ref={heroRef} id="hero" className="hero-section">
-      <div className="hero-grid-lines" aria-hidden="true" />
-
-      <div id="hero-content" className="container hero-content">
-        <div className="hero-main">
-          <span id="hero-greeting" className="label hero-eyebrow">
-            Software Builder — Context-Driven Engineering
-          </span>
-
-          <h1 className="hero-name">
-            <span id="hero-title-span-0" className="hero-name-line">
-              Naoki Ishida
-            </span>
-            <span id="hero-title-span-1" className="hero-name-handle font-mono">
-              Stasshe
-            </span>
-          </h1>
-
-          <p id="hero-subtag" className="heading-md hero-statement">
-            身近な不便や制約を見つけ、<span className="accent">使い続けられる</span>
-            形まで設計する。
-          </p>
-
-          <p id="hero-tagline" className="body-text hero-description">
-            TypeScript・React・Next.js
-            を中心に、ブラウザ上で動く開発環境や学校現場の運営システムを開発。実装だけでなく、要件・設計・UX・運用までを一続きの問題として扱います。
-          </p>
-
-          <div id="hero-actions" className="hero-actions">
-            <Link href="/products" className="cta-button">
-              <span>View Products</span>
-            </Link>
-            <Link href="/about" className="cta-button cta-button--outline">
-              <span>Philosophy &amp; Background</span>
-            </Link>
+    <>
+      <section ref={heroRef} id="hero" className="hero-section">
+        <div className="container">
+          <div id="hero-greeting" className="hero-meta-row">
+            <span className="accent-italic hero-meta-accent">The work of a builder</span>
+            <span className="hero-meta-name label">石田尚幹 — STASSHE</span>
           </div>
         </div>
 
-        <div id="hero-panel" className="hero-panel" aria-label="Highlights">
-          {HIGHLIGHTS.map((item) => (
-            <div className="hero-stat" key={item.label}>
-              <span className="hero-stat-value font-serif">{item.value}</span>
-              <span className="hero-stat-label label">{item.label}</span>
-              <p className="hero-stat-detail body-text-sm">{item.detail}</p>
+        <div id="hero-content" className="container hero-content">
+          <h1 className="hero-headline">
+            <span id="hero-title-span-0" className="hero-headline-line">
+              現場に向き合い、
+            </span>
+            <span id="hero-title-span-1" className="hero-headline-line">
+              判断し、<span className="hero-headline-accent">使われ続ける</span>
+            </span>
+            <span id="hero-title-span-2" className="hero-headline-line">
+              ものをつくる。
+            </span>
+          </h1>
+
+          <div className="hero-lower">
+            <div id="hero-subtag" className="hero-index">
+              <span className="hero-index-no font-accent">No.01</span>
+              <span className="accent-italic hero-index-sub">
+                A practice in restraint &amp; judgment
+              </span>
             </div>
+
+            <div className="hero-lower-right">
+              <p id="hero-tagline" className="body-text hero-description">
+                身近な不便や制約を見つけ、実用性と保守性を重視して課題解決に取り組んできました。単に動くものを作るのではなく、実際の利用者が安心して使い続けられる状態まで設計することを大切にしています。
+              </p>
+
+              <div id="hero-actions" className="hero-actions">
+                <Link href="/products" className="cta-button cta-button--light">
+                  <span>View Products</span>
+                </Link>
+                <Link href="/about" className="cta-button cta-button--light cta-button--outline">
+                  <span>Philosophy &amp; Background</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="hero-scroll-indicator" className="hero-scroll-indicator">
+          <span className="label">Scroll</span>
+          <div className="hero-scroll-line" />
+        </div>
+      </section>
+
+      <section className="stat-bar" aria-label="In numbers">
+        <div className="container stat-bar-inner">
+          <span className="accent-italic stat-bar-lead">In numbers —</span>
+          {STATS.map((stat) => (
+            <span className="stat-bar-item" key={stat.label}>
+              <b className="stat-bar-value font-serif">{stat.value}</b>
+              <span className="stat-bar-label">{stat.label}</span>
+            </span>
           ))}
         </div>
-      </div>
-
-      <div id="hero-scroll-indicator" className="hero-scroll-indicator">
-        <span className="label">Scroll</span>
-        <div className="hero-scroll-line" />
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

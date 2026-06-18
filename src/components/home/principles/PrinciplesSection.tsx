@@ -28,23 +28,41 @@ const PRINCIPLES = [
 
 export function PrinciplesSection({ principlesRef }: PrinciplesSectionProps) {
   return (
-    <section ref={principlesRef} className="section principles-section" id="principles">
+    <section ref={principlesRef} className="principles-section" id="principles">
       <div className="container">
+        <div className="profile-grid">
+          <div>
+            <span className="accent-italic profile-eyebrow">Profile</span>
+            <h2 className="heading-lg profile-title">
+              軸から逆算し、
+              <br />
+              設計判断する。
+            </h2>
+          </div>
+          <div className="profile-body">
+            <p className="body-text">
+              Next.js を中心に Svelte / SolidJS / Astro / Nuxt を扱い、Rust・Swift
+              も手がけます。Wasm・WebWorker・Worklet など Web の先端技術や React
+              の最適化に通じ、これまでに 30 ほどのプロダクトを個人開発してきました。
+            </p>
+            <p className="body-text">
+              現在はハッカソンの運営・講師、各サークルでのメンター、摂津市の中学校で教育委員会から委託を受けた部活の技術顧問を務めています。趣味はヴァイオリン。
+            </p>
+          </div>
+        </div>
+
+        <div className="principles-divider" />
+
         <div id="principles-header" className="principles-header">
-          <span
-            className="label"
-            style={{ color: "var(--color-brand)", marginBottom: "1rem", display: "block" }}
-          >
-            Operating Principles
-          </span>
+          <span className="label principles-label">Operating Principles</span>
           <h2 className="heading-lg principles-title">
             How I think about{" "}
-            <span style={{ color: "var(--color-dark-accent)", fontStyle: "italic" }}>
-              building software.
-            </span>
+            <span className="accent-italic principles-accent">building software.</span>
           </h2>
           <p className="body-text principles-intro">
-            コード生成AIの普及で実装速度は大きく上がりました。けれど、それが良い設計につながるとは限りません。AIが見落としやすい文脈を人が補い、出力を批判的に評価することを重視しています。
+            コード生成 AI
+            の普及で実装速度は大きく上がりました。けれど、それが良い設計につながるとは限りません。AI
+            が見落としやすい文脈を人が補い、出力を批判的に評価することを重視しています。
           </p>
         </div>
 

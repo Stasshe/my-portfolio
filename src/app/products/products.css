@@ -9,26 +9,30 @@
 
 /* ---- Products search toggle (used within ProductsClient filter bar) ---- */
 .products-search-toggle {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.45rem 1rem;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   color: var(--color-dark);
-  border: 1px solid rgba(var(--color-dark-rgb), 0.1);
-  transition: all var(--transition-base);
+  border: 1px solid var(--color-dark);
+  transition: color var(--transition-base), background-color var(--transition-base);
 }
 
 .products-search-toggle:hover {
-  border-color: var(--color-brand);
-  color: var(--color-brand);
+  background-color: var(--color-brand);
+  color: var(--color-dark);
 }
 
 /* ---- Products Page Header ---- */
 .products-page-header {
-  padding-top: calc(72px + var(--space-xl));
+  padding-top: clamp(3rem, 7vw, 6rem);
   padding-bottom: var(--space-lg);
+  border-bottom: 2px solid var(--color-dark);
 }
 
 .products-page-title {
@@ -36,11 +40,13 @@
 }
 
 .products-title-accent {
-  color: var(--color-brand);
+  color: var(--color-dark);
 }
 
 .products-title-italic {
+  font-family: var(--font-accent);
   font-style: italic;
+  font-weight: 400;
   color: var(--color-dark-accent);
 }
 
@@ -53,13 +59,13 @@
 /* ---- Filter Bar ---- */
 .products-filter-bar {
   position: sticky;
-  top: 60px;
+  top: 0;
   z-index: 100;
-  padding: 1rem 0;
-  background-color: rgba(var(--color-light-rgb), 0.92);
+  padding: 0.9rem 0;
+  background-color: rgba(var(--color-light-rgb), 0.94);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(var(--color-dark-rgb), 0.05);
+  border-bottom: 1px solid var(--color-line);
 }
 
 .products-filter-inner {
@@ -72,20 +78,22 @@
 
 .products-categories {
   display: flex;
-  gap: 0.25rem;
+  gap: 0.4rem;
   flex-wrap: wrap;
 }
 
 .products-category-btn {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.7rem;
+  font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   padding: 0.5rem 1rem;
-  border-radius: 100px;
   color: var(--color-light-accent);
+  border: 1px solid transparent;
   position: relative;
-  transition: all var(--transition-base);
+  transition: color var(--transition-base), background-color var(--transition-base), border-color
+    var(--transition-base);
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -93,18 +101,19 @@
 
 .products-category-btn:hover {
   color: var(--color-dark);
+  border-color: var(--color-dark);
 }
 
 .products-category-btn.active {
   color: var(--color-dark);
-  background-color: rgba(var(--color-brand-rgb), 0.08);
+  background-color: var(--color-brand);
+  border-color: var(--color-dark);
 }
 
 .category-dot {
   width: 5px;
   height: 5px;
-  border-radius: 50%;
-  background-color: var(--color-brand);
+  background-color: var(--color-dark);
   display: inline-block;
 }
 
@@ -120,15 +129,13 @@
     var(--ease-out-expo);
   padding: 0;
   border: 1px solid transparent;
-  border-radius: 100px;
 }
 
 .products-search-bar.open {
-  max-width: 320px;
+  max-width: 360px;
   opacity: 1;
-  padding: 0.4rem 1rem;
-  border-color: rgba(var(--color-dark-rgb), 0.1);
-  background-color: rgba(var(--color-dark-rgb), 0.02);
+  padding: 0.35rem 0.9rem;
+  border-color: var(--color-dark);
 }
 
 .products-search-icon {
@@ -137,9 +144,9 @@
 }
 
 .products-search-input {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
   border: none;
   background: none;
   outline: none;
@@ -168,7 +175,9 @@
   white-space: nowrap;
 }
 
-/* ---- Products Grid ---- */
+/* ============================================
+   Products Grid — DO NOT CHANGE (resizable tile UI)
+   ============================================ */
 .products-grid-container {
   padding: var(--space-lg) 0 var(--space-xl);
 }
@@ -446,7 +455,7 @@
 /* Mobile */
 @media (max-width: 640px) {
   .products-page-header {
-    padding-top: calc(70px + var(--space-lg));
+    padding-top: clamp(2.5rem, 8vw, 4rem);
     padding-bottom: var(--space-md);
   }
 
@@ -510,132 +519,4 @@
   .products-count {
     align-self: flex-end;
   }
-}
-
-/* ============================================
-   Scrollbar
-   ============================================ */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--color-light);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-light-accent);
-  border-radius: 3px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-brand);
-}
-
-/* ============================================
-   Selection
-   ============================================ */
-::selection {
-  background-color: rgba(var(--color-brand-rgb), 0.2);
-  color: var(--color-dark);
-}
-
-/* ============================================
-   Smooth loading
-   ============================================ */
-.page-loader {
-  position: fixed;
-  inset: 0;
-  background-color: var(--color-dark);
-  z-index: 10000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.page-loader-text {
-  font-family: var(--font-serif);
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
-  font-weight: 300;
-  color: var(--color-light);
-  letter-spacing: 0.1em;
-}
-
-/* ============================================
-   CTA Button
-   ============================================ */
-.cta-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  padding: 1rem 2rem;
-  border: 1px solid rgba(var(--color-dark-rgb), 0.15);
-  border-radius: 100px;
-  transition: all var(--transition-base);
-  position: relative;
-  overflow: hidden;
-}
-
-.cta-button::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-color: var(--color-brand);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.5s var(--ease-out-expo);
-  border-radius: inherit;
-}
-
-.cta-button:hover::before {
-  transform: scaleX(1);
-}
-
-.cta-button:hover {
-  color: var(--color-light);
-  border-color: var(--color-brand);
-}
-
-.cta-button span {
-  position: relative;
-  z-index: 1;
-}
-
-.cta-button .arrow {
-  position: relative;
-  z-index: 1;
-  transition: transform var(--transition-base);
-}
-
-.cta-button:hover .arrow {
-  transform: translateX(4px);
-}
-
-/* Inverted version for dark backgrounds */
-.cta-button--light {
-  border-color: rgba(var(--color-light-rgb), 0.2);
-  color: var(--color-light);
-}
-
-.cta-button--light:hover {
-  border-color: var(--color-brand);
-}
-
-/* Outline / secondary — no fill, just a border + color shift */
-.cta-button--outline {
-  border-color: rgba(var(--color-dark-rgb), 0.15);
-  color: var(--color-dark);
-}
-
-.cta-button--outline::before {
-  display: none;
-}
-
-.cta-button--outline:hover {
-  border-color: var(--color-brand);
-  color: var(--color-brand);
 }

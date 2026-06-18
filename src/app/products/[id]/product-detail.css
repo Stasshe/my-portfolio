@@ -58,7 +58,7 @@
   font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: var(--color-brand);
+  color: var(--color-dark-accent);
   position: relative;
   padding-left: 1.4rem;
 }
@@ -71,8 +71,7 @@
   transform: translateY(-50%);
   width: 8px;
   height: 8px;
-  border-radius: 50%;
-  background-color: var(--color-brand);
+  background-color: var(--color-dark-accent);
 }
 
 .product-detail-year {
@@ -85,10 +84,10 @@
 /* Title */
 .product-detail-title {
   font-family: var(--font-serif);
-  font-size: clamp(2.8rem, 7.5vw, 6.5rem);
-  font-weight: 300;
+  font-size: clamp(2.6rem, 7vw, 6rem);
+  font-weight: 900;
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
   color: var(--color-dark);
   margin-bottom: clamp(1.2rem, 2.5vw, 2rem);
   max-width: 14ch;
@@ -182,7 +181,7 @@
 .product-detail-prose h1 {
   font-family: var(--font-serif);
   font-size: clamp(1.45rem, 2.4vw, 1.9rem);
-  font-weight: 300;
+  font-weight: 700;
   line-height: 1.15;
   letter-spacing: -0.02em;
   color: var(--color-dark);
@@ -197,7 +196,7 @@
 .product-detail-prose h2 {
   font-family: var(--font-serif);
   font-size: clamp(1.15rem, 1.8vw, 1.45rem);
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1.25;
   letter-spacing: -0.01em;
   color: var(--color-dark);
@@ -208,7 +207,7 @@
 .product-detail-prose h3 {
   font-family: var(--font-serif);
   font-size: clamp(1rem, 1.3vw, 1.2rem);
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.35;
   color: var(--color-dark);
   margin-top: 2rem;
@@ -261,14 +260,14 @@
 
 /* Links */
 .product-detail-prose a {
-  color: var(--color-brand);
+  color: var(--color-dark);
   text-decoration: none;
-  border-bottom: 1px solid rgba(var(--color-brand-rgb), 0.3);
-  transition: border-color var(--transition-base);
+  border-bottom: 2px solid var(--color-brand);
+  transition: opacity var(--transition-base);
 }
 
 .product-detail-prose a:hover {
-  border-bottom-color: var(--color-brand);
+  opacity: 0.65;
 }
 
 /* Lists */
@@ -296,9 +295,8 @@
   top: 0.7em;
   width: 6px;
   height: 6px;
-  border-radius: 50%;
-  background-color: var(--color-brand);
-  opacity: 0.5;
+  background-color: var(--color-dark-accent);
+  opacity: 0.7;
 }
 
 .product-detail-prose ol {
@@ -321,9 +319,9 @@
   top: 0;
   font-family: var(--font-serif);
   font-size: 1.1em;
-  font-weight: 500;
-  color: var(--color-brand);
-  opacity: 0.6;
+  font-weight: 700;
+  color: var(--color-dark-accent);
+  opacity: 0.85;
 }
 
 /* Nested lists */

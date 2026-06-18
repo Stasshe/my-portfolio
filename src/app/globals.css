@@ -1,46 +1,53 @@
 /* ============================================
    Stasshe Portfolio — Global Styles
+   B3-Ink editorial system: white / ink / lime
    ============================================ */
 
 /* Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;600;700;900&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400;1,6..72,500&family=Noto+Sans+JP:wght@400;500;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 /* ============================================
    CSS Custom Properties
    ============================================ */
 :root {
   /* Color Palette */
-  --color-light: #f0ecee;
-  --color-light-accent: #8099b2;
-  --color-brand: #14a8c7;
-  --color-dark-accent: #ac5d7b;
-  --color-dark: #273582;
+  --color-light: #ffffff;
+  --color-dark: #0b0b0c;
+  --color-brand: #c6f24e; /* lime accent */
+  --color-dark-accent: #3a5a00; /* deep lime for text on lime bg */
+  --color-light-accent: #6b6b6b; /* muted text on white */
+  --color-muted-dark: #8a8a8c; /* muted text on ink */
+  --color-line: #e4e4e4; /* hairline on white */
+  --color-line-dark: #2a2a2c; /* hairline on ink */
 
-  /* Derived colors */
-  --color-light-rgb: 240, 236, 238;
-  --color-brand-rgb: 20, 168, 199;
-  --color-dark-rgb: 39, 53, 130;
-  --color-dark-accent-rgb: 172, 93, 123;
-  --color-light-accent-rgb: 128, 153, 178;
+  /* Derived colors (RGB) */
+  --color-light-rgb: 255, 255, 255;
+  --color-brand-rgb: 198, 242, 78;
+  --color-dark-rgb: 11, 11, 12;
+  --color-dark-accent-rgb: 58, 90, 0;
+  --color-light-accent-rgb: 107, 107, 107;
 
   /* Typography */
-  --font-serif: "Cormorant Garamond", "Georgia", serif;
-  --font-mono: "Space Mono", "Courier New", monospace;
-  --font-sans: "DM Sans", "Helvetica Neue", sans-serif;
+  --font-serif: "Zen Old Mincho", "Georgia", serif;
+  --font-accent: "Newsreader", "Georgia", serif;
+  --font-sans: "Noto Sans JP", "Helvetica Neue", sans-serif;
+  --font-mono: "Noto Sans JP", "Helvetica Neue", sans-serif;
 
   /* Spacing */
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 2rem;
   --space-lg: 4rem;
-  --space-xl: 8rem;
-  --space-2xl: 12rem;
+  --space-xl: 7rem;
+  --space-2xl: 11rem;
 
   /* Layout */
-  --container-max: 1400px;
-  --section-padding: clamp(4rem, 10vw, 10rem);
+  --container-max: 1280px;
+  --container-pad: clamp(1.5rem, 4vw, 2.5rem);
+  --section-padding: clamp(4rem, 9vw, 9rem);
 
   /* Transitions */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -70,7 +77,7 @@ body {
   font-family: var(--font-sans);
   background-color: var(--color-light);
   color: var(--color-dark);
-  line-height: 1.6;
+  line-height: 1.7;
   overflow-x: hidden;
 }
 
@@ -98,11 +105,20 @@ ol {
   list-style: none;
 }
 
+::selection {
+  background-color: var(--color-brand);
+  color: var(--color-dark);
+}
+
 /* ============================================
    Typography Classes
    ============================================ */
 .font-serif {
   font-family: var(--font-serif);
+}
+
+.font-accent {
+  font-family: var(--font-accent);
 }
 
 .font-mono {
@@ -113,66 +129,74 @@ ol {
   font-family: var(--font-sans);
 }
 
-/* Display headings — Serif */
+/* Display headings — Zen Old Mincho */
 .heading-xl {
   font-family: var(--font-serif);
-  font-size: clamp(3.5rem, 10vw, 9rem);
-  font-weight: 300;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.8rem, 8vw, 7rem);
+  font-weight: 900;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
 }
 
 .heading-lg {
   font-family: var(--font-serif);
-  font-size: clamp(2.5rem, 6vw, 5.5rem);
-  font-weight: 300;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  font-size: clamp(1.9rem, 4.5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
 }
 
 .heading-md {
   font-family: var(--font-serif);
-  font-size: clamp(1.8rem, 4vw, 3.5rem);
-  font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.28;
 }
 
 .heading-sm {
   font-family: var(--font-serif);
-  font-size: clamp(1.2rem, 2.5vw, 2rem);
-  font-weight: 400;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  font-weight: 700;
   line-height: 1.3;
 }
 
-/* Labels — Mono */
+/* Labels — uppercase sans */
 .label {
-  font-family: var(--font-mono);
-  font-size: clamp(0.65rem, 1vw, 0.8rem);
+  font-family: var(--font-sans);
+  font-size: clamp(0.66rem, 1vw, 0.76rem);
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.14em;
   line-height: 1.4;
 }
 
 .label-lg {
-  font-family: var(--font-mono);
-  font-size: clamp(0.8rem, 1.2vw, 1rem);
+  font-family: var(--font-sans);
+  font-size: clamp(0.78rem, 1.2vw, 0.95rem);
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   line-height: 1.4;
 }
 
-/* Body text — Sans */
+/* Italic editorial accent — Newsreader */
+.accent-italic {
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Body text — Noto Sans JP */
 .body-text {
   font-family: var(--font-sans);
-  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
-  line-height: 1.7;
+  font-size: clamp(0.95rem, 1.1vw, 1.05rem);
+  line-height: 1.95;
 }
 
 .body-text-sm {
   font-family: var(--font-sans);
-  font-size: clamp(0.8rem, 1vw, 0.95rem);
-  line-height: 1.6;
+  font-size: clamp(0.85rem, 1vw, 0.92rem);
+  line-height: 1.85;
 }
 
 /* ============================================
@@ -182,7 +206,7 @@ ol {
   width: 100%;
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 clamp(1.5rem, 4vw, 4rem);
+  padding: 0 var(--container-pad);
 }
 
 .section {
@@ -191,23 +215,24 @@ ol {
 }
 
 /* ============================================
-   Navigation
+   Navigation — static editorial header
    ============================================ */
 .nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1000;
-  padding: 1.5rem 0;
-  transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
-  mix-blend-mode: normal;
+  position: relative;
+  z-index: 100;
+  width: 100%;
 }
 
-.nav.scrolled {
-  background-color: rgba(var(--color-light-rgb), 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+.nav.theme-dark {
+  background-color: var(--color-dark);
+  color: #fff;
+  border-bottom: 1px solid var(--color-line-dark);
+}
+
+.nav.theme-light {
+  background-color: var(--color-light);
+  color: var(--color-dark);
+  border-bottom: 1px solid var(--color-line);
 }
 
 .nav-inner {
@@ -216,35 +241,36 @@ ol {
   align-items: center;
   max-width: var(--container-max);
   margin: 0 auto;
-  padding: 0 clamp(1.5rem, 4vw, 4rem);
+  padding: 14px var(--container-pad);
 }
 
 .nav-logo {
   font-family: var(--font-serif);
-  font-size: 1.4rem;
-  font-weight: 500;
-  letter-spacing: -0.02em;
-  color: var(--color-dark);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: inherit;
   cursor: pointer;
   transition: opacity var(--transition-base);
 }
 
 .nav-logo:hover {
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .nav-links {
   display: flex;
-  gap: 2.5rem;
+  gap: 1.9rem;
   align-items: center;
 }
 
 .nav-link {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--color-dark);
+  letter-spacing: 0.1em;
+  color: inherit;
   position: relative;
   padding: 0.25rem 0;
   transition: color var(--transition-base);
@@ -257,17 +283,21 @@ ol {
   bottom: 0;
   left: 0;
   width: 0;
-  height: 1px;
+  height: 2px;
   background-color: var(--color-brand);
   transition: width var(--transition-base);
 }
 
-.nav-link:hover {
-  color: var(--color-brand);
-}
-
 .nav-link:hover::after {
   width: 100%;
+}
+
+.nav-link--accent {
+  color: var(--color-dark-accent);
+}
+
+.nav.theme-dark .nav-link--accent {
+  color: var(--color-brand);
 }
 
 /* Mobile menu button */
@@ -278,12 +308,12 @@ ol {
   padding: 4px;
   cursor: pointer;
   z-index: 1001;
+  color: inherit;
 }
 
 .nav-menu-btn .menu-icon {
   width: 24px;
   height: 24px;
-  color: var(--color-dark);
   transition: transform 0.3s ease;
 }
 
@@ -292,12 +322,13 @@ ol {
   display: none;
   position: fixed;
   inset: 0;
-  background-color: var(--color-light);
+  background-color: var(--color-dark);
+  color: #fff;
   z-index: 999;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
+  gap: 1.8rem;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease;
@@ -309,7 +340,7 @@ ol {
 }
 
 .mobile-menu .nav-link {
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 @media (max-width: 768px) {
@@ -327,11 +358,108 @@ ol {
 }
 
 /* ============================================
+   Buttons — sharp / crisp
+   ============================================ */
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 0.85rem 1.7rem;
+  border: 1.5px solid var(--color-dark);
+  border-radius: 0;
+  color: var(--color-dark);
+  background-color: transparent;
+  transition: color var(--transition-base), border-color var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-brand);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s var(--ease-out-expo);
+}
+
+.cta-button:hover::before {
+  transform: scaleX(1);
+}
+
+.cta-button:hover {
+  color: var(--color-dark);
+  border-color: var(--color-dark);
+}
+
+.cta-button span,
+.cta-button .arrow {
+  position: relative;
+  z-index: 1;
+}
+
+.cta-button .arrow {
+  transition: transform var(--transition-base);
+}
+
+.cta-button:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* On dark backgrounds */
+.cta-button--light {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+.cta-button--light:hover {
+  color: var(--color-dark);
+  border-color: var(--color-brand);
+}
+
+/* Secondary outline — no fill */
+.cta-button--outline::before {
+  display: none;
+}
+
+.cta-button--outline {
+  border-color: rgba(var(--color-dark-rgb), 0.25);
+}
+
+.cta-button--outline:hover {
+  border-color: var(--color-dark);
+  color: var(--color-dark);
+  background-color: var(--color-brand);
+}
+
+/* Text link with lime underline (editorial) */
+.ink-link {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: var(--color-dark);
+  border-bottom: 2px solid var(--color-brand);
+  padding-bottom: 2px;
+  transition: opacity var(--transition-base);
+}
+
+.ink-link:hover {
+  opacity: 0.65;
+}
+
+/* ============================================
    Footer
    ============================================ */
 .footer {
   background-color: var(--color-dark);
-  color: var(--color-light);
+  color: rgba(255, 255, 255, 0.85);
   padding: var(--space-xl) 0 var(--space-md);
 }
 
@@ -345,17 +473,19 @@ ol {
 }
 
 .footer-cta {
-  max-width: 600px;
+  max-width: 640px;
 }
 
 .footer-cta-title {
-  color: var(--color-light);
+  color: #fff;
   margin-bottom: var(--space-md);
 }
 
 .footer-cta-title .accent {
   color: var(--color-brand);
+  font-family: var(--font-accent);
   font-style: italic;
+  font-weight: 400;
 }
 
 .footer-links {
@@ -370,11 +500,12 @@ ol {
 }
 
 .footer-link-group h4 {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 0.7rem;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: rgba(var(--color-light-rgb), 0.3);
+  letter-spacing: 0.14em;
+  color: var(--color-muted-dark);
   margin-bottom: var(--space-sm);
 }
 
@@ -382,7 +513,7 @@ ol {
   display: block;
   font-family: var(--font-sans);
   font-size: 0.9rem;
-  color: rgba(var(--color-light-rgb), 0.6);
+  color: rgba(255, 255, 255, 0.6);
   padding: 0.3rem 0;
   transition: color var(--transition-base);
 }
@@ -396,16 +527,37 @@ ol {
   justify-content: space-between;
   align-items: center;
   padding-top: var(--space-md);
-  border-top: 1px solid rgba(var(--color-light-rgb), 0.08);
+  border-top: 1px solid var(--color-line-dark);
   flex-wrap: wrap;
   gap: var(--space-sm);
 }
 
+.footer-name {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #fff;
+}
+
 .footer-copyright {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.08em;
-  color: rgba(var(--color-light-rgb), 0.3);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--color-muted-dark);
+}
+
+/* ============================================
+   Shared section header (about / products)
+   ============================================ */
+.section-label {
+  color: var(--color-dark-accent);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.section-heading {
+  color: var(--color-dark);
+  margin-bottom: var(--space-lg);
 }
 
 /* ============================================
@@ -436,11 +588,32 @@ ol {
 }
 
 /* ============================================
-   Custom Cursor (optional enhancement)
+   Page loader
+   ============================================ */
+.page-loader {
+  position: fixed;
+  inset: 0;
+  background-color: var(--color-dark);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-loader-text {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.08em;
+}
+
+/* ============================================
+   Custom Cursor
    ============================================ */
 .custom-cursor {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border: 1.5px solid var(--color-dark);
   border-radius: 50%;
   position: fixed;
@@ -454,8 +627,8 @@ ol {
 }
 
 .custom-cursor.hovering {
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
   border-color: var(--color-brand);
 }
 
@@ -463,4 +636,23 @@ ol {
   .custom-cursor {
     display: none;
   }
+}
+
+/* ============================================
+   Scrollbar
+   ============================================ */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-dark);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-dark-accent);
 }
