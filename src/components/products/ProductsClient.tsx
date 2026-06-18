@@ -85,9 +85,9 @@ export default function ProductsClient({ initialProducts, initialCategories }: P
     <div ref={pageRef} className="relative min-h-screen bg-light">
       <div ref={cursorRef} className="custom-cursor" />
 
-      <div className="sticky top-[53px] z-[200] border-b border-line bg-light/95 py-[0.9rem] backdrop-blur-2xl">
+      <div className="sticky top-[var(--nav-h)] z-[200] border-b border-line bg-light/95 py-[0.9rem] backdrop-blur-2xl">
         <div className={containerClass}>
-          <div className="flex flex-wrap items-center justify-between gap-6 max-sm:flex-col max-sm:items-start max-sm:gap-3">
+          <div className="flex flex-wrap items-center gap-4 max-sm:flex-col max-sm:items-start max-sm:gap-3">
             <div className="flex flex-wrap gap-1.5 max-sm:w-full max-sm:flex-nowrap max-sm:overflow-x-auto max-sm:pb-1 max-sm:[scrollbar-width:none] [&::-webkit-scrollbar]:max-sm:hidden">
               {initialCategories.map((cat) => (
                 <button
@@ -190,10 +190,10 @@ function ProductCard({ item }: { item: MdxProduct }) {
 
   const bgStyle: React.CSSProperties = item.thumbnail
     ? {
-        backgroundImage: `url(${item.thumbnail})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }
+      backgroundImage: `url(${item.thumbnail})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }
     : { background: "linear-gradient(135deg,#f3f4f6,#e5e7eb)" };
 
   const col = item.colSpan ?? 1;

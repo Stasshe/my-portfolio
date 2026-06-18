@@ -42,7 +42,7 @@ export function SiteNav({
           isDark ? "border-line-dark bg-dark text-white" : "border-line bg-light text-dark",
         )}
       >
-        <div className="mx-auto flex max-w-[var(--container-max)] items-center justify-between px-[var(--container-pad)] py-3.5">
+        <div className="mx-auto flex h-[var(--nav-h)] max-w-[var(--container-max)] items-center justify-between px-[var(--container-pad)]">
           <Link
             href="/"
             className="cursor-pointer font-serif text-[1.2rem] font-bold tracking-[0.01em] text-inherit transition-opacity duration-[400ms] ease-out-expo hover:opacity-60"
@@ -80,7 +80,7 @@ export function SiteNav({
           </button>
         </div>
       </nav>
-      <div className="h-[53px]" aria-hidden="true" />
+      <div className="h-[var(--nav-h)]" aria-hidden="true" />
 
       <div
         className={cx(
