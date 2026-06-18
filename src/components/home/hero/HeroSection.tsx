@@ -29,7 +29,7 @@ export function HeroSection({ heroRef }: HeroSectionProps) {
         className="hero-section relative overflow-hidden bg-dark pt-[clamp(3.25rem,6vh,5rem)] pb-[clamp(3rem,7vh,5rem)] text-white max-sm:pt-[clamp(4rem,10vh,5.75rem)]"
       >
         <div id="hero-content" className={`${containerClass} relative z-[1]`}>
-          <h1 className="font-serif text-[clamp(2.5rem,8.2vw,7.75rem)] font-black leading-[0.98] tracking-[-0.02em] max-sm:text-[2.35rem] max-sm:leading-[1.05] max-[380px]:text-[1.85rem]">
+          <h1 className="font-serif text-[clamp(2.5rem,8.2vw,7.75rem)] font-black leading-[0.98] tracking-[-0.02em] max-sm:text-[clamp(2.6rem,11vw,3.1rem)] max-sm:leading-[1.06] max-[380px]:text-[2.15rem]">
             <span id="hero-title-span-0" className="block whitespace-nowrap">
               <span className="text-brand">現場</span>に向き合い、
               <br />
@@ -89,8 +89,9 @@ export function HeroSection({ heroRef }: HeroSectionProps) {
         className="stat-bar border-b-2 border-dark bg-brand text-dark"
         aria-label="In numbers"
       >
+        {/* Desktop / tablet: static wrapped row */}
         <div
-          className={`${containerClass} flex min-h-[76px] flex-wrap items-center gap-x-11 gap-y-4 py-0 max-sm:flex-col max-sm:items-start max-sm:gap-2`}
+          className={`${containerClass} hidden min-h-[76px] flex-wrap items-center gap-x-11 gap-y-4 py-0 sm:flex`}
         >
           <span className="stat-bar-lead font-accent text-base italic text-dark-accent">
             In numbers —
@@ -103,6 +104,28 @@ export function HeroSection({ heroRef }: HeroSectionProps) {
               <b className="font-serif text-[1.6rem] font-black leading-none">{stat.value}</b>
               <span className="text-dark/80">{stat.label}</span>
             </span>
+          ))}
+        </div>
+
+        {/* Mobile: fixed-height horizontal marquee (avoids vertical overflow) */}
+        <div className="flex min-h-[76px] items-center overflow-hidden sm:hidden">
+          {[0, 1].map((track) => (
+            <div
+              key={track}
+              aria-hidden={track === 1}
+              className="flex shrink-0 animate-stat-marquee items-center gap-x-8 whitespace-nowrap pr-8"
+            >
+              <span className="font-accent text-base italic text-dark-accent">In numbers —</span>
+              {STATS.map((stat) => (
+                <span
+                  className="inline-flex items-baseline gap-2 text-[1.05rem]"
+                  key={`${track}-${stat.label}`}
+                >
+                  <b className="font-serif text-[1.6rem] font-black leading-none">{stat.value}</b>
+                  <span className="text-dark/80">{stat.label}</span>
+                </span>
+              ))}
+            </div>
           ))}
         </div>
       </section>

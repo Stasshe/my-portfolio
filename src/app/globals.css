@@ -55,6 +55,26 @@ body {
   color: var(--color-dark);
 }
 
+/* On the brand-colored stat bar, invert selection so it stays legible. */
+.stat-bar ::selection,
+.stat-bar::selection {
+  background-color: var(--color-dark);
+  color: var(--color-brand);
+}
+
+@keyframes stat-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-stat-marquee {
+  animation: stat-marquee 18s linear infinite;
+}
+
 .split-char {
   display: inline-block;
 }

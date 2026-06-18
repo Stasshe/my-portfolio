@@ -38,7 +38,7 @@ export function SiteNav({
     <>
       <nav
         className={cx(
-          "fixed left-0 top-0 z-[500] w-full border-b",
+          "fixed left-0 top-0 z-[1000] w-full border-b",
           isDark ? "border-line-dark bg-dark text-white" : "border-line bg-light text-dark",
         )}
       >
