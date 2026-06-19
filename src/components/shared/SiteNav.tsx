@@ -91,13 +91,6 @@ export function SiteNav({
             : "pointer-events-none invisible opacity-0",
         )}
       >
-        <Link
-          href="/"
-          className={cx(navLinkClass, "text-[1.1rem]")}
-          onClick={() => setMenuOpen(false)}
-        >
-          Home
-        </Link>
         {NAV_LINKS.map((link) => (
           <Link
             key={link.href}

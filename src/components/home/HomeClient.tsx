@@ -13,6 +13,8 @@ import { WorksSection } from "./works/WorksSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const HOME_VISITED_KEY = "home-visited";
+
 type HomeClientProps = {
   products: Product[];
   indexItems: IndexItem[];
@@ -151,28 +153,12 @@ export default function HomeClient({ products, indexItems, totalProducts }: Home
 
       setupScrollAnimations();
 
-      const loaderTl = gsap.timeline({
-        onComplete: () => {
-          setIsLoaded(true);
-          ScrollTrigger.refresh();
-        },
-      });
+      const isFirstVisit = !window.localStorage.getItem(HOME_VISITED_KEY);
+      if (isFirstVisit) {
+        window.localStorage.setItem(HOME_VISITED_KEY, "1");
+      }
 
       document.fonts?.ready.then(() => ScrollTrigger.refresh());
-
-      loaderTl
-        .to(".page-loader-text", { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
-        .to(".page-loader-text", {
-          opacity: 0,
-          y: -20,
-          duration: 0.4,
-          delay: 0.5,
-          ease: "power2.in",
-        })
-        .to(".page-loader", { yPercent: -100, duration: 0.8, ease: "power4.inOut" })
-        .set(".page-loader", { display: "none" });
-
-      const heroTl = gsap.timeline({ delay: 1.8 });
 
       const titleSpans = [
         document.getElementById("hero-title-span-0"),
@@ -185,12 +171,41 @@ export default function HomeClient({ products, indexItems, totalProducts }: Home
         Boolean,
       ) as HTMLElement[];
 
-      heroTl
-        .from(titleSpans, { y: 80, opacity: 0, duration: 1, ease: "power3.out", stagger: 0.1 })
-        .from(subtagEls, { y: 20, opacity: 0, duration: 0.7, ease: "power3.out" }, "-=0.6")
-        .from(taglineEls, { y: 30, opacity: 0, duration: 0.8, ease: "power3.out" }, "-=0.4")
-        .from(actionEls, { y: 20, opacity: 0, duration: 0.6, ease: "power3.out" }, "-=0.4")
-        .from(scrollIndicators, { opacity: 0, duration: 0.6 }, "-=0.2");
+      const runHeroTl = (delay: number) => {
+        gsap
+          .timeline({ delay })
+          .from(titleSpans, { y: 80, opacity: 0, duration: 1, ease: "power3.out", stagger: 0.1 })
+          .from(subtagEls, { y: 20, opacity: 0, duration: 0.7, ease: "power3.out" }, "-=0.6")
+          .from(taglineEls, { y: 30, opacity: 0, duration: 0.8, ease: "power3.out" }, "-=0.4")
+          .from(actionEls, { y: 20, opacity: 0, duration: 0.6, ease: "power3.out" }, "-=0.4")
+          .from(scrollIndicators, { opacity: 0, duration: 0.6 }, "-=0.2");
+      };
+
+      if (isFirstVisit) {
+        gsap
+          .timeline({
+            onComplete: () => {
+              setIsLoaded(true);
+              ScrollTrigger.refresh();
+            },
+          })
+          .to(".page-loader-text", { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
+          .to(".page-loader-text", {
+            opacity: 0,
+            y: -20,
+            duration: 0.4,
+            delay: 0.5,
+            ease: "power2.in",
+          })
+          .to(".page-loader", { yPercent: -100, duration: 0.8, ease: "power4.inOut" })
+          .set(".page-loader", { display: "none" });
+
+        runHeroTl(1.8);
+      } else {
+        gsap.set(".page-loader", { display: "none" });
+        setIsLoaded(true);
+        runHeroTl(0.1);
+      }
     }, mainRef);
 
     return () => ctx.revert();
