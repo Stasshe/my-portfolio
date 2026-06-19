@@ -48,9 +48,6 @@ export function SiteFooter() {
 
           <div className="flex gap-[var(--space-xl)] max-md:gap-[var(--space-lg)]">
             <div>
-              <h4 className="mb-[var(--space-sm)] font-sans text-[0.7rem] font-medium uppercase tracking-[0.14em] text-muted-dark">
-                Navigate
-              </h4>
               {NAV_LINKS.map((link) => (
                 <Link key={link.href} href={link.href} className={footerLinkClass}>
                   {link.label}
@@ -58,9 +55,6 @@ export function SiteFooter() {
               ))}
             </div>
             <div>
-              <h4 className="mb-[var(--space-sm)] font-sans text-[0.7rem] font-medium uppercase tracking-[0.14em] text-muted-dark">
-                Connect
-              </h4>
               <a
                 href="https://github.com/Stasshe"
                 target="_blank"
