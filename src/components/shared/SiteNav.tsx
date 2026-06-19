@@ -3,6 +3,7 @@
 import { cx } from "@/lib/styles";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 type SiteNavProps = {
@@ -30,6 +31,15 @@ export function SiteNav({
   const [menuOpenState, setMenuOpenState] = useState(false);
   const menuOpen = menuOpenProp ?? menuOpenState;
   const setMenuOpen = setMenuOpenProp ?? setMenuOpenState;
+  const pathname = usePathname();
+
+  const handleNavClick = (href: string) => (e: React.MouseEvent) => {
+    const [path] = href.split("#");
+    if (!href.includes("#") && path === pathname) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
   const resolvedTheme = theme ?? (solid ? "light" : "light");
   const isDark = resolvedTheme === "dark";
   const navLinkClass =
@@ -53,7 +63,12 @@ export function SiteNav({
 
           <div className="hidden items-center gap-[1.9rem] md:flex">
             {NAV_LINKS.map((link) => (
-              <Link key={link.href} href={link.href} className={navLinkClass}>
+              <Link
+                key={link.href}
+                href={link.href}
+                className={navLinkClass}
+                onClick={handleNavClick(link.href)}
+              >
                 {link.label}
               </Link>
             ))}
@@ -96,7 +111,10 @@ export function SiteNav({
             key={link.href}
             href={link.href}
             className={cx(navLinkClass, "text-[1.1rem]")}
-            onClick={() => setMenuOpen(false)}
+            onClick={(e) => {
+              handleNavClick(link.href)(e);
+              setMenuOpen(false);
+            }}
           >
             {link.label}
           </Link>
