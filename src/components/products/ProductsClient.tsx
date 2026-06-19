@@ -14,7 +14,7 @@ import { useCustomCursor } from "@/lib/useCustomCursor";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -158,7 +158,7 @@ export default function ProductsClient({ initialProducts, initialCategories }: P
   );
 }
 
-function ProductCard({ item }: { item: MdxProduct }) {
+const ProductCard = memo(function ProductCard({ item }: { item: MdxProduct }) {
   const cardRef = useRef<HTMLDivElement | null>(null);
   const tiltLayerRef = useRef<HTMLDivElement | null>(null);
   const tiltSettersRef = useRef<{
@@ -263,4 +263,4 @@ function ProductCard({ item }: { item: MdxProduct }) {
       </div>
     </div>
   );
-}
+});

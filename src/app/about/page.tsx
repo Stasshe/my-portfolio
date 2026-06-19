@@ -269,8 +269,9 @@ export default function AboutPage() {
                 よく使う技術
               </h2>
               <p className={`${bodyTextSmClass} mb-[var(--space-md)] max-w-[52ch] text-white/70`}>
-                Next.js を中心に Svelte / SolidJS / Astro / Nuxt、Rust・Swift にも対応。WebAssembly・Web
-                Worker・Audio Worklet など Web の最先端技術と、React の最適化に通じています。
+                Next.js を中心に Svelte / SolidJS / Astro / Nuxt、Rust・Swift
+                にも対応。WebAssembly・Web Worker・Audio Worklet など Web の最先端技術と、React
+                の最適化に通じています。
               </p>
               <div className="flex flex-wrap gap-2.5">
                 {SKILLS.map((skill) => (
