@@ -23,17 +23,16 @@ export function useCustomCursor<T extends HTMLElement = HTMLElement>(
     const moveDuration = options?.moveDuration ?? 0.5;
     const easing = options?.easing ?? "power2.out";
 
+    if (!cursorRef.current) return;
+
+    const setX = gsap.quickTo(cursorRef.current, "x", { duration: moveDuration, ease: easing });
+    const setY = gsap.quickTo(cursorRef.current, "y", { duration: moveDuration, ease: easing });
+
     const moveCursor = (e: MouseEvent) => {
-      if (cursorRef.current) {
-        gsap.to(cursorRef.current, {
-          x: e.clientX,
-          y: e.clientY,
-          duration: moveDuration,
-          ease: easing,
-        });
-      }
+      setX(e.clientX);
+      setY(e.clientY);
     };
-    window.addEventListener("mousemove", moveCursor);
+    window.addEventListener("mousemove", moveCursor, { passive: true });
 
     const baseSelectors = ["a", "button", ".nav-link"];
     const extra = extraSelectors

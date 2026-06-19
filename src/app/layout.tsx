@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./products/products.css";
 import "./products/[id]/product-detail.css";
+import { ReactScan } from "@/components/shared/ReactScan";
 
 export const metadata: Metadata = {
   title: "Naoki Ishida / Stasshe — Portfolio",
@@ -22,7 +23,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ReactScan />
+        {children}
+      </body>
     </html>
   );
 }

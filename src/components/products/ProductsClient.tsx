@@ -161,30 +161,47 @@ export default function ProductsClient({ initialProducts, initialCategories }: P
 function ProductCard({ item }: { item: MdxProduct }) {
   const cardRef = useRef<HTMLDivElement | null>(null);
   const tiltLayerRef = useRef<HTMLDivElement | null>(null);
+  const tiltSettersRef = useRef<{
+    setRotateX: ReturnType<typeof gsap.quickTo>;
+    setRotateY: ReturnType<typeof gsap.quickTo>;
+  } | null>(null);
   const [isHovered, setIsHovered] = useState(false);
+
+  const getTiltSetters = () => {
+    if (tiltSettersRef.current) return tiltSettersRef.current;
+    if (!tiltLayerRef.current) return null;
+    tiltSettersRef.current = {
+      setRotateX: gsap.quickTo(tiltLayerRef.current, "rotationX", {
+        duration: 0.4,
+        ease: "power2.out",
+      }),
+      setRotateY: gsap.quickTo(tiltLayerRef.current, "rotationY", {
+        duration: 0.4,
+        ease: "power2.out",
+      }),
+    };
+    return tiltSettersRef.current;
+  };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
-    const tiltLayer = tiltLayerRef.current;
-    if (!tiltLayer) return;
+    const setters = getTiltSetters();
+    if (!setters) return;
 
     const rect = cardRef.current.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
     const y = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
 
-    gsap.to(tiltLayer, {
-      rotateY: x * 4,
-      rotateX: -y * 4,
-      duration: 0.4,
-      ease: "power2.out",
-    });
+    setters.setRotateY(x * 4);
+    setters.setRotateX(-y * 4);
   };
 
   const handleMouseLeave = () => {
     setIsHovered(false);
-    const tiltLayer = tiltLayerRef.current;
-    if (tiltLayer) {
-      gsap.to(tiltLayer, { rotateY: 0, rotateX: 0, duration: 0.6, ease: "power3.out" });
+    const setters = getTiltSetters();
+    if (setters) {
+      setters.setRotateY(0);
+      setters.setRotateX(0);
     }
   };
 
