@@ -10,10 +10,10 @@ export type MdxProduct = {
   category?: string;
   tags?: string[];
   thumbnail?: string;
-  colSpan?: number;
-  rowSpan?: number;
+  colSpan?: number; // final grid tile span: 1 or 2
+  rowSpan?: number; // final grid tile span: 1 or 2
   pinned?: boolean;
-  year?: string;
+  date?: string; // YYYY-MM-DD, used for sort order
   alwaysShowSummary?: boolean;
   textColor?: string;
   contentHtml: string;
@@ -85,7 +85,7 @@ export function getAllProductsFromMdx(): MdxProduct[] {
       colSpan: Number(data.colSpan ?? 1),
       rowSpan: Number(data.rowSpan ?? 1),
       pinned: Boolean(data.pinned ?? false),
-      year: String(data.year ?? ""),
+      date: String(data.date ?? ""),
       alwaysShowSummary: Boolean(data.alwaysShowSummary ?? false),
       textColor: data.textColor ? String(data.textColor) : undefined,
       contentHtml: resolvedHtml,

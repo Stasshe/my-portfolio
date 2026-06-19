@@ -62,7 +62,9 @@ export default async function ProductPage({ params }: { params: MaybePromise<{ i
             {product.category && (
               <span className="product-detail-category">{product.category}</span>
             )}
-            {product.year && <span className="product-detail-year">{product.year}</span>}
+            {product.date && (
+              <span className="product-detail-year">{product.date.slice(0, 4)}</span>
+            )}
           </div>
 
           {/* Title */}

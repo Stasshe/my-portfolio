@@ -17,7 +17,7 @@ export default function Home() {
     const areaA = (a.colSpan ?? 1) * (a.rowSpan ?? 1);
     const areaB = (b.colSpan ?? 1) * (b.rowSpan ?? 1);
     if (areaB !== areaA) return areaB - areaA;
-    return (b.year ?? "").localeCompare(a.year ?? "");
+    return (b.date ?? "").localeCompare(a.date ?? "");
   });
 
   const featuredProducts: Product[] = all.slice(0, 3).map((item, index) => ({
