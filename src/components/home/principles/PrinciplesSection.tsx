@@ -81,10 +81,10 @@ export function PrinciplesSection({ principlesRef }: PrinciplesSectionProps) {
         <div className="grid grid-cols-3 gap-[clamp(1rem,2vw,1.5rem)] max-[900px]:grid-cols-1">
           {PRINCIPLES.map(({ icon: Icon, title, detail }) => (
             <div
-              className="principle-card border border-line-dark bg-white/[0.02] p-[clamp(1.5rem,2.5vw,2rem)] transition-[border-color,background-color] duration-[400ms] ease-out-expo hover:border-brand hover:bg-[rgba(var(--color-brand-rgb),0.06)]"
+              className="principle-card border-l-2 border-l-brand/40 bg-white/[0.02] p-[clamp(1.5rem,2.5vw,2rem)] transition-colors duration-[400ms] ease-out-expo"
               key={title}
             >
-              <div className="mb-[var(--space-sm)] flex h-11 w-11 items-center justify-center border border-brand text-brand">
+              <div className="mb-[var(--space-sm)] flex h-11 w-11 items-center justify-center rounded-full bg-brand/10 text-brand">
                 <Icon size={20} />
               </div>
               <h3 className={`${headingSmClass} mb-2 text-white`}>{title}</h3>
