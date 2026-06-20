@@ -103,7 +103,7 @@ export default function AboutPage() {
           <h1 className="font-serif text-heading-xl font-bold leading-[0.98] tracking-[-0.02em] text-dark">
             目的を見て
             <br />
-            <span className="font-accent font-semibold italic text-dark-accent">設計する力。</span>
+            <span className="font-accent font-semibold text-dark-accent">設計する力。</span>
           </h1>
           <p className={`${bodyTextClass} mt-[var(--space-md)] max-w-[640px] text-light-accent`}>
             身近な不便や制約を見つけ、実用性と保守性を重視して課題解決に取り組んできました。機能を実装して終わりにせず、実際の利用者が安心して使い続けられる状態まで設計することを大切にしています。これまでに30件ほどのプロダクトを開発してきました。基本は個人開発ですが、チーム開発の経験もあります。
