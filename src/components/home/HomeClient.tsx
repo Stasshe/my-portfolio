@@ -220,7 +220,7 @@ export default function HomeClient({ products, indexItems, totalProducts }: Home
           className="page-loader-text font-serif text-[clamp(1.6rem,3vw,2.6rem)] font-bold tracking-[0.08em] text-white"
           style={{ opacity: 0, transform: "translateY(20px)" }}
         >
-          石田尚幹/Stasshe
+          石田 尚幹 / Stasshe
         </span>
       </div>
 

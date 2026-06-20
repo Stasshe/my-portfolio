@@ -33,7 +33,7 @@ export function SiteFooter() {
             >
               現場に向き合い、
               <span className="font-accent font-normal italic text-brand">使われ続ける</span>
-              ものを。
+              ものをつくる。
             </h2>
             <div className="mt-[var(--space-md)]">
               <a
@@ -71,7 +71,7 @@ export function SiteFooter() {
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-[var(--space-sm)] border-t border-line-dark pt-[var(--space-md)]">
-          <span className="font-serif text-[1.7rem] font-bold text-white">石田尚幹</span>
+          <span className="font-serif text-[1.7rem] font-bold text-white">石田 尚幹</span>
           <span className="font-sans text-[0.72rem] tracking-[0.06em] text-muted-dark">
             © 2026 Stasshe — Portfolio
           </span>

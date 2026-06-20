@@ -9,7 +9,6 @@ import {
   containerClass,
   headingLgClass,
   headingSmClass,
-  headingXlClass,
   inkLinkClass,
   labelClass,
   sectionClass,
@@ -21,23 +20,23 @@ import { useState } from "react";
 const TIMELINE = [
   {
     index: "01",
-    title: "脆弱性に気づき、正しい手順で伝えた",
-    body: "高校2年生の頃、出身高校の学食システムを利用する中で脆弱性の可能性に気づきました。内容を直接公開するのではなく、学校の事務を通じてECサイト制作会社へ報告し、後日、複数の指摘を確認した旨の返信を受けました。学んだのは、自分が使うサービスに責任を持つ姿勢と、適切な相手に適切な手順で伝えることの重要性です。",
+    title: "セキュリティ上の懸念を、責任ある形で共有した",
+    body: "高校2年生の頃、出身高校の学食システムを利用する中で、CSPタグやCookieの設定、Linuxサーバーのバージョン情報の露出など、セキュリティ上の懸念点に気づきました。内容を不用意に広めるのではなく、学校の事務を通じて制作会社へ共有し、後日、指摘内容を確認した旨の返信を受けました。この経験から、問題を見つける力だけでなく、関係者に正しく伝える姿勢の重要性を学びました。",
   },
   {
     index: "02",
-    title: "30以上のプロダクト",
-    body: "これまでに30個ほどのプロダクトを開発してきました。高校3年生の頃にはU-22プログラミング・コンテスト2025で2作品が同時に事前審査を通過。",
+    title: "30件ほどのプロダクト",
+    body: "これまでに30件ほどのプロダクトを開発してきました。高校3年生の頃には、U-22プログラミング・コンテスト2025で2作品が同時に事前審査を通過しました。",
   },
   {
     index: "03",
-    title: "Pyxis-CodeCanvas — 二冠受賞",
-    body: "iPad向けブラウザIDE「Pyxis-CodeCanvas」は、経済産業大臣賞〈テクノロジー部門〉とアクセンチュア賞を同時受賞。自分のPCを持たずiPadで開発していた経験から、高性能な端末がなくても本格的に開発できる環境を目指しました。現在は摂津市立第一中学校の部活動でも利用されています。",
+    title: "Pyxis-CodeCanvas — 2つの賞を同時受賞",
+    body: "iPad向けブラウザIDE「Pyxis-CodeCanvas」は、経済産業大臣賞〈テクノロジー部門〉とアクセンチュア賞を同時に受賞しました。自分専用のPCを持たず、iPadで開発していた経験から、高性能な端末がなくても本格的に開発できる環境を目指しました。現在は摂津市立第一中学校の部活動でも利用されています。",
   },
   {
     index: "04",
     title: "Celeritas — 今も母校で稼働中",
-    body: "「Celeritas-freedom-student-council」は、出身高校のスポーツ祭運営を支援するWebシステムです。理想的な自動化ではなく、当日の急な変更に人が対応できる手動調整機能を重視して設計し、現在も実際に運用されています。運営・先生・一般生徒からの評判も良好です。",
+    body: "「Celeritas-freedom-student-council」は、出身高校のスポーツ祭運営を支援するWebシステムです。理想的な自動化だけを追うのではなく、当日の急な変更に人が対応できる手動調整機能を重視して設計しました。現在も実際に運用され、運営メンバー・教員・一般生徒からも良い評価を受けています。",
   },
 ];
 
@@ -45,9 +44,9 @@ const CASE_STUDIES = [
   {
     title: "Pyxis-CodeCanvas",
     type: "Browser IDE",
-    problem: "自分のPCがなく、iPad中心の開発では既存のIDEが重く不安定だった。",
+    problem: "自分専用のPCがなく、iPad中心の開発では既存のIDEが重く、不安定だった。",
     design:
-      "1秒起動、直感的な編集、Git連携、Node.js / TypeScript 実行をブラウザ上に集約。環境制約をUX設計の出発点にした。",
+      "素早い起動、直感的な編集、Git連携、Node.js / TypeScript 実行をブラウザ上に集約。環境の制約をUX設計の出発点にした。",
     outcome:
       "U-22で経済産業大臣賞〈テクノロジー部門〉とアクセンチュア賞を受賞。中学校の部活動でも利用中。",
     href: "/products/pyxis-codecanvas",
@@ -55,15 +54,15 @@ const CASE_STUDIES = [
   {
     title: "Celeritas",
     type: "Operations Web App",
-    problem: "スポーツ祭の準備期間が短く、進行変更と情報共有が属人的になっていた。",
-    design: "自動生成に寄せすぎず、当日の例外を人が修正できる運営向け設計を重視。",
-    outcome: "出身高校の行事運営で実運用。運営・先生・一般生徒の評判も良好。",
+    problem: "スポーツ祭の準備期間が短く、進行変更や情報共有が属人的になっていた。",
+    design: "自動生成に寄せすぎず、当日の例外を人が修正できる運営向けの設計を重視。",
+    outcome: "出身高校の行事運営で実運用。運営メンバー・教員・一般生徒からも良い評価を受けている。",
     href: "/products/celeritas-sports-event",
   },
 ];
 
 const STRENGTHS = [
-  "目的から逆算し、妥協と断行を見極める設計判断",
+  "目的から逆算し、妥協と断行を見極める設計判断力",
   "AIに何を任せ、何を任せないかを判断する力",
   "コードベース全体の構造を把握する力",
   "機能の責任範囲・境界を考える力",
@@ -87,8 +86,8 @@ const NOW = [
 
 const BEYOND = [
   "小中高で自然科学系の探求に取り組み、高校ではJR四国と連携した一般販売ツアーを企画。その成果を県で発表しました。",
-  "友人と学校全体を巻き込む企画を起こし、所属していた部活の人数は15倍に。チームや組織を動かす中で、コミュニケーション能力とプレゼンスキルを磨きました。",
-  "趣味はヴァイオリン。手を出せることはすべてやってきた結果、挑戦する心と戦闘心が刻まれています。",
+  "友人と学校全体を巻き込む企画を立ち上げ、所属していた部活の人数は15倍になりました。チームや組織を動かす中で、コミュニケーション力とプレゼンテーション力を磨きました。",
+  "趣味はヴァイオリン。関心を持ったことに広く挑戦してきた経験が、新しい領域へ踏み出す姿勢につながっています。",
 ];
 
 export default function AboutPage() {
@@ -100,15 +99,14 @@ export default function AboutPage() {
 
       <header className="border-b-2 border-dark pt-[clamp(3rem,7vw,6rem)] pb-[var(--space-lg)] max-sm:pt-[clamp(2.5rem,8vw,4rem)]">
         <div className={containerClass}>
-          <span className={`${labelClass} mb-4 block text-dark-accent`}>About — 石田 尚幹</span>
-          <h1 className={`${headingXlClass} text-dark`}>
-            つくるものと、
+          <span className={`${labelClass} mb-4 block text-dark-accent`}>About — 石田尚幹</span>
+          <h1 className="font-serif text-heading-xl font-bold leading-[0.98] tracking-[-0.02em] text-dark">
+            目的を見て
             <br />
-            それを{" "}
-            <span className="font-accent font-normal italic text-dark-accent">見極める力。</span>
+            <span className="font-accent font-semibold italic text-dark-accent">設計する力。</span>
           </h1>
           <p className={`${bodyTextClass} mt-[var(--space-md)] max-w-[640px] text-light-accent`}>
-            身近な不便や制約を見つけ、実用性と保守性を重視して課題解決に取り組んできました。単に動くものを作るのではなく、実際の利用者が安心して使い続けられる状態まで設計することを大切にしています。これまでに30以上のプロダクトを開発。基本は個人開発ですが、チーム開発の経験もあります。
+            身近な不便や制約を見つけ、実用性と保守性を重視して課題解決に取り組んできました。機能を実装して終わりにせず、実際の利用者が安心して使い続けられる状態まで設計することを大切にしています。これまでに30件ほどのプロダクトを開発してきました。基本は個人開発ですが、チーム開発の経験もあります。
           </p>
         </div>
       </header>
@@ -194,7 +192,7 @@ export default function AboutPage() {
           <h2
             className={`${headingLgClass} mb-[var(--space-lg)] max-w-[22ch] text-dark max-[900px]:max-w-full`}
           >
-            情報系人材としての在り方。
+            ソフトウェアをつくる人としての在り方。
           </h2>
 
           <p className={`${bodyTextClass} mb-[var(--space-lg)] text-dark/80`}>
@@ -204,7 +202,7 @@ export default function AboutPage() {
           <div className="my-[var(--space-lg)] grid grid-cols-2 gap-[var(--space-xl)] max-[900px]:grid-cols-1">
             <div>
               <h3 className={`${headingSmClass} mb-[var(--space-sm)] text-dark`}>
-                強みがあるところ
+                強みとしていること
               </h3>
               <ul className="flex flex-col gap-[0.7rem]">
                 {STRENGTHS.map((item) => (
@@ -217,7 +215,7 @@ export default function AboutPage() {
             </div>
             <div>
               <h3 className={`${headingSmClass} mb-[var(--space-sm)] text-dark`}>
-                これから固めるところ
+                これから学びを深める領域
               </h3>
               <p className={`${bodyTextSmClass} mb-[var(--space-sm)] text-light-accent`}>
                 この半年はAIを活用した開発が中心になり、ゼロから細かいコードを書く力は相対的に弱くなったと感じています。一方で、AIに任せる範囲を判断する力や、コードベース全体を俯瞰する力は伸びました。今は次の領域の基礎を学び直しています。
@@ -236,7 +234,7 @@ export default function AboutPage() {
           </div>
 
           <p className={`${bodyTextClass} mb-[var(--space-lg)] text-dark/80`}>
-            目指しているのは、AIより詳しくなることでも、ミクロな実装でAIと競うことでもありません。AIやフレームワークが扱う局所的な文脈を超えて、要件・設計・実装・評価・運用を連続的な視点で観察し、判断できる情報系人材になることです。Web開発で得た実装経験を出発点に、計算機科学の基礎・低レイヤ・セキュリティ・ソフトウェア設計を学び、AIに適切なコンテキストを与え、その出力を批判的に評価できる人材を目指します。ミクロからマクロへ。
+            目指しているのは、AIより詳しくなることでも、ミクロな実装でAIと競うことでもありません。AIやフレームワークが扱う局所的な文脈を超えて、要件・設計・実装・評価・運用を連続的な視点で観察し、判断できる人材になることです。Web開発で得た実装経験を出発点に、計算機科学の基礎・低レイヤ・セキュリティ・ソフトウェア設計を学び、AIに適切なコンテキストを与え、その出力を批判的に評価できる力を伸ばしていきます。ミクロからマクロへ。
           </p>
         </div>
       </section>
@@ -270,8 +268,8 @@ export default function AboutPage() {
               </h2>
               <p className={`${bodyTextSmClass} mb-[var(--space-md)] max-w-[52ch] text-white/70`}>
                 Next.js を中心に Svelte / SolidJS / Astro / Nuxt、Rust・Swift
-                にも対応。WebAssembly・Web Worker・Audio Worklet など Web の最先端技術と、React
-                の最適化に通じています。
+                も扱います。WebAssembly・Web Worker・Audio Worklet など Web の先端技術や、React
+                の最適化にも取り組んできました。
               </p>
               <div className="flex flex-wrap gap-2.5">
                 {SKILLS.map((skill) => (
@@ -287,7 +285,7 @@ export default function AboutPage() {
             <div>
               <span className={`${labelClass} mb-4 block text-brand`}>Now</span>
               <h2 className={`${headingLgClass} mb-[var(--space-lg)] max-w-[22ch] text-white`}>
-                最近していること。
+                最近取り組んでいること。
               </h2>
               <ul className="flex flex-col gap-[0.85rem]">
                 {NOW.map((item) => (

@@ -33,7 +33,7 @@ export function WorksSection({ worksRef, products, indexItems, totalProducts }: 
     >
       <div className={containerClass}>
         <div id="works-header" className="flex flex-wrap items-baseline justify-between gap-4 mb-3">
-          <h2 className={`${headingMdClass} text-dark`}>代表的な仕事</h2>
+          <h2 className={`${headingMdClass} text-dark`}>主なプロダクト</h2>
           <span className="font-accent text-base italic text-light-accent">Selected work</span>
         </div>
         <div className="mb-[clamp(1.5rem,3vw,2.5rem)] h-0.5 bg-dark" />
@@ -82,7 +82,7 @@ export function WorksSection({ worksRef, products, indexItems, totalProducts }: 
 
       <div className={`${containerClass} mt-[clamp(3rem,7vw,6rem)]`}>
         <div className="mb-[clamp(1.25rem,2.5vw,1.75rem)] flex flex-wrap items-baseline justify-between gap-4">
-          <h2 className={`${headingMdClass} text-dark`}>プロダクト・インデックス</h2>
+          <h2 className={`${headingMdClass} text-dark`}>プロダクト一覧</h2>
           <span className="font-accent text-base italic text-light-accent">
             {totalProducts}+ projects
           </span>
@@ -114,7 +114,7 @@ export function WorksSection({ worksRef, products, indexItems, totalProducts }: 
             >
               <span className="font-accent text-base text-light-accent">—</span>
               <span className="font-serif text-[clamp(1.1rem,1.8vw,1.35rem)] font-normal text-light-accent">
-                ほか {remaining} プロダクト
+                ほか {remaining} 件
               </span>
               <span className="bg-brand px-3 py-1.5 font-sans text-[0.78rem] font-medium text-dark max-md:col-start-2">
                 一覧へ →

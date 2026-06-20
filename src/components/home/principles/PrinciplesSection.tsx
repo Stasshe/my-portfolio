@@ -18,7 +18,7 @@ const PRINCIPLES = [
     icon: Layers,
     title: "Context over code",
     detail:
-      "AIの弱点は知識不足ではなく、文脈を保ち続ける難しさ。設計判断・責務・将来の変更まで見て、生成されたコードを評価します。",
+      "AIの弱点は知識不足だけではなく、文脈を保ち続ける難しさにあります。設計判断・責務・将来の変更まで見て、生成されたコードを評価します。",
   },
   {
     icon: Compass,
@@ -30,7 +30,7 @@ const PRINCIPLES = [
     icon: ShieldCheck,
     title: "Verify, don't just ship",
     detail:
-      "動くことと、責務として妥当か・保守しやすいか・安全かは別の問題。AIの出力も人間が検証する側に立ちます。",
+      "動くことと、責務として妥当か、保守しやすいか、安全かは別の問題です。AIの出力も、人間が検証する側に立ちます。",
   },
 ];
 
@@ -46,19 +46,19 @@ export function PrinciplesSection({ principlesRef }: PrinciplesSectionProps) {
           <div>
             <span className="font-accent text-base italic text-brand">Profile</span>
             <h2 className={`${headingLgClass} mt-[0.85rem] text-white`}>
-              軸から逆算し、
+              目的から逆算し、
               <br />
-              設計判断する。
+              設計する。
             </h2>
           </div>
           <div className="flex flex-col gap-5">
             <p className={`${bodyTextClass} text-white/80`}>
               Next.js を中心に Svelte / SolidJS / Astro / Nuxt を扱い、Rust・Swift
-              も手がけます。Wasm・WebWorker・Worklet など Web の先端技術や React
-              の最適化に通じ、これまでに 30 ほどのプロダクトを個人開発してきました。
+              も手がけます。Wasm・Web Worker・Worklet など Web の先端技術や React
+              の最適化に取り組み、これまでに 30 件ほどのプロダクトを個人開発してきました。
             </p>
             <p className={`${bodyTextClass} text-white/80`}>
-              現在はハッカソンの運営・講師、各サークルでのメンター、摂津市の中学校で教育委員会から委託を受けた部活の技術顧問を務めています。趣味はヴァイオリン。
+              現在はハッカソンの運営・講師、学生サークルでのメンター、摂津市の中学校で教育委員会から委託を受けた部活動の技術顧問を務めています。趣味はヴァイオリンです。
             </p>
           </div>
         </div>
@@ -73,7 +73,7 @@ export function PrinciplesSection({ principlesRef }: PrinciplesSectionProps) {
           </h2>
           <p className={`${bodyTextClass} mt-[var(--space-md)] text-white/70`}>
             コード生成 AI
-            の普及で実装速度は大きく上がりました。けれど、それが良い設計につながるとは限りません。AI
+            の普及で実装速度は大きく上がりました。しかし、それが良い設計につながるとは限りません。AI
             が見落としやすい文脈を人が補い、出力を批判的に評価することを重視しています。
           </p>
         </div>

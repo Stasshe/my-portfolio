@@ -15,7 +15,7 @@ type HeroSectionProps = {
 };
 
 const STATS = [
-  { value: "30+", label: "プロダクト開発" },
+  { value: "30件", label: "プロダクト開発" },
   { value: "2作品", label: "U-22 同時通過" },
   { value: "経産大臣賞", label: "+ アクセンチュア賞 同時受賞" },
 ];
@@ -55,7 +55,7 @@ export function HeroSection({ heroRef }: HeroSectionProps) {
 
             <div>
               <p id="hero-tagline" className={`${bodyTextClass} max-w-[46em] text-white/80`}>
-                身近な不便や制約を見つけ、実用性と保守性を重視して課題解決に取り組んできました。単に動くものを作るのではなく、実際の利用者が安心して使い続けられる状態まで設計することを大切にしています。
+                身近な不便や制約を見つけ、実用性と保守性を重視して課題解決に取り組んできました。機能を実装して終わりにせず、実際の利用者が安心して使い続けられる状態まで設計することを大切にしています。
               </p>
 
               <div
