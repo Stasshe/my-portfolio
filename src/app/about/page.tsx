@@ -105,7 +105,7 @@ export default function AboutPage() {
             つくるものと、
             <br />
             それを{" "}
-            <span className="font-accent font-normal italic text-dark-accent">見極め力。</span>
+            <span className="font-accent font-normal italic text-dark-accent">見極める力。</span>
           </h1>
           <p className={`${bodyTextClass} mt-[var(--space-md)] max-w-[640px] text-light-accent`}>
             身近な不便や制約を見つけ、実用性と保守性を重視して課題解決に取り組んできました。単に動くものを作るのではなく、実際の利用者が安心して使い続けられる状態まで設計することを大切にしています。これまでに30以上のプロダクトを開発。基本は個人開発ですが、チーム開発の経験もあります。
