@@ -164,7 +164,7 @@
 
 /* ---- Article Content (MDX output) ---- */
 .product-detail-article {
-  max-width: 720px;
+  max-width: 920px;
   margin: 0 auto;
   padding: clamp(2.5rem, 5vw, 5rem) clamp(1.5rem, 4vw, 4rem);
 }
