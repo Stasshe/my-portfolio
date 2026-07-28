@@ -16,9 +16,9 @@
   "dependencies": {
     "gray-matter": "^4.0.3",
     "gsap": "^3.15.0",
-    "lucide-react": "^1.20.0",
+    "lucide-react": "^1.27.0",
     "marked": "^5.1.2",
-    "next": "^16.2.9",
+    "next": "^16.2.12",
     "react": "19.1.1",
     "react-dom": "19.1.1"
   },
