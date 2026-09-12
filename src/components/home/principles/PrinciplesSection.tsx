@@ -1,3 +1,4 @@
+import { EXPERIENCE } from "@/lib/experience";
 import {
   bodyTextClass,
   bodyTextSmClass,
@@ -6,7 +7,8 @@ import {
   headingSmClass,
   labelClass,
 } from "@/lib/styles";
-import { Compass, Layers, ShieldCheck } from "lucide-react";
+import { ArrowRight, Compass, Layers, ShieldCheck } from "lucide-react";
+import Link from "next/link";
 import type { RefObject } from "react";
 
 type PrinciplesSectionProps = {
@@ -36,12 +38,8 @@ const PRINCIPLES = [
 
 export function PrinciplesSection({ principlesRef }: PrinciplesSectionProps) {
   return (
-    <section
-      ref={principlesRef}
-      className="bg-dark py-[clamp(4.5rem,9vw,8rem)] text-white"
-      id="principles"
-    >
-      <div className={containerClass}>
+    <section ref={principlesRef} className="bg-dark text-white" id="principles">
+      <div className={`${containerClass} pb-[clamp(3rem,5vw,4rem)] pt-[clamp(4.5rem,9vw,8rem)]`}>
         <div className="grid grid-cols-[1fr_1.3fr] items-start gap-[clamp(2rem,5vw,4rem)] max-[900px]:grid-cols-1">
           <div>
             <span className="font-accent text-base italic text-brand">Profile</span>
@@ -58,13 +56,57 @@ export function PrinciplesSection({ principlesRef }: PrinciplesSectionProps) {
               の最適化に取り組み、これまでに 30 件ほどのプロダクトを個人開発してきました。
             </p>
             <p className={`${bodyTextClass} text-white/80`}>
-              現在はハッカソンの運営・講師、学生サークルでのメンター、摂津市の中学校で教育委員会から委託を受けた部活動の技術顧問を務めています。趣味はヴァイオリンです。
+              現在は株式会社アルファ・オメガでインターンとして働きながら、摂津市の中学校で教育委員会から委託を受けた部活動の技術顧問を務めています。趣味はヴァイオリンです。
             </p>
           </div>
         </div>
+      </div>
 
-        <div className="my-[clamp(3rem,6vw,5rem)] mb-[clamp(2.5rem,5vw,4rem)] h-px bg-line-dark" />
+      <div className={containerClass}>
+        <div className="relative border-y border-line-dark py-[clamp(2.75rem,5vw,4.5rem)] pl-[clamp(1.25rem,2.5vw,2.5rem)] before:absolute before:inset-y-0 before:left-0 before:w-0.5 before:bg-brand">
+          <div className="grid grid-cols-[0.4fr_1.05fr_1.45fr] items-start gap-[clamp(2rem,4vw,4rem)] max-[900px]:grid-cols-1 max-[900px]:gap-8">
+            <div>
+              <span className={`${labelClass} text-brand`}>Now</span>
+              <p className="mt-3 font-mono text-[0.72rem] tracking-[0.1em] text-muted-dark">
+                {EXPERIENCE.period}
+              </p>
+            </div>
 
+            <div>
+              <h2 className="font-serif text-[clamp(1.5rem,2.6vw,1.85rem)] font-bold leading-[1.28] text-white">
+                {EXPERIENCE.company}
+              </h2>
+              <p className="mt-3 font-accent text-[1.05rem] italic text-white/65">
+                {EXPERIENCE.role}
+              </p>
+              <Link
+                href="/about#experience"
+                className="group mt-7 inline-flex items-center gap-2 border-b border-white/30 pb-0.5 font-sans text-[0.84rem] font-medium text-white transition-colors duration-[400ms] ease-out-expo hover:border-brand hover:text-brand"
+              >
+                担当領域の詳細
+                <ArrowRight
+                  size={16}
+                  className="transition-transform duration-[400ms] ease-out-expo group-hover:translate-x-1"
+                />
+              </Link>
+            </div>
+
+            <ul className="grid grid-cols-2 border-b border-line-dark max-sm:grid-cols-1">
+              {EXPERIENCE.areas.map((area) => (
+                <li
+                  className="grid grid-cols-[0.5rem_1fr] gap-3 border-t border-line-dark py-4 pr-5"
+                  key={area.title}
+                >
+                  <span aria-hidden="true" className="mt-[0.55rem] h-1.5 w-1.5 bg-brand" />
+                  <span className={`${headingSmClass} text-white/90`}>{area.title}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className={`${containerClass} pb-[clamp(4.5rem,9vw,8rem)] pt-[clamp(3.5rem,7vw,6rem)]`}>
         <div id="principles-header" className="mb-[clamp(2.5rem,5vw,4rem)] max-w-[680px]">
           <span className={`${labelClass} mb-4 block text-brand`}>Operating Principles</span>
           <h2 className={`${headingLgClass} text-white`}>

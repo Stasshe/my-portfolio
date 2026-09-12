@@ -1,5 +1,6 @@
 "use client";
 
+import { ExperienceSection } from "@/components/about/ExperienceSection";
 import { SKILLS } from "@/components/home/data";
 import { SiteFooter } from "@/components/shared/SiteFooter";
 import { SiteNav } from "@/components/shared/SiteNav";
@@ -9,6 +10,7 @@ import {
   containerClass,
   headingLgClass,
   headingSmClass,
+  headingXlClass,
   inkLinkClass,
   labelClass,
   sectionClass,
@@ -37,6 +39,11 @@ const TIMELINE = [
     index: "04",
     title: "Celeritas — 今も母校で稼働中",
     body: "「Celeritas-freedom-student-council」は、出身高校のスポーツ祭運営を支援するWebシステムです。理想的な自動化だけを追うのではなく、当日の急な変更に人が対応できる手動調整機能を重視して設計しました。現在も実際に運用され、運営メンバー・教員・一般生徒からも良い評価を受けています。",
+  },
+  {
+    index: "05",
+    title: "2026年7月から、チームの中で",
+    body: "株式会社アルファ・オメガにインターンとして参加しました。個人開発で身につけた設計判断を、チームと本番運用の中で試している段階です。",
   },
 ];
 
@@ -78,9 +85,7 @@ const GROWTH_AREAS = [
 ];
 
 const NOW = [
-  "Branding Hackathon の運営",
-  "ハッカソンの運営・講師",
-  "学生サークルでのメンター",
+  "株式会社アルファ・オメガ インターン（2026.7 —）",
   "大阪府摂津市立中学校 部活動の技術顧問（教育委員会委託・不定期）",
 ];
 
@@ -100,10 +105,10 @@ export default function AboutPage() {
       <header className="border-b-2 border-dark pt-[clamp(3rem,7vw,6rem)] pb-[var(--space-lg)] max-sm:pt-[clamp(2.5rem,8vw,4rem)]">
         <div className={containerClass}>
           <span className={`${labelClass} mb-4 block text-dark-accent`}>About — 石田尚幹</span>
-          <h1 className="font-serif text-heading-xl font-bold leading-[0.98] tracking-[-0.02em] text-dark">
+          <h1 className={`${headingXlClass} text-dark`}>
             目的を見て
             <br />
-            <span className="font-accent font-semibold text-dark-accent">設計する力。</span>
+            <span className="text-dark-accent">設計する力。</span>
           </h1>
           <p className={`${bodyTextClass} mt-[var(--space-md)] max-w-[640px] text-light-accent`}>
             身近な不便や制約を見つけ、実用性と保守性を重視して課題解決に取り組んできました。機能を実装して終わりにせず、実際の利用者が安心して使い続けられる状態まで設計することを大切にしています。これまでに30件ほどのプロダクトを開発してきました。基本は個人開発ですが、チーム開発の経験もあります。
@@ -145,6 +150,8 @@ export default function AboutPage() {
           </a>
         </div>
       </section>
+
+      <ExperienceSection />
 
       <section className={`${sectionClass} bg-dark text-white`}>
         <div className={containerClass}>
