@@ -43,3 +43,25 @@ export const EXPERIENCE = {
     },
   ] satisfies ExperienceArea[],
 };
+
+export const INDEPENDENT_EXPERIENCE = {
+  company: "U-22プログラミング・コンテスト2025",
+  role: "Pyxis-CodeCanvas / Celeritas",
+  period: "2025.8 — 12",
+  summary:
+    "端末と現場運営、それぞれの制約を出発点に2つのプロダクトを設計・開発しました。いずれも制作で終わらず、現在も実際の現場で利用されています。",
+  areas: [
+    {
+      title: "Pyxis-CodeCanvas",
+      body: "自分専用のPCを持たずiPadで開発していた経験から、高性能な端末がなくても本格的に開発できるブラウザIDEを開発しました。U-22プログラミング・コンテスト2025で経済産業大臣賞〈テクノロジー部門〉とアクセンチュア賞を受賞し、現在は中学校の部活動でも利用されています。",
+      tags: ["Browser IDE", "iPad", "U-22"],
+    },
+    {
+      title: "Celeritas",
+      body: "出身高校のスポーツ祭運営を支援するWebシステムです。理想的な自動化に寄せすぎず、当日の急な変更を人が調整できる設計を重視しました。現在も母校の行事運営で利用されています。",
+      tags: ["Operations", "Web App", "Production"],
+    },
+  ] satisfies ExperienceArea[],
+};
+
+export const CAREER_ENTRIES = [EXPERIENCE, INDEPENDENT_EXPERIENCE];

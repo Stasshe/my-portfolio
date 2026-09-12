@@ -11,41 +11,12 @@ import {
   headingLgClass,
   headingSmClass,
   headingXlClass,
-  inkLinkClass,
   labelClass,
   sectionClass,
 } from "@/lib/styles";
 import { Check } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-
-const TIMELINE = [
-  {
-    index: "01",
-    title: "セキュリティ上の懸念を、責任ある形で共有した",
-    body: "高校2年生の頃、出身高校の学食システムを利用する中で、CSPタグやCookieの設定、Linuxサーバーのバージョン情報の露出など、セキュリティ上の懸念点に気づきました。内容を不用意に広めるのではなく、学校の事務を通じて制作会社へ共有し、後日、指摘内容を確認した旨の返信を受けました。この経験から、問題を見つける力だけでなく、関係者に正しく伝える姿勢の重要性を学びました。",
-  },
-  {
-    index: "02",
-    title: "30件ほどのプロダクト",
-    body: "これまでに30件ほどのプロダクトを開発してきました。高校3年生の頃には、U-22プログラミング・コンテスト2025で2作品が同時に事前審査を通過しました。",
-  },
-  {
-    index: "03",
-    title: "Pyxis-CodeCanvas — 2つの賞を同時受賞",
-    body: "iPad向けブラウザIDE「Pyxis-CodeCanvas」は、経済産業大臣賞〈テクノロジー部門〉とアクセンチュア賞を同時に受賞しました。自分専用のPCを持たず、iPadで開発していた経験から、高性能な端末がなくても本格的に開発できる環境を目指しました。現在は摂津市立第一中学校の部活動でも利用されています。",
-  },
-  {
-    index: "04",
-    title: "Celeritas — 今も母校で稼働中",
-    body: "「Celeritas-freedom-student-council」は、出身高校のスポーツ祭運営を支援するWebシステムです。理想的な自動化だけを追うのではなく、当日の急な変更に人が対応できる手動調整機能を重視して設計しました。現在も実際に運用され、運営メンバー・教員・一般生徒からも良い評価を受けています。",
-  },
-  {
-    index: "05",
-    title: "2026年7月から、チームの中で",
-    body: "株式会社アルファ・オメガにインターンとして参加しました。個人開発で身につけた設計判断を、チームと本番運用の中で試している段階です。",
-  },
-];
 
 const CASE_STUDIES = [
   {
@@ -115,41 +86,6 @@ export default function AboutPage() {
           </p>
         </div>
       </header>
-
-      <section className={sectionClass}>
-        <div className={containerClass}>
-          <span className={`${labelClass} mb-4 block text-dark-accent`}>Story</span>
-          <h2 className={`${headingLgClass} mb-[var(--space-lg)] max-w-[22ch] text-dark`}>
-            経歴のなかで、軸になったこと。
-          </h2>
-
-          <ol className="flex max-w-[760px] flex-col gap-[var(--space-lg)]">
-            {TIMELINE.map((item) => (
-              <li
-                className="flex items-start gap-[var(--space-md)] max-sm:gap-[var(--space-sm)]"
-                key={item.index}
-              >
-                <span className="w-14 flex-shrink-0 font-accent text-[1.6rem] leading-[1.2] text-dark-accent max-sm:w-10 max-sm:text-[1.3rem]">
-                  {item.index}
-                </span>
-                <div>
-                  <h3 className={`${headingSmClass} mb-2 text-dark`}>{item.title}</h3>
-                  <p className={`${bodyTextSmClass} text-light-accent`}>{item.body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-
-          <a
-            href="https://u22procon.com/2025/report/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${inkLinkClass} mt-[var(--space-lg)] font-sans text-label tracking-[0.14em]`}
-          >
-            U-22プログラミング・コンテスト2025 大会レポートを見る →
-          </a>
-        </div>
-      </section>
 
       <ExperienceSection />
 
