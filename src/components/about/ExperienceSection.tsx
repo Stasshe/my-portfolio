@@ -14,7 +14,7 @@ export function ExperienceSection() {
     <section className={`${sectionClass} border-t-2 border-dark`} id="experience">
       <div className={containerClass}>
         <span className={`${labelClass} mb-4 block text-dark-accent`}>Experience</span>
-        <h2 className={`${headingLgClass} mb-[var(--space-lg)] text-dark`}>経歴</h2>
+        <h2 className={`${headingLgClass} mb-[var(--space-lg)] text-dark`}>主な経歴・実績</h2>
 
         <div className="flex flex-col gap-[var(--space-xl)]">
           {CAREER_ENTRIES.map((entry) => (
@@ -36,10 +36,12 @@ export function ExperienceSection() {
                 </p>
               </div>
 
-              <dl className="mt-[var(--space-md)] grid grid-cols-2 gap-x-[var(--space-lg)] max-[900px]:grid-cols-1">
+              <dl className="ml-[clamp(0.75rem,3vw,3rem)] mt-[var(--space-md)] grid grid-cols-2 gap-x-[var(--space-lg)] border-l-2 border-dark-accent/50 pl-[clamp(1rem,2vw,2rem)] max-[900px]:grid-cols-1">
                 {entry.areas.map((area) => (
                   <div className="border-t border-dark/15 py-[var(--space-md)]" key={area.title}>
-                    <dt className={`${headingSmClass} text-dark`}>{area.title}</dt>
+                    <dt className="font-serif text-[1.05rem] font-semibold leading-[1.4] text-dark">
+                      {area.title}
+                    </dt>
                     <dd className="mt-3">
                       <p className={`${bodyTextSmClass} text-dark/80`}>{area.body}</p>
                       <ul className="mt-4 flex flex-wrap gap-2">

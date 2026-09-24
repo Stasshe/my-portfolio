@@ -65,3 +65,13 @@ export const INDEPENDENT_EXPERIENCE = {
 };
 
 export const CAREER_ENTRIES = [EXPERIENCE, INDEPENDENT_EXPERIENCE];
+
+export const OTHER_ACTIVITIES = [
+  {
+    title: "Advanced ClientSide Tech",
+    event: "KC3 2026",
+    period: "2026.9.23",
+    summary: "学生勉強会で、クライアントサイドアプリケーションの高速化と状態管理について発表。",
+    href: "https://kc3.me/study/4263/",
+  },
+];

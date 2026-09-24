@@ -1,5 +1,6 @@
 "use client";
 
+import { ActivitiesSection } from "@/components/about/ActivitiesSection";
 import { ExperienceSection } from "@/components/about/ExperienceSection";
 import { SKILLS } from "@/components/home/data";
 import { SiteFooter } from "@/components/shared/SiteFooter";
@@ -88,6 +89,7 @@ export default function AboutPage() {
       </header>
 
       <ExperienceSection />
+      <ActivitiesSection />
 
       <section className={`${sectionClass} bg-dark text-white`}>
         <div className={containerClass}>
